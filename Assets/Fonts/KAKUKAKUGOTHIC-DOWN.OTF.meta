@@ -1,0 +1,25 @@
+fileFormatVersion: 2
+guid: 2e3163364251f934db3c8d67aff049b1
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: KakuKaku Gothic
+  fontNames:
+  - KakuKaku Gothic
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: d074a0b5604c32d4394a16d40b4fa948, type: 3}
+  - {fileID: 12800000, guid: 87b1653770d9f1846bfb6e313c6663e8, type: 3}
+  - {fileID: 12800000, guid: 42b95d6b89e7c8d4488590218ed32e61, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

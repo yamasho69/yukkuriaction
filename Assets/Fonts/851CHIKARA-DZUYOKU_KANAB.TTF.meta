@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 770eed4c2c84fd147b4ac579a7792995
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: 851CHIKARA-DZUYOKU-KANA-B
+  fontNames:
+  - 851CHIKARA-DZUYOKU-KANA-B
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
