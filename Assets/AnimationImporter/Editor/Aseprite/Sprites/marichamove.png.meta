@@ -356,6 +356,12 @@ TextureImporter:
   - first:
       213: 8396699093002715555
     second: marichamove 117
+  - first:
+      213: 2506818095932181127
+    second: marichamove 118
+  - first:
+      213: 3764182188215734765
+    second: marichamove 119
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -1440,8 +1446,8 @@ TextureImporter:
       name: marichamove 48
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1024
+        x: 1024
+        y: 640
         width: 128
         height: 128
       alignment: 7
@@ -1461,8 +1467,8 @@ TextureImporter:
       name: marichamove 49
       rect:
         serializedVersion: 2
-        x: 1024
-        y: 640
+        x: 0
+        y: 1024
         width: 128
         height: 128
       alignment: 7
@@ -1482,7 +1488,7 @@ TextureImporter:
       name: marichamove 50
       rect:
         serializedVersion: 2
-        x: 0
+        x: 128
         y: 1024
         width: 128
         height: 128
@@ -1503,8 +1509,8 @@ TextureImporter:
       name: marichamove 51
       rect:
         serializedVersion: 2
-        x: 128
-        y: 1024
+        x: 1152
+        y: 640
         width: 128
         height: 128
       alignment: 7
@@ -1524,8 +1530,8 @@ TextureImporter:
       name: marichamove 52
       rect:
         serializedVersion: 2
-        x: 1152
-        y: 640
+        x: 0
+        y: 512
         width: 128
         height: 128
       alignment: 7
@@ -1545,7 +1551,7 @@ TextureImporter:
       name: marichamove 53
       rect:
         serializedVersion: 2
-        x: 0
+        x: 128
         y: 512
         width: 128
         height: 128
@@ -1566,7 +1572,7 @@ TextureImporter:
       name: marichamove 54
       rect:
         serializedVersion: 2
-        x: 128
+        x: 256
         y: 512
         width: 128
         height: 128
@@ -1587,7 +1593,7 @@ TextureImporter:
       name: marichamove 55
       rect:
         serializedVersion: 2
-        x: 256
+        x: 384
         y: 512
         width: 128
         height: 128
@@ -1608,7 +1614,7 @@ TextureImporter:
       name: marichamove 56
       rect:
         serializedVersion: 2
-        x: 384
+        x: 512
         y: 512
         width: 128
         height: 128
@@ -1629,7 +1635,7 @@ TextureImporter:
       name: marichamove 57
       rect:
         serializedVersion: 2
-        x: 512
+        x: 640
         y: 512
         width: 128
         height: 128
@@ -1650,7 +1656,7 @@ TextureImporter:
       name: marichamove 58
       rect:
         serializedVersion: 2
-        x: 640
+        x: 512
         y: 512
         width: 128
         height: 128
@@ -1671,8 +1677,8 @@ TextureImporter:
       name: marichamove 59
       rect:
         serializedVersion: 2
-        x: 1152
-        y: 1024
+        x: 0
+        y: 896
         width: 128
         height: 128
       alignment: 7
@@ -1692,8 +1698,8 @@ TextureImporter:
       name: marichamove 60
       rect:
         serializedVersion: 2
-        x: 0
-        y: 896
+        x: 768
+        y: 512
         width: 128
         height: 128
       alignment: 7
@@ -1713,7 +1719,7 @@ TextureImporter:
       name: marichamove 61
       rect:
         serializedVersion: 2
-        x: 768
+        x: 896
         y: 512
         width: 128
         height: 128
@@ -1734,7 +1740,7 @@ TextureImporter:
       name: marichamove 62
       rect:
         serializedVersion: 2
-        x: 896
+        x: 1024
         y: 512
         width: 128
         height: 128
@@ -1755,8 +1761,8 @@ TextureImporter:
       name: marichamove 63
       rect:
         serializedVersion: 2
-        x: 1024
-        y: 640
+        x: 1152
+        y: 512
         width: 128
         height: 128
       alignment: 7
@@ -1776,8 +1782,8 @@ TextureImporter:
       name: marichamove 64
       rect:
         serializedVersion: 2
-        x: 1024
-        y: 512
+        x: 0
+        y: 384
         width: 128
         height: 128
       alignment: 7
@@ -1798,7 +1804,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1024
-        y: 640
+        y: 512
         width: 128
         height: 128
       alignment: 7
@@ -1860,8 +1866,8 @@ TextureImporter:
       name: marichamove 68
       rect:
         serializedVersion: 2
-        x: 1152
-        y: 512
+        x: 128
+        y: 384
         width: 128
         height: 128
       alignment: 7
@@ -1881,7 +1887,7 @@ TextureImporter:
       name: marichamove 69
       rect:
         serializedVersion: 2
-        x: 0
+        x: 256
         y: 384
         width: 128
         height: 128
@@ -1902,7 +1908,7 @@ TextureImporter:
       name: marichamove 70
       rect:
         serializedVersion: 2
-        x: 128
+        x: 384
         y: 384
         width: 128
         height: 128
@@ -1923,7 +1929,7 @@ TextureImporter:
       name: marichamove 71
       rect:
         serializedVersion: 2
-        x: 256
+        x: 512
         y: 384
         width: 128
         height: 128
@@ -1944,7 +1950,7 @@ TextureImporter:
       name: marichamove 72
       rect:
         serializedVersion: 2
-        x: 384
+        x: 512
         y: 384
         width: 128
         height: 128
@@ -1986,7 +1992,7 @@ TextureImporter:
       name: marichamove 74
       rect:
         serializedVersion: 2
-        x: 640
+        x: 512
         y: 384
         width: 128
         height: 128
@@ -2007,7 +2013,7 @@ TextureImporter:
       name: marichamove 75
       rect:
         serializedVersion: 2
-        x: 768
+        x: 640
         y: 384
         width: 128
         height: 128
@@ -2028,7 +2034,7 @@ TextureImporter:
       name: marichamove 76
       rect:
         serializedVersion: 2
-        x: 896
+        x: 768
         y: 384
         width: 128
         height: 128
@@ -2049,7 +2055,7 @@ TextureImporter:
       name: marichamove 77
       rect:
         serializedVersion: 2
-        x: 1024
+        x: 640
         y: 384
         width: 128
         height: 128
@@ -2070,7 +2076,7 @@ TextureImporter:
       name: marichamove 78
       rect:
         serializedVersion: 2
-        x: 1152
+        x: 768
         y: 384
         width: 128
         height: 128
@@ -2091,8 +2097,8 @@ TextureImporter:
       name: marichamove 79
       rect:
         serializedVersion: 2
-        x: 0
-        y: 256
+        x: 896
+        y: 384
         width: 128
         height: 128
       alignment: 7
@@ -2112,8 +2118,8 @@ TextureImporter:
       name: marichamove 80
       rect:
         serializedVersion: 2
-        x: 128
-        y: 256
+        x: 1024
+        y: 384
         width: 128
         height: 128
       alignment: 7
@@ -2133,8 +2139,8 @@ TextureImporter:
       name: marichamove 81
       rect:
         serializedVersion: 2
-        x: 256
-        y: 256
+        x: 1152
+        y: 384
         width: 128
         height: 128
       alignment: 7
@@ -2154,7 +2160,7 @@ TextureImporter:
       name: marichamove 82
       rect:
         serializedVersion: 2
-        x: 384
+        x: 0
         y: 256
         width: 128
         height: 128
@@ -2175,7 +2181,7 @@ TextureImporter:
       name: marichamove 83
       rect:
         serializedVersion: 2
-        x: 512
+        x: 128
         y: 256
         width: 128
         height: 128
@@ -2196,7 +2202,7 @@ TextureImporter:
       name: marichamove 84
       rect:
         serializedVersion: 2
-        x: 640
+        x: 256
         y: 256
         width: 128
         height: 128
@@ -2217,7 +2223,7 @@ TextureImporter:
       name: marichamove 85
       rect:
         serializedVersion: 2
-        x: 512
+        x: 0
         y: 256
         width: 128
         height: 128
@@ -2238,8 +2244,8 @@ TextureImporter:
       name: marichamove 86
       rect:
         serializedVersion: 2
-        x: 384
-        y: 256
+        x: 1152
+        y: 384
         width: 128
         height: 128
       alignment: 7
@@ -2259,8 +2265,8 @@ TextureImporter:
       name: marichamove 87
       rect:
         serializedVersion: 2
-        x: 256
-        y: 256
+        x: 1024
+        y: 384
         width: 128
         height: 128
       alignment: 7
@@ -2280,7 +2286,7 @@ TextureImporter:
       name: marichamove 88
       rect:
         serializedVersion: 2
-        x: 768
+        x: 384
         y: 256
         width: 128
         height: 128
@@ -2301,7 +2307,7 @@ TextureImporter:
       name: marichamove 89
       rect:
         serializedVersion: 2
-        x: 896
+        x: 512
         y: 256
         width: 128
         height: 128
@@ -2322,7 +2328,7 @@ TextureImporter:
       name: marichamove 90
       rect:
         serializedVersion: 2
-        x: 1024
+        x: 640
         y: 256
         width: 128
         height: 128
@@ -2343,7 +2349,7 @@ TextureImporter:
       name: marichamove 91
       rect:
         serializedVersion: 2
-        x: 1152
+        x: 768
         y: 256
         width: 128
         height: 128
@@ -2364,8 +2370,8 @@ TextureImporter:
       name: marichamove 92
       rect:
         serializedVersion: 2
-        x: 0
-        y: 128
+        x: 896
+        y: 256
         width: 128
         height: 128
       alignment: 7
@@ -2385,8 +2391,8 @@ TextureImporter:
       name: marichamove 93
       rect:
         serializedVersion: 2
-        x: 128
-        y: 128
+        x: 1024
+        y: 256
         width: 128
         height: 128
       alignment: 7
@@ -2406,8 +2412,8 @@ TextureImporter:
       name: marichamove 94
       rect:
         serializedVersion: 2
-        x: 0
-        y: 128
+        x: 896
+        y: 256
         width: 128
         height: 128
       alignment: 7
@@ -2427,8 +2433,8 @@ TextureImporter:
       name: marichamove 95
       rect:
         serializedVersion: 2
-        x: 256
-        y: 128
+        x: 1152
+        y: 256
         width: 128
         height: 128
       alignment: 7
@@ -2448,7 +2454,7 @@ TextureImporter:
       name: marichamove 96
       rect:
         serializedVersion: 2
-        x: 1024
+        x: 640
         y: 256
         width: 128
         height: 128
@@ -2469,7 +2475,7 @@ TextureImporter:
       name: marichamove 97
       rect:
         serializedVersion: 2
-        x: 384
+        x: 0
         y: 128
         width: 128
         height: 128
@@ -2490,8 +2496,8 @@ TextureImporter:
       name: marichamove 98
       rect:
         serializedVersion: 2
-        x: 0
-        y: 128
+        x: 896
+        y: 256
         width: 128
         height: 128
       alignment: 7
@@ -2511,7 +2517,7 @@ TextureImporter:
       name: marichamove 99
       rect:
         serializedVersion: 2
-        x: 512
+        x: 128
         y: 128
         width: 128
         height: 128
@@ -2532,7 +2538,7 @@ TextureImporter:
       name: marichamove 100
       rect:
         serializedVersion: 2
-        x: 640
+        x: 256
         y: 128
         width: 128
         height: 128
@@ -2553,7 +2559,7 @@ TextureImporter:
       name: marichamove 101
       rect:
         serializedVersion: 2
-        x: 768
+        x: 384
         y: 128
         width: 128
         height: 128
@@ -2574,7 +2580,7 @@ TextureImporter:
       name: marichamove 102
       rect:
         serializedVersion: 2
-        x: 896
+        x: 512
         y: 128
         width: 128
         height: 128
@@ -2595,7 +2601,7 @@ TextureImporter:
       name: marichamove 103
       rect:
         serializedVersion: 2
-        x: 1024
+        x: 640
         y: 128
         width: 128
         height: 128
@@ -2616,7 +2622,7 @@ TextureImporter:
       name: marichamove 104
       rect:
         serializedVersion: 2
-        x: 896
+        x: 512
         y: 128
         width: 128
         height: 128
@@ -2637,7 +2643,7 @@ TextureImporter:
       name: marichamove 105
       rect:
         serializedVersion: 2
-        x: 1024
+        x: 768
         y: 128
         width: 128
         height: 128
@@ -2679,7 +2685,7 @@ TextureImporter:
       name: marichamove 107
       rect:
         serializedVersion: 2
-        x: 1024
+        x: 640
         y: 128
         width: 128
         height: 128
@@ -2700,7 +2706,7 @@ TextureImporter:
       name: marichamove 108
       rect:
         serializedVersion: 2
-        x: 1152
+        x: 1024
         y: 128
         width: 128
         height: 128
@@ -2721,8 +2727,8 @@ TextureImporter:
       name: marichamove 109
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 1152
+        y: 128
         width: 128
         height: 128
       alignment: 7
@@ -2742,7 +2748,7 @@ TextureImporter:
       name: marichamove 110
       rect:
         serializedVersion: 2
-        x: 128
+        x: 0
         y: 0
         width: 128
         height: 128
@@ -2763,7 +2769,7 @@ TextureImporter:
       name: marichamove 111
       rect:
         serializedVersion: 2
-        x: 256
+        x: 128
         y: 0
         width: 128
         height: 128
@@ -2784,7 +2790,7 @@ TextureImporter:
       name: marichamove 112
       rect:
         serializedVersion: 2
-        x: 384
+        x: 256
         y: 0
         width: 128
         height: 128
@@ -2805,7 +2811,7 @@ TextureImporter:
       name: marichamove 113
       rect:
         serializedVersion: 2
-        x: 512
+        x: 384
         y: 0
         width: 128
         height: 128
@@ -2826,7 +2832,7 @@ TextureImporter:
       name: marichamove 114
       rect:
         serializedVersion: 2
-        x: 384
+        x: 256
         y: 0
         width: 128
         height: 128
@@ -2847,7 +2853,7 @@ TextureImporter:
       name: marichamove 115
       rect:
         serializedVersion: 2
-        x: 640
+        x: 512
         y: 0
         width: 128
         height: 128
@@ -2868,7 +2874,7 @@ TextureImporter:
       name: marichamove 116
       rect:
         serializedVersion: 2
-        x: 768
+        x: 640
         y: 0
         width: 128
         height: 128
@@ -2889,7 +2895,7 @@ TextureImporter:
       name: marichamove 117
       rect:
         serializedVersion: 2
-        x: 896
+        x: 768
         y: 0
         width: 128
         height: 128
