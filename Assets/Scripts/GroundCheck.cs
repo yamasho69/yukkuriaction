@@ -42,7 +42,7 @@ public class GroundCheck : MonoBehaviour{
     //判定内に入ったときに呼ばれる
     private void OnTriggerEnter2D(Collider2D collision) {//判定内に入った２D コライダーの
         if (collision.tag == groundTag) {//タグがGroundならば
-            Debug.Log("判定");
+            //Debug.Log("判定");
             isGroundEnter = true;
         }
     }
