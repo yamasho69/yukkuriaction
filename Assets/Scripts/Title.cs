@@ -8,7 +8,9 @@ using System.Linq;
 
 public class Title : MonoBehaviour{
 
+    [Header("フェード")] public FadeImage fade;
     private bool firstPush = false;//初めてのプッシュかどうか
+    private bool goNextScene = false;
 
     public void PressStart()
     {
@@ -16,10 +18,15 @@ public class Title : MonoBehaviour{
 
         if (!firstPush)//プッシュ済みではない場合
         {
-            Debug.Log("Go Next Scene");
-            //ここに次のシーンへ行く命令を書く
-
+            fade.StartFadeOut();
             firstPush = true;//一度押すとプッシュ済に
+        }
+    }
+
+    private void Update() {
+        if(!goNextScene && fade.IsFadeOutComplete()) {
+            SceneManager.LoadScene("stage01");
+            goNextScene = true;
         }
     }
 }
