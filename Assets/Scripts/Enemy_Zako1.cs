@@ -11,6 +11,7 @@ using System.Linq;
 
 public class Enemy_Zako1 : MonoBehaviour {
     #region//インスペクターで設定する
+    [Header("加算スコア")] public int myScore;
     [Header("移動速度")] public float speed;
     [Header("重力")] public float gravity;
     [Header("画面外でも行動する")] public bool nonVisibleAct;
@@ -59,7 +60,10 @@ public class Enemy_Zako1 : MonoBehaviour {
                 rb.velocity = new Vector2(0, -gravity);
                 isDead = true;
                 col.enabled = false;//CircleCollider2Dを無効にする。
-                Destroy(gameObject, 3f);
+                if(GameManager.instance != null) {
+                    GameManager.instance.score += myScore;
+                }
+                 Destroy(gameObject, 3f);
             } else {
                 transform.Rotate(new Vector3(0, 0, 5));
             }
