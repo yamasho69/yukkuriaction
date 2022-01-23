@@ -35,6 +35,7 @@ public class Player : MonoBehaviour{
     private bool isLeft = false;//43で追加。
     private bool isDown = false;//44で追加。
     private bool isContinue = false; //50で追加。
+    private bool nonDownAnim = false;//51
     private float continueTime = 0.0f;//50で追加。
     private float blinkTime = 0.0f;//50で追加。
     private float jumpPos = 0.0f;//40で追加。ジャンプした高さを記録。
@@ -43,6 +44,8 @@ public class Player : MonoBehaviour{
     private float dashTime = 0.0f;//41
     private float beforeKey = 0.0f;//41
     private string enemyTag = "Enemy"; //44で追加。敵判別。
+    private string deadAreaTag = "DeadArea";//51
+    private string hitAreaTag = "HitArea";//51
     #endregion
 
     // Start is called before the first frame update
@@ -84,7 +87,7 @@ public class Player : MonoBehaviour{
     // FixedUpdate1 物理演算の前にしたい処理を書く。可能なら重い処理は他へ。瞬間的な処理は相性が悪い。レッスン39
     void FixedUpdate() {
 
-        if (!isDown) {//ダウン中ではない。レッスン44で追加。
+        if (!isDown && !GameManager.instance.isGameOver) {//ダウン中ではない。レッスン44で追加。
             //設置判定を得る
             isGround = ground.IsGround();
             isHead = head.IsGround();
@@ -243,14 +246,7 @@ public class Player : MonoBehaviour{
 
 
                 }else{
-                    //ダウンする
-                    if (isLeft) {
-                        anim.Play("LeftDown");
-                    } else if(isRight)
-                    {
-                        anim.Play("RightDown");
-                    }
-                    isDown = true;
+                    ReceiveDamage(true);
                     break;//ダウンがあったらループを抜ける。
                 }
             }
@@ -258,7 +254,11 @@ public class Player : MonoBehaviour{
     }
 
     public bool IsContinueWaiting() {
-        return IsDownAnimEnd();
+        if (GameManager.instance.isGameOver) {
+            return false;
+        } else {
+            return IsDownAnimEnd() || nonDownAnim;
+        }
     }
 
     //ダウンアニメーションが完了しているかどうか。レッスン50で追加。
@@ -283,5 +283,37 @@ public class Player : MonoBehaviour{
         isContinue = true;
         anim.Play("RightIdle");
         isDown = false;
+        isContinue = true;
+        nonDownAnim = false;
+    }
+
+    //51で追加。
+    private void ReceiveDamage(bool downAnim) {
+        if (isDown) {
+            return;
+        } else 
+        {
+            if (downAnim) {
+                AnimatorStateInfo currentState = anim.GetCurrentAnimatorStateInfo(0);
+                if (isLeft || currentState.IsName("LeftIdle") || currentState.IsName("LeftLanding")) {
+                    anim.Play("LeftDown");
+                } else {
+                    anim.Play("RightDown");
+                }
+            } else {
+                nonDownAnim = true;
+            }
+        }
+        isDown = true;
+        GameManager.instance.SubHeartNum();
+    }
+
+    //51で追加。
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if(collision.tag == deadAreaTag) {
+            ReceiveDamage(false);
+        }else if(collision.tag == hitAreaTag){
+            ReceiveDamage(true);
+        }
     }
 }
