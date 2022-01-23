@@ -26,6 +26,7 @@ public class Player : MonoBehaviour{
     private Animator anim = null;// アニメーターコンポーネントを入れる変数
     private Rigidbody2D rb = null;//リジッドボディ２Ｄを入れる。
     private CapsuleCollider2D capcol = null;//レッスン45で追加。カプセルコライダー2Dを入れる。
+    private SpriteRenderer sr = null;// スプライトを入れる変数。レッスン50で追加。
     private bool isGround = false;//38で追加。
     private bool isHead = false;//40で追加。
     private bool isJump = false;//40で追加。
@@ -33,6 +34,9 @@ public class Player : MonoBehaviour{
     private bool isRight = false; //43で追加。
     private bool isLeft = false;//43で追加。
     private bool isDown = false;//44で追加。
+    private bool isContinue = false; //50で追加。
+    private float continueTime = 0.0f;//50で追加。
+    private float blinkTime = 0.0f;//50で追加。
     private float jumpPos = 0.0f;//40で追加。ジャンプした高さを記録。
     private float otherJumpHeight = 0.0f; //45で追加。
     private float jumpTime = 0.0f;//40で追加。滞空時間をはかる。
@@ -46,6 +50,35 @@ public class Player : MonoBehaviour{
         anim = GetComponent<Animator>();//アニメーターコンポーネントを取得、変数animに格納
         rb = GetComponent<Rigidbody2D>();//リジッドボディ２Ⅾを取得、変数rbに格納
         capcol = GetComponent<CapsuleCollider2D>();//レッスン45で追加。
+        sr = GetComponent<SpriteRenderer>();
+    }
+
+    private void Update() {
+        if (isContinue) {
+            //明滅　ついている時に戻る
+            if (blinkTime > 0.2f) {
+                sr.enabled = true;
+                blinkTime = 0.0f;
+            }
+            //明滅　消えているとき
+            else if (blinkTime > 0.1f) {
+                sr.enabled = false;
+            }
+            //明滅　ついているとき
+            else {
+                sr.enabled = true;
+            }
+            //1秒たったら明滅終わり
+            if (continueTime > 1.0f) {
+                isContinue = false;
+                blinkTime = 0.0f;
+                continueTime = 0.0f;
+                sr.enabled = true;
+            } else {
+                blinkTime += Time.deltaTime;
+                continueTime += Time.deltaTime;
+            }
+        }
     }
 
     // FixedUpdate1 物理演算の前にしたい処理を書く。可能なら重い処理は他へ。瞬間的な処理は相性が悪い。レッスン39
@@ -67,7 +100,6 @@ public class Player : MonoBehaviour{
             rb.velocity = new Vector2(xSpeed, ySpeed);//レッスン40で第二引数をySpeedに変更
         } else {
             rb.velocity = new Vector2(0, -grovity);//レッスン44で追加。ダウン中は重力のみ影響
-            Debug.Log("ダウン");
         }
     }
 
@@ -76,7 +108,6 @@ public class Player : MonoBehaviour{
         anim.SetBool("ground", isGround);
         anim.SetBool("left", isLeft);
         anim.SetBool("right", isRight);
-        //anim.SetBool("Down", isDown);
     }
 
 
@@ -203,7 +234,7 @@ public class Player : MonoBehaviour{
 
                     if(o != null) {
                         otherJumpHeight = o.boundHeight;//踏んづけたものから跳ねる高さを取得する。
-                        o.playerStepOn = true;//
+                        o.playerStepOn = true;
                         jumpPos = transform.position.y;
                         isOtherJump = true;
                         isJump = false;
@@ -213,12 +244,44 @@ public class Player : MonoBehaviour{
 
                 }else{
                     //ダウンする
-                    //anim.Play("LeftDown");
-                    Debug.Log("衝突");
+                    if (isLeft) {
+                        anim.Play("LeftDown");
+                    } else if(isRight)
+                    {
+                        anim.Play("RightDown");
+                    }
                     isDown = true;
                     break;//ダウンがあったらループを抜ける。
                 }
             }
         }
+    }
+
+    public bool IsContinueWaiting() {
+        return IsDownAnimEnd();
+    }
+
+    //ダウンアニメーションが完了しているかどうか。レッスン50で追加。
+    private bool IsDownAnimEnd() {
+        if(isDown && anim != null) {
+            AnimatorStateInfo currentState = anim.GetCurrentAnimatorStateInfo(0);
+            if (currentState.IsName("RightDown") || currentState.IsName("LeftDown")) {
+                if(currentState.normalizedTime >= 1) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    //レッスン50で追加。
+    public void ContinuePlayer() {
+        isJump = false;
+        isOtherJump = false;
+        isRight = false;
+        isLeft = false;
+        isContinue = true;
+        anim.Play("RightIdle");
+        isDown = false;
     }
 }
