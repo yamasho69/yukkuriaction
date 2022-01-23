@@ -10,6 +10,7 @@ public class ScoreItem : MonoBehaviour{
 
     [Header("加算するスコア")] public int myScore;
     [Header("プレイヤーの判定")] public PlayerTriggerCheck PlayerCheck;
+    [Header("EatVoice")] public AudioClip eatVoice;
 
     // Start is called before the first frame update
     void Start(){
@@ -21,6 +22,7 @@ public class ScoreItem : MonoBehaviour{
         if (PlayerCheck.isOn) {
             if(GameManager.instance != null) {
                 GameManager.instance.score += myScore;
+                GameManager.instance.playSE(eatVoice);
                 Destroy(this.gameObject);
             }
         }

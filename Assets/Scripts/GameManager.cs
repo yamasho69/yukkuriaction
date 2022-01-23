@@ -17,6 +17,9 @@ public class GameManager : MonoBehaviour{
     [Header("現在の残機")] public int heart;
     [Header("デフォルトの残機")] public int defaultHeartNum;
     [HideInInspector] public bool isGameOver;
+    [Header("GameOverVoice")] public AudioClip gameOverVoice;
+
+    private AudioSource audioSource = null;
 
     private void Awake() {
         if(instance == null) {
@@ -26,6 +29,10 @@ public class GameManager : MonoBehaviour{
             Destroy(this.gameObject);
         }
         
+    }
+
+    private void Start() {
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void AddHeartNum() {
@@ -39,6 +46,7 @@ public class GameManager : MonoBehaviour{
             --heart;
         } else {
             isGameOver = true;
+            playSE(gameOverVoice);
         }
     }
 
@@ -48,5 +56,13 @@ public class GameManager : MonoBehaviour{
         score = 0;
         stageNum = 1;
         continueNum = 0;
+    }
+
+    public void playSE(AudioClip clip) {
+        if(audioSource != null) {
+            audioSource.PlayOneShot(clip);
+        } else {
+            Debug.Log("オーディオソースが設定されていません。");
+        }
     }
 }

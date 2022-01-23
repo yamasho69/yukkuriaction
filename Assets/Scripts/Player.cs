@@ -20,6 +20,11 @@ public class Player : MonoBehaviour{
     [Header("頭をぶつけた時の判定")] public GroundCheck head;//頭をぶつけた時の判定。40で追加
     [Header("ダッシュアニメーションカーブ")] public AnimationCurve dashCurve;//レッスン41で追加。アニメーションカーブ
     [Header("ジャンプアニメーションカーブ")] public AnimationCurve jumpCurve;//同上
+    [Header("JumpVoice")] public AudioClip jumpVoice;
+    [Header("RightDownVoice")] public AudioClip rightDownVoice;
+    [Header("LeftDownVoice")] public AudioClip leftDownVoice;
+    [Header("FallVoice")] public AudioClip fallVoice;
+
     #endregion
 
     #region
@@ -234,8 +239,8 @@ public class Player : MonoBehaviour{
                 if (p.point.y <judgePos){
                     //もう一度跳ねる
                     ObjectCollision o = collision.gameObject.GetComponent<ObjectCollision>();//スクリプトObjectCollisionから跳ねる高さを取得
-
-                    if(o != null) {
+                    GameManager.instance.playSE(jumpVoice);
+                    if (o != null) {
                         otherJumpHeight = o.boundHeight;//踏んづけたものから跳ねる高さを取得する。
                         o.playerStepOn = true;
                         jumpPos = transform.position.y;
@@ -297,8 +302,10 @@ public class Player : MonoBehaviour{
                 AnimatorStateInfo currentState = anim.GetCurrentAnimatorStateInfo(0);
                 if (isLeft || currentState.IsName("LeftIdle") || currentState.IsName("LeftLanding")) {
                     anim.Play("LeftDown");
+                    GameManager.instance.playSE(leftDownVoice);
                 } else {
                     anim.Play("RightDown");
+                    GameManager.instance.playSE(rightDownVoice);
                 }
             } else {
                 nonDownAnim = true;
@@ -311,6 +318,7 @@ public class Player : MonoBehaviour{
     //51で追加。
     private void OnTriggerEnter2D(Collider2D collision) {
         if(collision.tag == deadAreaTag) {
+            GameManager.instance.playSE(fallVoice);
             ReceiveDamage(false);
         }else if(collision.tag == hitAreaTag){
             ReceiveDamage(true);
