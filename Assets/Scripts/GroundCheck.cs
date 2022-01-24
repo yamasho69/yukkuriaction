@@ -10,7 +10,11 @@ using System.Linq;
 
 public class GroundCheck : MonoBehaviour{
 
+    [Header("エフェクトがついた床を判定")] public bool checkPlatformGround;
+
     private string groundTag = "Ground";
+    private string moveFloorTag = "MoveFloor";
+    private string platformTag = "GroundPlatform";
     private bool isGround = false;
     private bool isGroundEnter, isGroundStay, isGroundExit;
     
@@ -44,12 +48,16 @@ public class GroundCheck : MonoBehaviour{
         if (collision.tag == groundTag) {//タグがGroundならば
             //Debug.Log("判定");
             isGroundEnter = true;
+        }else if(checkPlatformGround && (collision.tag == platformTag|| collision.tag == moveFloorTag)) {//レッスン54で追加。下から抜けられる床の判定
+            isGroundEnter = true;
         }
     }
 
     //判定内から出たときに呼ばれる
     private void OnTriggerExit2D(Collider2D collision) {
         if(collision.tag == groundTag) {
+            isGroundExit = true;
+        }else if (checkPlatformGround && (collision.tag == platformTag || collision.tag == moveFloorTag)) {//レッスン54で追加。下から抜けられる床の判定
             isGroundExit = true;
         }
     }
@@ -58,6 +66,8 @@ public class GroundCheck : MonoBehaviour{
     private void OnTriggerStay2D(Collider2D collision) {
         if(collision.tag == groundTag) {
             isGroundStay = false;
+        }else if (checkPlatformGround && (collision.tag == platformTag || collision.tag == moveFloorTag)) {//レッスン54で追加。下から抜けられる床の判定
+            isGroundStay = true;
         }
     }
 }

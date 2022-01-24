@@ -32,6 +32,7 @@ public class Player : MonoBehaviour{
     private Rigidbody2D rb = null;//リジッドボディ２Ｄを入れる。
     private CapsuleCollider2D capcol = null;//レッスン45で追加。カプセルコライダー2Dを入れる。
     private SpriteRenderer sr = null;// スプライトを入れる変数。レッスン50で追加。
+    private MoveObject moveObj = null;//54
     private bool isGround = false;//38で追加。
     private bool isHead = false;//40で追加。
     private bool isJump = false;//40で追加。
@@ -51,6 +52,7 @@ public class Player : MonoBehaviour{
     private string enemyTag = "Enemy"; //44で追加。敵判別。
     private string deadAreaTag = "DeadArea";//51
     private string hitAreaTag = "HitArea";//51
+    private string moveFloorTag = "MoveFloor";//54
     #endregion
 
     // Start is called before the first frame update
@@ -103,9 +105,14 @@ public class Player : MonoBehaviour{
 
             SetAnimation();
 
+            //54
+            Vector2 addVelocity = Vector2.zero;
+            if(moveObj != null) {
+                addVelocity = moveObj.GetVelocity();
+            }
             //velocityをスクリプトで上書きし、物理法則を無視させる
             //参考：https://www.youtube.com/watch?v=klTg9hl_clU
-            rb.velocity = new Vector2(xSpeed, ySpeed);//レッスン40で第二引数をySpeedに変更
+            rb.velocity = new Vector2(xSpeed, ySpeed)+addVelocity;//レッスン40で第二引数をySpeedに変更
         } else {
             rb.velocity = new Vector2(0, -grovity);//レッスン44で追加。ダウン中は重力のみ影響
         }
@@ -227,13 +234,16 @@ public class Player : MonoBehaviour{
         float capcolSizeY = capcol.size.y * transform.localScale.y;//動画コメントを参考に追加。
         float capcolOffsetY = capcol.offset.y * transform.localScale.y;//動画コメントを参考に追加。
 
-        //踏みつけ判定になる高さ
-        float stepOnHeight = (capcolSizeY * (stepOnRate / 100f));//動画コメントを参考に変更
-        //踏みつけ判定のワールド座標
-        float judgePos = transform.position.y - ((capcolSizeY / 2f)-capcolOffsetY) + stepOnHeight;//動画コメントを参考に変更
+       
 
 
         if (collision.collider.tag == enemyTag) {
+
+            //踏みつけ判定になる高さ
+            float stepOnHeight = (capcolSizeY * (stepOnRate / 100f));//動画コメントを参考に変更
+                                                                     //踏みつけ判定のワールド座標
+            float judgePos = transform.position.y - ((capcolSizeY / 2f) - capcolOffsetY) + stepOnHeight;//動画コメントを参考に変更
+
             //レッスン45で追加。敵と衝突した位置を検知。当たったらまずい場所に当たっていたらミス
             foreach (ContactPoint2D p in collision.contacts) {
                 if (p.point.y <judgePos){
@@ -255,6 +265,24 @@ public class Player : MonoBehaviour{
                     break;//ダウンがあったらループを抜ける。
                 }
             }
+        }
+        else if (collision.collider.tag == moveFloorTag) {//54
+
+           
+            float stepOnHeight = (capcolSizeY * (stepOnRate / 100f));
+            float judgePos = transform.position.y - ((capcolSizeY / 2f) - capcolOffsetY) + stepOnHeight;
+            foreach (ContactPoint2D p in collision.contacts) {
+                if (p.point.y < judgePos) {
+                    moveObj = collision.gameObject.GetComponent<MoveObject>();
+                } 
+            }
+        }
+    }
+
+    //54
+    private void OnCollisionExit2D(Collision2D collision) {
+        if(collision.collider.tag == moveFloorTag) {
+            moveObj = null;
         }
     }
 

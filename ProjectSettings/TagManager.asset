@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - DeadArea
   - HitArea
+  - GroundPlatform
+  - MoveFloor
   layers:
   - Default
   - TransparentFX
