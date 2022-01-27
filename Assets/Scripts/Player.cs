@@ -53,6 +53,7 @@ public class Player : MonoBehaviour{
     private string deadAreaTag = "DeadArea";//51
     private string hitAreaTag = "HitArea";//51
     private string moveFloorTag = "MoveFloor";//54
+    private string fallFloorTag = "FallFloor"; //55
     #endregion
 
     // Start is called before the first frame update
@@ -234,10 +235,12 @@ public class Player : MonoBehaviour{
         float capcolSizeY = capcol.size.y * transform.localScale.y;//動画コメントを参考に追加。
         float capcolOffsetY = capcol.offset.y * transform.localScale.y;//動画コメントを参考に追加。
 
-       
+        //レッスン55でフラグ整理
+        bool enemy = (collision.collider.tag == enemyTag);
+        bool moveFloor = (collision.collider.tag == moveFloorTag);
+        bool fallFloor = (collision.collider.tag == fallFloorTag);
 
-
-        if (collision.collider.tag == enemyTag) {
+        if (enemy) {//ここはenemyのみにする。
 
             //踏みつけ判定になる高さ
             float stepOnHeight = (capcolSizeY * (stepOnRate / 100f));//動画コメントを参考に変更
@@ -246,39 +249,41 @@ public class Player : MonoBehaviour{
 
             //レッスン45で追加。敵と衝突した位置を検知。当たったらまずい場所に当たっていたらミス
             foreach (ContactPoint2D p in collision.contacts) {
-                if (p.point.y <judgePos){
+                if (p.point.y < judgePos) {
                     //もう一度跳ねる
                     ObjectCollision o = collision.gameObject.GetComponent<ObjectCollision>();//スクリプトObjectCollisionから跳ねる高さを取得
                     GameManager.instance.playSE(jumpVoice);
                     if (o != null) {
-                        otherJumpHeight = o.boundHeight;//踏んづけたものから跳ねる高さを取得する。
-                        o.playerStepOn = true;
-                        jumpPos = transform.position.y;
-                        isOtherJump = true;
-                        isJump = false;
-                        jumpTime = 0.0f;
+                        if (enemy) {
+                            otherJumpHeight = o.boundHeight;//踏んづけたものから跳ねる高さを取得する。
+                            o.playerStepOn = true;
+                            jumpPos = transform.position.y;
+                            isOtherJump = true;
+                            isJump = false;
+                            jumpTime = 0.0f;
+                        }
                     }
-
-
-                }else{
-                    ReceiveDamage(true);
-                    break;//ダウンがあったらループを抜ける。
+                } else {
+                    if (enemy) {
+                        ReceiveDamage(true);
+                        break;//ダウンがあったらループを抜ける。
+                    }
                 }
             }
-        }
-        else if (collision.collider.tag == moveFloorTag) {//54
-
-           
+        } else if (moveFloor) {//54
             float stepOnHeight = (capcolSizeY * (stepOnRate / 100f));
             float judgePos = transform.position.y - ((capcolSizeY / 2f) - capcolOffsetY) + stepOnHeight;
             foreach (ContactPoint2D p in collision.contacts) {
                 if (p.point.y < judgePos) {
                     moveObj = collision.gameObject.GetComponent<MoveObject>();
-                } 
+                }
             }
         }
+        if (fallFloor) {//レッスン55で追加。ブログ、動画のやり方とは違う。
+            ObjectCollision o = collision.gameObject.GetComponent<ObjectCollision>();
+            o.playerStepOn = true;
+        }
     }
-
     //54
     private void OnCollisionExit2D(Collision2D collision) {
         if(collision.collider.tag == moveFloorTag) {

@@ -15,6 +15,7 @@ public class GroundCheck : MonoBehaviour{
     private string groundTag = "Ground";
     private string moveFloorTag = "MoveFloor";
     private string platformTag = "GroundPlatform";
+    private string fallFloorTag = "FallFloor";//55
     private bool isGround = false;
     private bool isGroundEnter, isGroundStay, isGroundExit;
     
@@ -46,9 +47,8 @@ public class GroundCheck : MonoBehaviour{
     //判定内に入ったときに呼ばれる
     private void OnTriggerEnter2D(Collider2D collision) {//判定内に入った２D コライダーの
         if (collision.tag == groundTag) {//タグがGroundならば
-            //Debug.Log("判定");
             isGroundEnter = true;
-        }else if(checkPlatformGround && (collision.tag == platformTag|| collision.tag == moveFloorTag)) {//レッスン54で追加。下から抜けられる床の判定
+        }else if(checkPlatformGround && (collision.tag == platformTag|| collision.tag == moveFloorTag || collision.tag == fallFloorTag)) {//レッスン54で追加。下から抜けられる床の判定
             isGroundEnter = true;
         }
     }
@@ -57,7 +57,7 @@ public class GroundCheck : MonoBehaviour{
     private void OnTriggerExit2D(Collider2D collision) {
         if(collision.tag == groundTag) {
             isGroundExit = true;
-        }else if (checkPlatformGround && (collision.tag == platformTag || collision.tag == moveFloorTag)) {//レッスン54で追加。下から抜けられる床の判定
+        }else if (checkPlatformGround && (collision.tag == platformTag || collision.tag == moveFloorTag || collision.tag == fallFloorTag)) {//レッスン54で追加。下から抜けられる床の判定
             isGroundExit = true;
         }
     }
@@ -66,7 +66,7 @@ public class GroundCheck : MonoBehaviour{
     private void OnTriggerStay2D(Collider2D collision) {
         if(collision.tag == groundTag) {
             isGroundStay = false;
-        }else if (checkPlatformGround && (collision.tag == platformTag || collision.tag == moveFloorTag)) {//レッスン54で追加。下から抜けられる床の判定
+        }else if (checkPlatformGround && (collision.tag == platformTag || collision.tag == moveFloorTag || collision.tag == fallFloorTag)) {//レッスン54で追加。下から抜けられる床の判定
             isGroundStay = true;
         }
     }
