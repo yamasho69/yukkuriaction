@@ -16,8 +16,10 @@ public class GameManager : MonoBehaviour{
     [Header("現在の復帰位置")] public int continueNum;
     [Header("現在の残機")] public int heart;
     [Header("デフォルトの残機")] public int defaultHeartNum;
-    [HideInInspector] public bool isGameOver;
+    [HideInInspector] public bool isGameOver = false;
+    [HideInInspector] public bool isStageClear = false;
     [Header("GameOverVoice")] public AudioClip gameOverVoice;
+    [Header("StageClearVoice")] public AudioClip stageClearVoice;
 
     private AudioSource audioSource = null;
 

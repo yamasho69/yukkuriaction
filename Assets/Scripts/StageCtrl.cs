@@ -13,6 +13,11 @@ public class StageCtrl : MonoBehaviour{
     [Header("コンテニュー位置")] public GameObject[] continuePoint;
     [Header("ゲームオーバー")] public GameObject gameOverObj;//51
     [Header("フェード")] public FadeImage fade;//51
+    [Header("ゲームオーバーSE")]public AudioClip gameOverSE;
+    [Header("リトライSE")]public AudioClip retrySE;
+    [Header("ステージクリアSE")]public AudioClip stageClearSE;
+    [Header("ステージクリア")]public GameObject stageClearObj;
+    [Header("ステージクリア判定")]public PlayerTriggerCheck stageClearTrigger;
 
     private Player p;
     //以下の変数は51で追加
@@ -21,6 +26,7 @@ public class StageCtrl : MonoBehaviour{
     private bool doGameOver = false;
     private bool retryGame = false;
     private bool doSceneChange = false;
+    private bool doClear = false;
     
     // Start is called before the first frame update
     void Start(){
@@ -28,6 +34,7 @@ public class StageCtrl : MonoBehaviour{
             && gameOverObj != null && fade !=null) 
         {
             gameOverObj.SetActive(false);
+            stageClearObj.SetActive(false);//56
             playerObj.transform.position = continuePoint[0].transform.position;
 
             p = playerObj.GetComponent<Player>();
@@ -55,7 +62,14 @@ public class StageCtrl : MonoBehaviour{
             {
                 Debug.Log("コンティニューポイントの設定が足りてないよ！");
             }
+        }else if(stageClearTrigger != null && stageClearTrigger.isOn && !doGameOver && !doClear) {//56
+            StageClear();
+            doClear = true;
         }
+
+
+
+
         if(fade != null && startFade && !doSceneChange) {
             if (fade.IsFadeOutComplete()) {
                 if (retryGame) {
@@ -63,6 +77,7 @@ public class StageCtrl : MonoBehaviour{
                 } else {
                     GameManager.instance.stageNum = nextStageNum;
                 }
+                GameManager.instance.isStageClear = false;//56で追加。クリアフラグ。
                 SceneManager.LoadScene("stage" + nextStageNum);
                 doSceneChange = true;
             }
@@ -80,5 +95,12 @@ public class StageCtrl : MonoBehaviour{
             fade.StartFadeOut();
             startFade = true;
         }
+    }
+
+    //56で作成
+    public void StageClear() {
+        GameManager.instance.isStageClear = true;
+        stageClearObj.SetActive(true);
+        GameManager.instance.playSE(stageClearSE);
     }
 }

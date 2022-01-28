@@ -42,6 +42,7 @@ public class Player : MonoBehaviour{
     private bool isDown = false;//44で追加。
     private bool isContinue = false; //50で追加。
     private bool nonDownAnim = false;//51
+    private bool isClearMotion = false; //56で追加。
     private float continueTime = 0.0f;//50で追加。
     private float blinkTime = 0.0f;//50で追加。
     private float jumpPos = 0.0f;//40で追加。ジャンプした高さを記録。
@@ -94,8 +95,10 @@ public class Player : MonoBehaviour{
 
     // FixedUpdate1 物理演算の前にしたい処理を書く。可能なら重い処理は他へ。瞬間的な処理は相性が悪い。レッスン39
     void FixedUpdate() {
-
-        if (!isDown && !GameManager.instance.isGameOver) {//ダウン中ではない。レッスン44で追加。
+        if (isClearMotion) {//ここは動画、ブログと違う。クリアモーションがオンになると動かないようにする。
+            rb.velocity = new Vector2(0, -grovity);
+        }
+        else if (!isDown && !GameManager.instance.isGameOver) {//ダウン中ではない。レッスン44で追加。ここは死なない限り有効
             //設置判定を得る
             isGround = ground.IsGround();
             isHead = head.IsGround();
@@ -116,6 +119,11 @@ public class Player : MonoBehaviour{
             rb.velocity = new Vector2(xSpeed, ySpeed)+addVelocity;//レッスン40で第二引数をySpeedに変更
         } else {
             rb.velocity = new Vector2(0, -grovity);//レッスン44で追加。ダウン中は重力のみ影響
+        }
+        if (!isClearMotion && GameManager.instance.isStageClear) {//ここはブログとは違う。上に死なない限り有効な部分があるので、そこから分岐させてしまうとクリアしても有効にならない。
+            isClearMotion = true;
+            anim.Play("StageClear");
+            //rb.velocity = new Vector2(0, -grovity);をここに書いても、死なない限り有効の部分で打ち消されるため、isClearMotionが有効ならば動かないif関数を一番上にした。
         }
     }
 
@@ -327,7 +335,7 @@ public class Player : MonoBehaviour{
 
     //51で追加。
     private void ReceiveDamage(bool downAnim) {
-        if (isDown) {
+        if (isDown || GameManager.instance.isStageClear) {
             return;
         } else 
         {
