@@ -7220,6 +7220,7 @@ GameObject:
   - component: {fileID: 305283719}
   - component: {fileID: 305283722}
   - component: {fileID: 305283721}
+  - component: {fileID: 305283723}
   - component: {fileID: 305283720}
   m_Layer: 5
   m_Name: Button
@@ -7290,7 +7291,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 305283721}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 305283723}
+        m_MethodName: PressStart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &305283721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7328,6 +7340,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 305283718}
   m_CullTransparentMesh: 0
+--- !u!114 &305283723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 305283718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bd6efb341768004283389193618bb59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fade: {fileID: 1423884667}
 --- !u!114 &306436632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11085,7 +11110,7 @@ PrefabInstance:
     - target: {fileID: 7528529640585727729, guid: be21636d095df9841bf31454c1ef92fe,
         type: 3}
       propertyPath: m_Text
-      value: "\u307F\u3069\u308A\u306E\u308A\u3075\u3068\u306F\n\u304C\u3093\u3070\u3063\u3066\u3046\u3054\u304F\u3088\n\u304D\u3044\u308D\u306E\u308A\u3075\u3068\u306F\n\u306E\u308B\u3068\u304A\u3061\u308B\u3088"
+      value: "\u307F\u3069\u308A\u306E\u308A\u3075\u3068\u306F\n\u304C\u3093\u3070\u3063\u3066\u3046\u3054\u304F\u3088\n\u3042\u304B\u3044\u308A\u3075\u3068\u306F\n\u306E\u308B\u3068\u304A\u3061\u308B\u3088"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be21636d095df9841bf31454c1ef92fe, type: 3}
@@ -50165,7 +50190,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1454875130}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 236.6, y: 15.95, z: 2.9485521}
+  m_LocalPosition: {x: -466, y: 1, z: 2.9485521}
   m_LocalScale: {x: 100, y: 100, z: 10}
   m_Children: []
   m_Father: {fileID: 297479476}
@@ -50344,7 +50369,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.057143, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

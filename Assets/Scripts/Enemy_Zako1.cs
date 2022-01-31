@@ -62,6 +62,10 @@ public class Enemy_Zako1 : MonoBehaviour {
                 col.enabled = false;//CircleCollider2Dを無効にする。
                 if(GameManager.instance != null) {
                     GameManager.instance.score += myScore;
+                    if (GameManager.instance.score >= GameManager.instance.zankiUpScore) {//自分で追加。スコアが100ごとに残機プラス1
+                        GameManager.instance.zankiUpScore += 100;
+                        GameManager.instance.AddHeartNum();
+                    }
                 }
                  Destroy(gameObject, 3f);
             } else {

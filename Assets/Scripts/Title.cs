@@ -15,6 +15,7 @@ public class Title : MonoBehaviour{
     public void PressStart()
     {
         Debug.Log("Press Start!");
+        
 
         if (!firstPush)//プッシュ済みではない場合
         {
@@ -25,8 +26,9 @@ public class Title : MonoBehaviour{
 
     private void Update() {
         if(!goNextScene && fade.IsFadeOutComplete()) {
-            SceneManager.LoadScene("stage01");
+            SceneManager.LoadScene("stage1");
             goNextScene = true;
+            GameManager.instance.RetryGame();//自分で追加リトライ用にスコア等を初期値に戻す。
         }
     }
 }
