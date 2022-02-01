@@ -98,7 +98,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myScore: 30
   PlayerCheck: {fileID: 8250471398054758663}
-  eatVoice: {fileID: 8300000, guid: 54dd9e8d1cce41d439bcd01e96db8637, type: 3}
+  clip1: {fileID: 8300000, guid: 54dd9e8d1cce41d439bcd01e96db8637, type: 3}
+  clip2: {fileID: 8300000, guid: 03fc00355fcd9c24c9baab7f3d3fd397, type: 3}
+  clip3: {fileID: 8300000, guid: 3b1b8d19914769c428be94a489b5463f, type: 3}
 --- !u!114 &8250471398054758663
 MonoBehaviour:
   m_ObjectHideFlags: 0

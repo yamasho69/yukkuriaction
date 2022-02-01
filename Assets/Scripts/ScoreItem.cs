@@ -10,7 +10,9 @@ public class ScoreItem : MonoBehaviour{
 
     [Header("加算するスコア")] public int myScore;
     [Header("プレイヤーの判定")] public PlayerTriggerCheck PlayerCheck;
-    [Header("EatVoice")] public AudioClip eatVoice;
+    [SerializeField] AudioClip clip1;
+    [SerializeField] AudioClip clip2;
+    [SerializeField] AudioClip clip3;
 
     // Start is called before the first frame update
     void Start(){
@@ -26,7 +28,7 @@ public class ScoreItem : MonoBehaviour{
                     GameManager.instance.zankiUpScore += 100;
                     GameManager.instance.AddHeartNum();
                 }
-                GameManager.instance.playSE(eatVoice);
+                GameManager.instance.RandomizeSfx(clip1,clip2,clip3);//ランダムでボイスを鳴らす。インスペクターのSfxsourceにはGameManagerをアタッチ。
                 Destroy(this.gameObject);
             }
         }

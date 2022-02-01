@@ -55,6 +55,7 @@ public class Player : MonoBehaviour{
     private string hitAreaTag = "HitArea";//51
     private string moveFloorTag = "MoveFloor";//54
     private string fallFloorTag = "FallFloor"; //55
+    private string poisonTag = "Poison"; //唐辛子につけるタグ
     #endregion
 
     // Start is called before the first frame update
@@ -247,6 +248,7 @@ public class Player : MonoBehaviour{
         bool enemy = (collision.collider.tag == enemyTag);
         bool moveFloor = (collision.collider.tag == moveFloorTag);
         bool fallFloor = (collision.collider.tag == fallFloorTag);
+        bool poison = (collision.collider.tag == poisonTag);//自分で作成。唐辛子につけるタグ。
 
         if (enemy) {//ここはenemyのみにする。
 
@@ -343,10 +345,10 @@ public class Player : MonoBehaviour{
                 AnimatorStateInfo currentState = anim.GetCurrentAnimatorStateInfo(0);
                 if (isLeft || currentState.IsName("LeftIdle") || currentState.IsName("LeftLanding")) {
                     anim.Play("LeftDown");
-                    GameManager.instance.playSE(leftDownVoice);
+                    //GameManager.instance.playSE(leftDownVoice); 
                 } else {
                     anim.Play("RightDown");
-                    GameManager.instance.playSE(rightDownVoice);
+                    //GameManager.instance.playSE(rightDownVoice);
                 }
             } else {
                 nonDownAnim = true;
@@ -362,6 +364,9 @@ public class Player : MonoBehaviour{
             GameManager.instance.playSE(fallVoice);
             ReceiveDamage(false);
         }else if(collision.tag == hitAreaTag){
+            ReceiveDamage(true);
+            GameManager.instance.RandomizeSfx(rightDownVoice,leftDownVoice);
+        } else if(collision.tag == poisonTag) {
             ReceiveDamage(true);
         }
     }

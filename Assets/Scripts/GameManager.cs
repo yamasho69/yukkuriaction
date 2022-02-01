@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour{
     [Header("StageClearVoice")] public AudioClip stageClearVoice;
 
     private AudioSource audioSource = null;
+    public AudioSource sfxSource;
 
     private void Awake() {
         if(instance == null) {
@@ -70,4 +71,11 @@ public class GameManager : MonoBehaviour{
             Debug.Log("オーディオソースが設定されていません。");
         }
     }
+
+    //ランダムでボイスを鳴らす、参考http://negi-lab.blog.jp/archives/RandomizeSfx.html
+    public void RandomizeSfx(params AudioClip[] clips) {
+        var randomIndex = UnityEngine.Random.Range(0, clips.Length);
+        sfxSource.PlayOneShot(clips[randomIndex]);
+    }
 }
+

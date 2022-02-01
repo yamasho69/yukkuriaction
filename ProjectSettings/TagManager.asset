@@ -11,6 +11,7 @@ TagManager:
   - GroundPlatform
   - MoveFloor
   - FallFloor
+  - Poison
   layers:
   - Default
   - TransparentFX
