@@ -139,3 +139,4 @@ MonoBehaviour:
   clip1: {fileID: 8300000, guid: 6a0779ed874fb584f8c68945c4422215, type: 3}
   clip2: {fileID: 8300000, guid: ae97f93c2392b1f4192619543a3255c9, type: 3}
   clip3: {fileID: 8300000, guid: b908614e5b75d3a468eaa90e105d7ec2, type: 3}
+  morunmorunSE: {fileID: 8300000, guid: 3ecff22040b3d534c805233348b32707, type: 3}

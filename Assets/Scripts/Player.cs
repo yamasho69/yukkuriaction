@@ -20,11 +20,23 @@ public class Player : MonoBehaviour{
     [Header("頭をぶつけた時の判定")] public GroundCheck head;//頭をぶつけた時の判定。40で追加
     [Header("ダッシュアニメーションカーブ")] public AnimationCurve dashCurve;//レッスン41で追加。アニメーションカーブ
     [Header("ジャンプアニメーションカーブ")] public AnimationCurve jumpCurve;//同上
-    [Header("JumpVoice")] public AudioClip jumpVoice;
-    [Header("RightDownVoice")] public AudioClip rightDownVoice;
-    [Header("LeftDownVoice")] public AudioClip leftDownVoice;
-    [Header("FallVoice")] public AudioClip fallVoice;
-
+    [Header("JumpVoice1")] public AudioClip jumpVoice1;
+    [Header("JumpVoice2")] public AudioClip jumpVoice2;
+    [Header("JumpVoice3")] public AudioClip jumpVoice3;
+    [Header("enemyDownVoice1")] public AudioClip enemyDownVoice1;
+    [Header("enemyDownVoice2")] public AudioClip enemyDownVoice2;
+    [Header("enemyDownVoice3")] public AudioClip enemyDownVoice3;
+    [Header("enemyDownVoice4")] public AudioClip enemyDownVoice4;
+    [Header("trapDownVoice1")] public AudioClip trapDownVoice1;
+    [Header("trapDownVoice2")] public AudioClip trapDownVoice2;
+    [Header("trapDownVoice3")] public AudioClip trapDownVoice3;
+    [Header("trapDownVoice4")] public AudioClip trapDownVoice4;
+    [Header("FallVoice1")] public AudioClip fallVoice1;
+    [Header("FallVoice2")] public AudioClip fallVoice2;
+    [Header("FallVoice3")] public AudioClip fallVoice3;
+    [Header("morunmorun")] public AudioClip morunmorunSE;
+    [Header("enemyDeath")] public AudioClip enemyDeathSE;
+    [Header("needle")] public AudioClip needleSE;
     #endregion
 
     #region
@@ -250,7 +262,7 @@ public class Player : MonoBehaviour{
         bool fallFloor = (collision.collider.tag == fallFloorTag);
         bool poison = (collision.collider.tag == poisonTag);//自分で作成。唐辛子につけるタグ。
 
-        if (enemy) {//ここはenemyのみにする。
+        if (enemy && !isDown) {//ここはenemyのみにする。isDownを入れないと二重にダメージをくらう
 
             //踏みつけ判定になる高さ
             float stepOnHeight = (capcolSizeY * (stepOnRate / 100f));//動画コメントを参考に変更
@@ -262,7 +274,8 @@ public class Player : MonoBehaviour{
                 if (p.point.y < judgePos) {
                     //もう一度跳ねる
                     ObjectCollision o = collision.gameObject.GetComponent<ObjectCollision>();//スクリプトObjectCollisionから跳ねる高さを取得
-                    GameManager.instance.playSE(jumpVoice);
+                    GameManager.instance.playSE(enemyDeathSE);//敵を踏みつけた時の音
+                    GameManager.instance.RandomizeSfx(jumpVoice1, jumpVoice2, jumpVoice3);
                     if (o != null) {
                         if (enemy) {
                             otherJumpHeight = o.boundHeight;//踏んづけたものから跳ねる高さを取得する。
@@ -276,6 +289,8 @@ public class Player : MonoBehaviour{
                 } else {
                     if (enemy) {
                         ReceiveDamage(true);
+                        GameManager.instance.RandomizeSfx(enemyDownVoice1, enemyDownVoice2, enemyDownVoice3, enemyDownVoice4);//ReceiveDamage内で声を出さないようにしたのでここに入れる。
+                        GameManager.instance.playSE(morunmorunSE);
                         break;//ダウンがあったらループを抜ける。
                     }
                 }
@@ -360,14 +375,16 @@ public class Player : MonoBehaviour{
 
     //51で追加。
     private void OnTriggerEnter2D(Collider2D collision) {
-        if(collision.tag == deadAreaTag) {
-            GameManager.instance.playSE(fallVoice);
+        if (collision.tag == poisonTag && !isDown) {//ダウン中に唐辛子をとっても反応しない様に!isDownをつける。
+            ReceiveDamage(true);
+        } else if(collision.tag == hitAreaTag && !isDown) {//!isDownを付けないとトゲの上にいる限り反応する
+            ReceiveDamage(true);
+            GameManager.instance.playSE(needleSE);
+            GameManager.instance.RandomizeSfx(trapDownVoice1,trapDownVoice2,trapDownVoice3,trapDownVoice4);
+            GameManager.instance.playSE(morunmorunSE);
+        } else if(collision.tag == deadAreaTag && !isDown) {//ダウン状態で穴に落ちた状態のときに反応しないように追加。
+            GameManager.instance.RandomizeSfx(fallVoice1, fallVoice2, fallVoice3);
             ReceiveDamage(false);
-        }else if(collision.tag == hitAreaTag){
-            ReceiveDamage(true);
-            GameManager.instance.RandomizeSfx(rightDownVoice,leftDownVoice);
-        } else if(collision.tag == poisonTag) {
-            ReceiveDamage(true);
-        }
+    }
     }
 }
