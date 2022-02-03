@@ -76,7 +76,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   continueNum: 1
-  se: {fileID: 8300000, guid: f0944ec8c1fd6ed42bee6a37dd0d0446, type: 3}
+  voice: {fileID: 8300000, guid: f0944ec8c1fd6ed42bee6a37dd0d0446, type: 3}
+  se: {fileID: 8300000, guid: b599df8eb1124014199e4af20f6416e5, type: 3}
   trigger: {fileID: 5575861817601133507}
   speed: 2
   curve:
@@ -121,6 +122,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  beforeBox: {fileID: 8007179770954655085}
+  afterBox: {fileID: 21300000, guid: 83ad4cac4980d8e41976cb852b3ef3a9, type: 3}
 --- !u!114 &8007179769957638579
 MonoBehaviour:
   m_ObjectHideFlags: 0
