@@ -212,7 +212,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -3.7, y: 5.6}
+  m_AnchoredPosition: {x: -8, y: 5.6}
   m_SizeDelta: {x: 32, y: 32}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &8007179770197891686
@@ -310,7 +310,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 32, y: 32}
+  m_SizeDelta: {x: 44.365997, y: 35.47116}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &8007179770954655084
 CanvasRenderer:
@@ -339,9 +339,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5e4bfb0400d46ac41901d80f5262483a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7e91dbb3c9a59de459fe4c8cd8309920, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -481,22 +481,22 @@ PrefabInstance:
     - target: {fileID: 8585427440792984215, guid: 76ceb49faa1011445bee0c26b884f24c,
         type: 3}
       propertyPath: m_Offset.y
-      value: -42.62689
+      value: -56.945175
       objectReference: {fileID: 0}
     - target: {fileID: 8585427440792984215, guid: 76ceb49faa1011445bee0c26b884f24c,
         type: 3}
       propertyPath: m_Size.y
-      value: 155.6344
+      value: 129.60123
       objectReference: {fileID: 0}
     - target: {fileID: 8585427440792984215, guid: 76ceb49faa1011445bee0c26b884f24c,
         type: 3}
       propertyPath: m_Offset.x
-      value: 89.270706
+      value: 94.47756
       objectReference: {fileID: 0}
     - target: {fileID: 8585427440792984215, guid: 76ceb49faa1011445bee0c26b884f24c,
         type: 3}
       propertyPath: m_Size.x
-      value: 175.40347
+      value: 185.81718
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 76ceb49faa1011445bee0c26b884f24c, type: 3}
