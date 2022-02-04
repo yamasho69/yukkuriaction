@@ -60,7 +60,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: -1995937467
+  m_SortingLayerID: 1586262539
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &8007179769957638580
@@ -79,49 +79,6 @@ MonoBehaviour:
   voice: {fileID: 8300000, guid: f0944ec8c1fd6ed42bee6a37dd0d0446, type: 3}
   se: {fileID: 8300000, guid: b599df8eb1124014199e4af20f6416e5, type: 3}
   trigger: {fileID: 5575861817601133507}
-  speed: 2
-  curve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0.005886078
-      value: 0.09933853
-      inSlope: 0.16638133
-      outSlope: 0.16638133
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.21931615
-      value: 0.13484931
-      inSlope: -0.046631515
-      outSlope: -0.046631515
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.5581729
-      value: 0.046867073
-      inSlope: -0.17073411
-      outSlope: -0.17073411
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.9278259
-      value: 0.016620636
-      inSlope: -0.081823856
-      outSlope: -0.081823856
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   beforeBox: {fileID: 8007179770954655085}
   afterBox: {fileID: 21300000, guid: 83ad4cac4980d8e41976cb852b3ef3a9, type: 3}
 --- !u!114 &8007179769957638579

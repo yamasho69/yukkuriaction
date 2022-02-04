@@ -11,6 +11,8 @@ public class DeathItem : MonoBehaviour {
     [SerializeField] AudioClip clip1;
     [SerializeField] AudioClip clip2;
     [SerializeField] AudioClip clip3;
+    [SerializeField] AudioClip clip4;
+    [SerializeField] AudioClip clip5;
     [SerializeField] AudioClip morunmorunSE;
 
     //HeadCheckにPlayerタグをつけないと、下からアイテムをとったとき、アイテムが消えずに残ってしまう＝このクラスは実行されない
@@ -24,8 +26,10 @@ public class DeathItem : MonoBehaviour {
     void Update() {
         if (PlayerCheck.isOn) {
             //if (GameManager.instance != null) {
-                GameManager.instance.RandomizeSfx(clip1, clip2, clip3);//ランダムでボイスを鳴らす。インスペクターのSfxsourceにはGameManagerをアタッチ。
+            if (!GameManager.instance.isGameOver) {//ゲームオーバー時にはダウンボイスを鳴らさない。
+                GameManager.instance.RandomizeSfx(clip1, clip2, clip3, clip4, clip5);//ランダムでボイスを鳴らす。インスペクターのSfxsourceにはGameManagerをアタッチ。
                 GameManager.instance.playSE(morunmorunSE);
+            }
                 Destroy(this.gameObject);
             //}
         }

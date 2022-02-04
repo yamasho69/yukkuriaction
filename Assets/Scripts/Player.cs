@@ -27,16 +27,22 @@ public class Player : MonoBehaviour{
     [Header("enemyDownVoice2")] public AudioClip enemyDownVoice2;
     [Header("enemyDownVoice3")] public AudioClip enemyDownVoice3;
     [Header("enemyDownVoice4")] public AudioClip enemyDownVoice4;
+    [Header("enemyDownVoice5")] public AudioClip enemyDownVoice5;
+    [Header("enemyDownVoice6")] public AudioClip enemyDownVoice6;
     [Header("trapDownVoice1")] public AudioClip trapDownVoice1;
     [Header("trapDownVoice2")] public AudioClip trapDownVoice2;
     [Header("trapDownVoice3")] public AudioClip trapDownVoice3;
     [Header("trapDownVoice4")] public AudioClip trapDownVoice4;
+    [Header("trapDownVoice5")] public AudioClip trapDownVoice5;
+    [Header("trapDownVoice6")] public AudioClip trapDownVoice6;
     [Header("FallVoice1")] public AudioClip fallVoice1;
     [Header("FallVoice2")] public AudioClip fallVoice2;
     [Header("FallVoice3")] public AudioClip fallVoice3;
+    [Header("FallVoice4")] public AudioClip fallVoice4;
+    [Header("FallVoice5")] public AudioClip fallVoice5;
     [Header("morunmorun")] public AudioClip morunmorunSE;
     [Header("enemyDeath")] public AudioClip enemyDeathSE;
-    [Header("needle")] public AudioClip needleSE;
+    [Header("trapSE")] public AudioClip trapSE;
     #endregion
 
     #region
@@ -47,7 +53,7 @@ public class Player : MonoBehaviour{
     private MoveObject moveObj = null;//54
     private bool isGround = false;//38で追加。
     private bool isHead = false;//40で追加。
-    private bool isJump = false;//40で追加。
+    public bool isJump = false;//40で追加。
     private bool isOtherJump = false;//45で追加。敵を踏んだ時の跳ね返り。
     private bool isRight = false; //43で追加。
     private bool isLeft = false;//43で追加。
@@ -289,8 +295,10 @@ public class Player : MonoBehaviour{
                 } else {
                     if (enemy) {
                         ReceiveDamage(true);
-                        GameManager.instance.RandomizeSfx(enemyDownVoice1, enemyDownVoice2, enemyDownVoice3, enemyDownVoice4);//ReceiveDamage内で声を出さないようにしたのでここに入れる。
-                        GameManager.instance.playSE(morunmorunSE);
+                        if (!GameManager.instance.isGameOver) {//ゲームオーバー時にはダウンボイスを鳴らさない。
+                            GameManager.instance.RandomizeSfx(enemyDownVoice1, enemyDownVoice2, enemyDownVoice3, enemyDownVoice4,enemyDownVoice5,enemyDownVoice6);//ReceiveDamage内で声を出さないようにしたのでここに入れる。
+                            GameManager.instance.playSE(morunmorunSE);
+                        }
                         break;//ダウンがあったらループを抜ける。
                     }
                 }
@@ -318,6 +326,7 @@ public class Player : MonoBehaviour{
 
     public bool IsContinueWaiting() {
         if (GameManager.instance.isGameOver) {
+            capcol.enabled = false;//ゲームオーバーの時はプレイヤーのカプセルコライダーをオフにして、画面外に落とす
             return false;
         } else {
             return IsDownAnimEnd() || nonDownAnim;
@@ -379,12 +388,16 @@ public class Player : MonoBehaviour{
             ReceiveDamage(true);
         } else if(collision.tag == hitAreaTag && !isDown) {//!isDownを付けないとトゲの上にいる限り反応する
             ReceiveDamage(true);
-            GameManager.instance.playSE(needleSE);
-            GameManager.instance.RandomizeSfx(trapDownVoice1,trapDownVoice2,trapDownVoice3,trapDownVoice4);
-            GameManager.instance.playSE(morunmorunSE);
+            GameManager.instance.playSE(trapSE);
+            if(!GameManager.instance.isGameOver) {//ゲームオーバー時にはダウンボイスを鳴らさない。
+                GameManager.instance.RandomizeSfx(trapDownVoice1, trapDownVoice2, trapDownVoice3, trapDownVoice4,trapDownVoice5,trapDownVoice6);
+                GameManager.instance.playSE(morunmorunSE); 
+            }
         } else if(collision.tag == deadAreaTag && !isDown) {//ダウン状態で穴に落ちた状態のときに反応しないように追加。
-            GameManager.instance.RandomizeSfx(fallVoice1, fallVoice2, fallVoice3);
             ReceiveDamage(false);
-    }
+            if (!GameManager.instance.isGameOver) {//ゲームオーバー時にはダウンボイスを鳴らさない。
+                GameManager.instance.RandomizeSfx(fallVoice1, fallVoice2, fallVoice3,fallVoice4,fallVoice5);
+            }
+        }
     }
 }

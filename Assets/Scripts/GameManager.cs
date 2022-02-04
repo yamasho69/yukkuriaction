@@ -50,8 +50,9 @@ public class GameManager : MonoBehaviour{
         if(heart > 0) {
             --heart;
         } else {
+            //GameOverになったとき
             isGameOver = true;
-            playSE(gameOverVoice);
+            //playSE(gameOverVoice);
         }
     }
 

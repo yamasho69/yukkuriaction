@@ -13,9 +13,20 @@ public class StageCtrl : MonoBehaviour{
     [Header("コンテニュー位置")] public GameObject[] continuePoint;
     [Header("ゲームオーバー")] public GameObject gameOverObj;//51
     [Header("フェード")] public FadeImage fade;//51
-    [Header("ゲームオーバーSE")]public AudioClip gameOverSE;
-    [Header("リトライSE")]public AudioClip retrySE;
+    [Header("ステージスタートVoice1")] public AudioClip startVoice1;
+    [Header("ステージスタートVoice2")] public AudioClip startVoice2;
+    [Header("ステージスタートVoice3")] public AudioClip startVoice3;
+    [Header("ステージスタートVoice4")] public AudioClip startVoice4;
+    [Header("ステージスタートVoice5")] public AudioClip startVoice5;
+    [Header("ゲームオーバーVoice1")] public AudioClip gameOverVoice1;
+    [Header("ゲームオーバーVoice2")] public AudioClip gameOverVoice2;
+    [Header("ゲームオーバーVoice3")] public AudioClip gameOverVoice3;
+    [Header("ゲームオーバーVoice4")] public AudioClip gameOverVoice4;
+    [Header("ゲームオーバーVoice5")] public AudioClip gameOverVoice5;
     [Header("ステージクリアSE")]public AudioClip stageClearSE;
+    [Header("ステージクリアVO1")]public AudioClip stageClearVoice1;
+    [Header("ステージクリアVO2")]public AudioClip stageClearVoice2;
+    [Header("ステージクリアVO3")]public AudioClip stageClearVoice3;
     [Header("ステージクリア")]public GameObject stageClearObj;
     [Header("ステージクリア判定")]public PlayerTriggerCheck stageClearTrigger;
 
@@ -30,6 +41,7 @@ public class StageCtrl : MonoBehaviour{
     
     // Start is called before the first frame update
     void Start(){
+        GameManager.instance.RandomizeSfx(startVoice1, startVoice2, startVoice3,startVoice4,startVoice5);
         if (playerObj != null && continuePoint != null && continuePoint.Length > 0 
             && gameOverObj != null && fade !=null) 
         {
@@ -53,6 +65,7 @@ public class StageCtrl : MonoBehaviour{
         if(GameManager.instance.isGameOver && !doGameOver) {
             gameOverObj.SetActive(true);
             doGameOver = true;
+            GameManager.instance.RandomizeSfx(gameOverVoice1, gameOverVoice2, gameOverVoice3,gameOverVoice4,gameOverVoice5);
         }
         else if(p!= null && p.IsContinueWaiting() && !doGameOver) {
             if(continuePoint.Length > GameManager.instance.continueNum) {
@@ -102,5 +115,6 @@ public class StageCtrl : MonoBehaviour{
         GameManager.instance.isStageClear = true;
         stageClearObj.SetActive(true);
         GameManager.instance.playSE(stageClearSE);
+        GameManager.instance.RandomizeSfx(stageClearVoice1, stageClearVoice2, stageClearVoice3);
     }
 }
