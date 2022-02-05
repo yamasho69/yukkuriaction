@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 
 //レッスン46で作成
 
@@ -46,7 +47,7 @@ public class Enemy_Zako2: MonoBehaviour {
                 int xVector = -1;
                 if (rightTleftF) {
                     xVector = 1;
-                    transform.localScale = new Vector3(-10, 10, 1);
+                    transform.localScale = new Vector3(-10,10, 1);
                 } else {
                     transform.localScale = new Vector3(10, 10, 1);
                 }

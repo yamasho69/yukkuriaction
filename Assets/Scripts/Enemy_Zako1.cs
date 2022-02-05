@@ -57,7 +57,7 @@ public class Enemy_Zako1 : MonoBehaviour {
         } else {
             if (!isDead) {
                 anim.Play("dead");
-                rb.velocity = new Vector2(0, -gravity);
+                rb.velocity = new Vector2(0, -gravity*1.5f);
                 isDead = true;
                 col.enabled = false;//CircleCollider2Dを無効にする。
                 if(GameManager.instance != null) {
