@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour{
     [Header("デフォルトの残機")] public int defaultHeartNum;
     [HideInInspector] public bool isGameOver = false;
     [HideInInspector] public bool isStageClear = false;
-    [Header("GameOverVoice")] public AudioClip gameOverVoice;
+    [Header("GameOverVoice")] public AudioClip gameOverSE;
     [Header("StageClearVoice")] public AudioClip stageClearVoice;
 
     private AudioSource audioSource = null;
@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour{
         } else {
             //GameOverになったとき
             isGameOver = true;
-            //playSE(gameOverVoice);
+            playSE(gameOverSE);
         }
     }
 
