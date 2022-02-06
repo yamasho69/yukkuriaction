@@ -12,6 +12,7 @@ TagManager:
   - MoveFloor
   - FallFloor
   - Poison
+  - PlayerFoot
   layers:
   - Default
   - TransparentFX

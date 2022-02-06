@@ -101,8 +101,6 @@ MonoBehaviour:
   movePoint:
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   speed: 15
 --- !u!251 &3675602113919764666
 PlatformEffector2D:
@@ -171,7 +169,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 1
   m_UsedByComposite: 0
-  m_Offset: {x: 0.00015740097, y: 0.07369639}
+  m_Offset: {x: 0.00046123564, y: 0.07369639}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -182,5 +180,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.32177433, y: 0.01341223}
+  m_Size: {x: 0.31630608, y: 0.013412237}
   m_EdgeRadius: 0

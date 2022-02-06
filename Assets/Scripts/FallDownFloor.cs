@@ -13,6 +13,7 @@ public class FallDownFloor : MonoBehaviour {
     public bool isOn;
     public bool isFall;
     public bool isReturn;
+    public bool isFloorOn = false;
     private Vector3 spriteDefaultPos;
     private Vector3 floorDefaultPos;
     private Vector2 fallVelocity;
@@ -48,7 +49,7 @@ public class FallDownFloor : MonoBehaviour {
 
     private void Update() {
         //プレイヤーが1回でも乗ったらフラグをオンに
-        if (oc.playerStepOn) {
+        if (oc.playerStepOn && isFloorOn) {
             isOn = true;
             oc.playerStepOn = false;
         }
@@ -61,6 +62,7 @@ public class FallDownFloor : MonoBehaviour {
             //一定時間たったら落ちる
             if (timer > fallTime) {
                 isFall = true;
+                isFloorOn = false;
             }
 
             timer += Time.deltaTime;
@@ -68,6 +70,7 @@ public class FallDownFloor : MonoBehaviour {
 
         //一定時間たつと明滅して戻ってくる
         if (isReturn) {
+            isFloorOn = false;
             //明滅　ついている時に戻る
             if (blinkTimer > 0.2f) {
                 sr.enabled = true;
@@ -112,6 +115,24 @@ public class FallDownFloor : MonoBehaviour {
                 fallingTimer += Time.deltaTime;
                 isOn = false;
             }
+        }
+    }
+
+
+
+    //ここ以下は自分で追加。プレイヤーの設置判定にタグを付与し、そのタグが触らないと、isFloorOnがtrueにならない。
+    //isFloorOnとoc.playerStepOnが両方trueでないとisOnはtrueにならない。isOnがtrueになると、床は落ちて、
+    //isFloorOnはfalseになる。
+    private void OnCollisionEnter2D(Collision2D collision) {
+        if(collision.collider.tag == "PlayerFoot") {
+            isFloorOn = true;
+        }
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if(collision.tag =="PlayerFoot") {
+            isFloorOn = true;
         }
     }
 }
