@@ -5,8 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-
-//レッスン46で作成
+using DG.Tweening;
 
 
 public class Enemy_Zako1 : MonoBehaviour {
@@ -23,7 +22,7 @@ public class Enemy_Zako1 : MonoBehaviour {
     private SpriteRenderer sr = null;
     private Animator anim = null;
     private ObjectCollision oc = null;
-    private CircleCollider2D col = null;
+    private BoxCollider2D col = null;
     private bool rightTleftF = false;
     private bool isDead = false;
     #endregion
@@ -34,13 +33,20 @@ public class Enemy_Zako1 : MonoBehaviour {
         sr = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         oc = GetComponent<ObjectCollision>();
-        col = GetComponent<CircleCollider2D>();
+        col = GetComponent<BoxCollider2D>();
     }
 
     void FixedUpdate() {
         if (!oc.playerStepOn) {
             if (sr.isVisible || nonVisibleAct) {
-                if (checkCollision.isOn) {
+                transform.DOShakePosition(1f, 1f, 1, 2, false, true).SetRelative(true).SetLink(gameObject); ;
+                //Dotweenでふわふわ動かす。.SetRelatiive(true)をつけることで、相対座標を指定できる。
+                //https://zenn.dev/ohbashunsuke/books/20200924-dotween-complete/viewer/dotween-15
+                //https://zenn.dev/ohbashunsuke/books/20200924-dotween-complete/viewer/dotween-19
+
+
+                //この下は無効にしないと敵の大きさが小さくなる。
+                /*if (checkCollision.isOn) {
                     rightTleftF = !rightTleftF;
                 }
                 int xVector = -1;
@@ -49,17 +55,17 @@ public class Enemy_Zako1 : MonoBehaviour {
                     transform.localScale = new Vector3(-10, 10, 1);
                 } else {
                     transform.localScale = new Vector3(10, 10, 1);
-                }
-                rb.velocity = new Vector2(xVector * speed, -gravity);
+                
+                rb.velocity = new Vector2(xVector * speed, -gravity);*/
             } else {
                 rb.Sleep();
             }
         } else {
             if (!isDead) {
                 anim.Play("dead");
-                rb.velocity = new Vector2(0, -gravity*1.5f);
+                rb.velocity = new Vector2(0, -25);
                 isDead = true;
-                col.enabled = false;//CircleCollider2Dを無効にする。
+                col.enabled = false;//BoxCollider2Dを無効にする。
                 if(GameManager.instance != null) {
                     GameManager.instance.score += myScore;
                     if (GameManager.instance.score >= GameManager.instance.zankiUpScore) {//自分で追加。スコアが100ごとに残機プラス1
@@ -69,7 +75,7 @@ public class Enemy_Zako1 : MonoBehaviour {
                 }
                  Destroy(gameObject, 3f);
             } else {
-                transform.Rotate(new Vector3(0, 0, 5));
+                transform.Rotate(new Vector3(0, 0, 0));
             }
         }
     }

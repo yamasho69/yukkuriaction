@@ -68,7 +68,8 @@ public class Enemy_Bullet: MonoBehaviour {
     void FixedUpdate() {
         if (!oc.playerStepOn) {
             if (sr.isVisible || nonVisibleAct) {
-                if (checkCollision.isOn) {
+                //この下は無効にしないと敵の大きさが小さくなる。
+                /*if (checkCollision.isOn) {
                     rightTleftF = !rightTleftF;
                 }
                 int xVector = -1;
@@ -77,15 +78,14 @@ public class Enemy_Bullet: MonoBehaviour {
                     transform.localScale = new Vector3(-10, 10, 1);
                 } else {
                     transform.localScale = new Vector3(10, 10, 1);
-                }
-                rb.velocity = new Vector2(xVector * speed, -gravity);
-            } else {
+                
+                rb.velocity = new Vector2(xVector * speed, -gravity);*/
                 rb.Sleep();
             }
         } else {
             if (!isDead) {
                 anim.Play("dead");
-                rb.velocity = new Vector2(0, -gravity*1.5f);
+                rb.velocity = new Vector2(0, -25);
                 isDead = true;
                 col.enabled = false;//BoxCollider2Dを無効にする。
                 if(GameManager.instance != null) {

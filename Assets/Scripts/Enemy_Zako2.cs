@@ -36,6 +36,7 @@ public class Enemy_Zako2: MonoBehaviour {
         anim = GetComponent<Animator>();
         oc = GetComponent<ObjectCollision>();
         col = GetComponent<BoxCollider2D>();
+ 
     }
 
     void FixedUpdate() {

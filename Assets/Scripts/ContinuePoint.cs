@@ -56,7 +56,7 @@ public class ContinuePoint : MonoBehaviour {
     }
 
     void Rotate() {
-        this.transform.DORotate(Vector3.right * 90f, 1.5f);//Dotweenで奥側に倒れる演出
+        this.transform.DORotate(Vector3.right * 90f, 1.5f).SetLink(gameObject);//Dotweenで奥側に倒れる演出
         Invoke("Vanish", 1.5f);
     }
 

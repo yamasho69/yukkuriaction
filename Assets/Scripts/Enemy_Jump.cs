@@ -27,7 +27,7 @@ public class Enemy_Jump: MonoBehaviour {
     private Animator anim = null;
     private ObjectCollision oc = null;
     private BoxCollider2D col = null;
-    private bool rightTleftF = false;
+    //private bool rightTleftF = false;
     private bool isDead = false;
 
     private Transform myTransform = null;
@@ -52,11 +52,14 @@ public class Enemy_Jump: MonoBehaviour {
             //通常の状態
             if (currentState.IsName("idle")) {
                 if (timer > interval) {
-                    anim.SetTrigger("jump");
-                    this.transform.DOJump(myTransform.position, jumpPower, numJumps: 1, duration);
+                   col.enabled = true;//当たり判定を復活させる。
+                   anim.SetTrigger("jump");
+                   this.transform.DOJump(myTransform.position, jumpPower, numJumps: 1, duration).SetLink(gameObject);
                     //Dotweenで元々いた座標にジャンプ
                     //https://section31.jp/gamedevelopment/unity/dotween2/
-                    timer = 0.0f;
+                    //SetLink(gameObject)がないと、エラーがでる。超重要。
+                    //https://kan-kikuchi.hatenablog.com/entry/DOTween_SetLink
+                    timer = 0.0f;  
                 } else {
                     timer += Time.deltaTime;
                 }
@@ -71,21 +74,21 @@ public class Enemy_Jump: MonoBehaviour {
                     //rightTleftF = !rightTleftF;
                     anim.SetTrigger("idle");
                 }
-                int xVector = -1;
+                /*int xVector = -1;
                 if (rightTleftF) {
                     xVector = 1;
                     transform.localScale = new Vector3(-10, 10, 1);
                 } else {
                     transform.localScale = new Vector3(10, 10, 1);
-                }
-                rb.velocity = new Vector2(xVector * speed, -gravity);
+
+                    rb.velocity = new Vector2(xVector * speed, -gravity); */
             } else {
                 rb.Sleep();
             }
         } else {
             if (!isDead) {
                 anim.Play("dead");
-                rb.velocity = new Vector2(0, -gravity*1.5f);
+                rb.velocity = new Vector2(0, -25);
                 isDead = true;
                 col.enabled = false;//BoxCollider2Dを無効にする。
                 if (GameManager.instance != null) {
@@ -95,8 +98,27 @@ public class Enemy_Jump: MonoBehaviour {
                         GameManager.instance.AddHeartNum();
                     }
                 }
-                Destroy(gameObject, 3f);
+                Destroy(gameObject, 0.3f);
             }
         }
     }
+
+    //プレイヤーに触った瞬間、敵の当たり判定を消す。
+    //上から乗ったときに、当たり判定があるままだとプレイヤーに乗っかっておかしくなる。
+    private void OnCollisionEnter2D(Collision2D collision) {
+            if (collision.gameObject.tag == "Player"&& !oc.playerStepOn) {
+                col.enabled = false;
+                rb.gravityScale = 0.0f;
+                Invoke("ColOne", 0.1f);//プイレイヤーと接触してすぐに当たり判定を復活させる。
+                                       //当たり判定がないままだと、床を突き抜けて落ちてしまう。
+            }
+    }
+
+
+    //プレイヤーと敵の当たり判定が重なると、重ならないようにじわじわずれるため、不自然さはなくなる。
+    private void ColOne() {
+        col.enabled = true;
+        rb.gravityScale = 1.0f;
+    }
+
 }
