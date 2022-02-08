@@ -84,8 +84,8 @@ GameObject:
   - component: {fileID: 2483105900070936164}
   - component: {fileID: 2483105900070936160}
   - component: {fileID: 2483105900070936174}
-  - component: {fileID: -3197718229370497708}
   - component: {fileID: 8169132667652273105}
+  - component: {fileID: 1383645725514920457}
   m_Layer: 0
   m_Name: Enemy_Duck
   m_TagString: Enemy
@@ -167,7 +167,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2483105900070936167}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -213,32 +213,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!61 &-3197718229370497708
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2483105900070936167}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.024344414, y: -0.011361748}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.36, y: 0.36}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 1
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.8371236, y: 0.94646484}
-  m_EdgeRadius: 0
 --- !u!114 &8169132667652273105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,3 +233,19 @@ MonoBehaviour:
   jumpPower: 15
   duration: 1
   interval: 2
+--- !u!70 &1383645725514920457
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2483105900070936167}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.01, y: -0.1}
+  m_Size: {x: 0.7, y: 0.8}
+  m_Direction: 0

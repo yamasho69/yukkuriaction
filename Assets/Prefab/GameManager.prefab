@@ -48,8 +48,13 @@ MonoBehaviour:
   stageNum: 1
   continueNum: 0
   heart: 3
+  zankiUpScore: 0
   defaultHeartNum: 3
   isGameOver: 0
+  isStageClear: 0
+  gameOverSE: {fileID: 8300000, guid: a609166ecc1bc0f4faf67db2f3dbaa5e, type: 3}
+  OneUpSE: {fileID: 8300000, guid: 67f9ffd6c3484d64094d4b6ecbc15cc5, type: 3}
+  sfxSource: {fileID: 2292742820848154084}
 --- !u!82 &2292742820848154084
 AudioSource:
   m_ObjectHideFlags: 0

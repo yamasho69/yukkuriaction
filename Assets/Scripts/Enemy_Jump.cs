@@ -26,7 +26,7 @@ public class Enemy_Jump: MonoBehaviour {
     private SpriteRenderer sr = null;
     private Animator anim = null;
     private ObjectCollision oc = null;
-    private BoxCollider2D col = null;
+    private CapsuleCollider2D col = null;
     //private bool rightTleftF = false;
     private bool isDead = false;
 
@@ -34,15 +34,21 @@ public class Enemy_Jump: MonoBehaviour {
     private float timer;
     #endregion
 
+    Tween tween;
+
     // Start is called before the first frame update
     void Start() {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         oc = GetComponent<ObjectCollision>();
-        col = GetComponent<BoxCollider2D>();
+        col = GetComponent<CapsuleCollider2D>();
         // transformを取得、https://www.sejuku.net/blog/50983
         myTransform = GetComponent<Transform>();
+
+        //https://qiita.com/broken55/items/df152c061da759ad1471#%E6%AD%A2%E3%82%81%E3%82%8B-kill
+        //この敵を踏みつけた瞬間にDotweenを無効にするためにこの処理が必要。
+        this.tween = this.transform.DOJump(myTransform.position, jumpPower, numJumps: 1, duration).SetLink(gameObject);
     }
 
     void Update() {
@@ -64,7 +70,7 @@ public class Enemy_Jump: MonoBehaviour {
                     timer += Time.deltaTime;
                 }
             }
-        }
+        } 
     }
 
     void FixedUpdate() {
@@ -88,9 +94,10 @@ public class Enemy_Jump: MonoBehaviour {
         } else {
             if (!isDead) {
                 anim.Play("dead");
-                rb.velocity = new Vector2(0, -25);
+                col.enabled = false;//Collider2Dを無効にする。
+                DOTween.Kill(this.transform);//このオブジェクトのDotweenを無効にする。超重要。これがないと敵のジャンプ中に踏みつけた時、プレイヤーの足元を突き抜けて接触する。
+                rb.velocity = new Vector2(0, -30);
                 isDead = true;
-                col.enabled = false;//BoxCollider2Dを無効にする。
                 if (GameManager.instance != null) {
                     GameManager.instance.score += myScore;
                     if (GameManager.instance.score >= GameManager.instance.zankiUpScore) {//自分で追加。スコアが100ごとに残機プラス1
@@ -98,7 +105,7 @@ public class Enemy_Jump: MonoBehaviour {
                         GameManager.instance.AddHeartNum();
                     }
                 }
-                Destroy(gameObject, 0.3f);
+                Destroy(gameObject, 0.1f);
             }
         }
     }
@@ -109,7 +116,7 @@ public class Enemy_Jump: MonoBehaviour {
             if (collision.gameObject.tag == "Player"&& !oc.playerStepOn) {
                 col.enabled = false;
                 rb.gravityScale = 0.0f;
-                Invoke("ColOne", 0.1f);//プイレイヤーと接触してすぐに当たり判定を復活させる。
+                Invoke("ColOne", 0.1f);//プレイヤーと接触してすぐに当たり判定を復活させる。
                                        //当たり判定がないままだと、床を突き抜けて落ちてしまう。
             }
     }
