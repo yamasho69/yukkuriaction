@@ -7,11 +7,11 @@ using System.Collections.Generic;
 using System.Linq;
 
 public class Title : MonoBehaviour{
-    [Header("リトライVoice1")] public AudioClip retryVoice1;
-    [Header("リトライVoice2")] public AudioClip retryVoice2;
-    [Header("リトライVoice3")] public AudioClip retryVoice3;
-    [Header("リトライVoice4")] public AudioClip retryVoice4;
-    [Header("リトライVoice5")] public AudioClip retryVoice5;
+    [Header("スタートVoice1")] public AudioClip startVoice1;
+    [Header("スタートVoice2")] public AudioClip startVoice2;
+    [Header("スタートVoice3")] public AudioClip startVoice3;
+    [Header("スタートVoice4")] public AudioClip startVoice4;
+    [Header("スタートVoice5")] public AudioClip startVoice5;
     [Header("フェード")] public FadeImage fade;
     private bool firstPush = false;//初めてのプッシュかどうか
     private bool goNextScene = false;
@@ -19,7 +19,7 @@ public class Title : MonoBehaviour{
     public void PressStart()
     {
         Debug.Log("Press Start!");
-        GameManager.instance.RandomizeSfx(retryVoice1, retryVoice2, retryVoice3, retryVoice4, retryVoice5);
+        GameManager.instance.RandomizeSfx(startVoice1, startVoice2, startVoice3, startVoice4, startVoice5);
 
 
         if (!firstPush)//プッシュ済みではない場合
@@ -31,7 +31,7 @@ public class Title : MonoBehaviour{
 
     private void Update() {
         if(!goNextScene && fade.IsFadeOutComplete()) {
-            Invoke("NextStage", 1.5f);
+            Invoke("NextStage", 1.0f);
         }
     }
 

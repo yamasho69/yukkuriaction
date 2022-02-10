@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour{
         if(instance == null) {
             instance = this;
             zankiUpScore = 100;//消してもよい。テストプレイ用
+            audioSource = GetComponent<AudioSource>();
             DontDestroyOnLoad(this.gameObject);
         } else {
             Destroy(this.gameObject);
@@ -37,7 +38,7 @@ public class GameManager : MonoBehaviour{
     }
 
     private void Start() {
-        audioSource = GetComponent<AudioSource>();
+        //audioSource = GetComponent<AudioSource>();
     }
 
     public void AddHeartNum() {
