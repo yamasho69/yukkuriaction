@@ -31,7 +31,7 @@ public class Title : MonoBehaviour{
 
     private void Update() {
         if(!goNextScene && fade.IsFadeOutComplete()) {
-            Invoke("NextStage", 1.0f);
+            Invoke("NextStage", 0.2f);
         }
     }
 

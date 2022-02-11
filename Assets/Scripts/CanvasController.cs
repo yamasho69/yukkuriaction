@@ -15,7 +15,8 @@ public class CanvasController : MonoBehaviour{
     [Header("ShitaVoice")] public AudioClip ShitaVoice;
     public Image imageUe;
     public Image imageShita;
-    public Button button;
+    public GameObject button1;
+    public GameObject button2;
 
     // Start is called before the first frame update
     void Start(){
@@ -45,6 +46,7 @@ public class CanvasController : MonoBehaviour{
     }
 
     public void ButtonOn() {
-        button.gameObject.SetActive(true);
+        button1.SetActive(true);
+        button2.SetActive(true);
     }
 }
