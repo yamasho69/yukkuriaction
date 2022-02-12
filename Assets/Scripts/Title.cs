@@ -31,15 +31,34 @@ public class Title : MonoBehaviour{
 
     private void Update() {
         if(!goNextScene && fade.IsFadeOutComplete()) {
-            Invoke("NextStage", 0.2f);
+            Invoke("NextStage", 2.0f);
         }
     }
 
     private void NextStage() {
-        if (GameManager.instance.stageNum > 1) {
+        if(GameManager.instance.stageNum == 99) {
+            SceneManager.LoadScene("titleScene");//ステージナンバーが99だとタイトルに戻る。
+        }
+        else if (GameManager.instance.stageNum > 1) {
             SceneManager.LoadScene("stage" + GameManager.instance.stageNum);
         } else { SceneManager.LoadScene("stage1"); }
         goNextScene = true;
         GameManager.instance.RetryGame();//自分で追加リトライ用にスコア等を初期値に戻す。
     }
+
+
+    //タイトルへ戻るボタンを押すと、こちらを呼び出す。
+    public void GotoTitle() {
+        Debug.Log("GotoTitle!");
+        GameManager.instance.RandomizeSfx(startVoice1, startVoice2, startVoice3, startVoice4, startVoice5);
+        GameManager.instance.stageNum = 99;//ステージナンバーを99にする。
+
+
+        if (!firstPush)//プッシュ済みではない場合
+        {
+            fade.StartFadeOut();
+            firstPush = true;//一度押すとプッシュ済に
+        }
+    }
+
 }
