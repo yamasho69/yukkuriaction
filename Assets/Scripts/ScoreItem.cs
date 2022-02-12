@@ -23,13 +23,15 @@ public class ScoreItem : MonoBehaviour{
     void Update(){
         if (PlayerCheck.isOn) {
             if(GameManager.instance != null) {
-                GameManager.instance.score += myScore;
-                if (GameManager.instance.score  >= GameManager.instance.zankiUpScore) {//自分で追加。スコアが100ごとに残機プラス1
-                    GameManager.instance.zankiUpScore += 100;
-                    GameManager.instance.AddHeartNum();
+                if (!GameManager.instance.isGameOver) {//自分で追加。ゲームオーバー後にむーしゃむーしゃしないように。
+                    GameManager.instance.score += myScore;
+                    if (GameManager.instance.score >= GameManager.instance.zankiUpScore) {//自分で追加。スコアが100ごとに残機プラス1
+                        GameManager.instance.zankiUpScore += 100;
+                        GameManager.instance.AddHeartNum();
+                    }
+                    GameManager.instance.RandomizeSfx(clip1, clip2, clip3);//ランダムでボイスを鳴らす。インスペクターのSfxsourceにはGameManagerをアタッチ。
+                    Destroy(this.gameObject);
                 }
-                GameManager.instance.RandomizeSfx(clip1,clip2,clip3);//ランダムでボイスを鳴らす。インスペクターのSfxsourceにはGameManagerをアタッチ。
-                Destroy(this.gameObject);
             }
         }
     }

@@ -266,6 +266,7 @@ public class OpeningPlayer : MonoBehaviour{
         GameManager.instance.playSE(LandingSE);
         GameManager.instance.playSE(LandingVoice);
         Debug.Log("ok");
+        GameManager.instance.stageNum = 1;//ステージナンバーを1にする。ステージ２、３からタイトル画面に来た場合のため。
         canvasController.CanvasOn();//キャンバスをオンにする。https://futabazemi.net/notes/script_function/
         Invoke("OpeningAnim", 1.0f);
 

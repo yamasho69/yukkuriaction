@@ -20,7 +20,7 @@ public class Title : MonoBehaviour{
     {
         Debug.Log("Press Start!");
         GameManager.instance.RandomizeSfx(startVoice1, startVoice2, startVoice3, startVoice4, startVoice5);
-
+        
 
         if (!firstPush)//プッシュ済みではない場合
         {
@@ -36,7 +36,9 @@ public class Title : MonoBehaviour{
     }
 
     private void NextStage() {
-        SceneManager.LoadScene("stage1");
+        if (GameManager.instance.stageNum > 1) {
+            SceneManager.LoadScene("stage" + GameManager.instance.stageNum);
+        } else { SceneManager.LoadScene("stage1"); }
         goNextScene = true;
         GameManager.instance.RetryGame();//自分で追加リトライ用にスコア等を初期値に戻す。
     }

@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour{
     private void Awake() {
         if(instance == null) {
             instance = this;
-            zankiUpScore = 100;//消してもよい。テストプレイ用
+            zankiUpScore = 100;//自分で設定。100点越えたら残機アップ
             audioSource = GetComponent<AudioSource>();
             DontDestroyOnLoad(this.gameObject);
         } else {
@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour{
         isGameOver = false;
         heart = defaultHeartNum;
         score = 0;
-        stageNum = 1;
+        //stageNum = 1;
         continueNum = 0;
         zankiUpScore = 100;
     }

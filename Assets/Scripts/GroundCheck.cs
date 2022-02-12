@@ -11,12 +11,12 @@ using System.Linq;
 public class GroundCheck : MonoBehaviour{
 
     [Header("エフェクトがついた床を判定")] public bool checkPlatformGround;
-    private string groundTag = "Ground";
-    private string moveFloorTag = "MoveFloor";
-    private string platformTag = "GroundPlatform";
-    private string fallFloorTag = "FallFloor";//55
-    private bool isGround = false;
-    private bool isGroundEnter, isGroundStay, isGroundExit;
+    public string groundTag = "Ground";
+    public string moveFloorTag = "MoveFloor";
+    public string platformTag = "GroundPlatform";
+    public string fallFloorTag = "FallFloor";//55
+    public bool isGround = false;
+    public bool isGroundEnter, isGroundStay, isGroundExit;
     
     // Start is called before the first frame update
     void Start(){
@@ -48,23 +48,23 @@ public class GroundCheck : MonoBehaviour{
             isGroundEnter = true;
         } else if(checkPlatformGround && (collision.tag == platformTag|| collision.tag == moveFloorTag || collision.tag == fallFloorTag)) {//レッスン54で追加。下から抜けられる床の判定
             isGroundEnter = true;
-        }
+        } 
     }
 
     //判定内から出たときに呼ばれる
     private void OnTriggerExit2D(Collider2D collision) {
         if(collision.tag == groundTag) {
             isGroundExit = true;
-        }else if (checkPlatformGround && (collision.tag == platformTag || collision.tag == moveFloorTag || collision.tag == fallFloorTag)) {//レッスン54で追加。下から抜けられる床の判定
+        } else if (checkPlatformGround && (collision.tag == platformTag || collision.tag == moveFloorTag || collision.tag == fallFloorTag)) {//レッスン54で追加。下から抜けられる床の判定
             isGroundExit = true;
         }
     }
 
     //判定内に居続ける限り呼ばれる(長すぎると呼ばれなくなる)
     private void OnTriggerStay2D(Collider2D collision) {
-        if(collision.tag == groundTag || collision.tag == fallFloorTag) {
-            isGroundStay = false;
-        }else if (checkPlatformGround && (collision.tag == platformTag || collision.tag == moveFloorTag || collision.tag == fallFloorTag)) {//レッスン54で追加。下から抜けられる床の判定
+          if(collision.tag == groundTag || collision.tag == fallFloorTag) {
+            isGroundStay = true;
+        } else if (checkPlatformGround && (collision.tag == platformTag || collision.tag == moveFloorTag || collision.tag == fallFloorTag)) {//レッスン54で追加。下から抜けられる床の判定
             isGroundStay = true;
         }
     }

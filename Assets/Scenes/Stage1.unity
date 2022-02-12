@@ -2925,7 +2925,7 @@ PrefabInstance:
     - target: {fileID: 7528529640585727729, guid: be21636d095df9841bf31454c1ef92fe,
         type: 3}
       propertyPath: m_Text
-      value: "\u3055\u3086\u3046\u3067\u3044\u3069\u3046\n\u3046\u3048\u3067\u3058\u3083\u3093\u3077\n\u306A\u304C\u304F\u304A\u305B\u3070\n\u305F\u304B\u304F\u306A\u304C\u304F\u3068\u3079\u308B"
+      value: "\u3055\u3086\u3046\u304BA\u3001D\u3067\u3044\u3069\u3046\n\u3046\u3048\u304BW\u3067\u3058\u3083\u3093\u3077\n\u306A\u304C\u304F\u304A\u305B\u3070\n\u305F\u304B\u304F\u306A\u304C\u304F\u3068\u3079\u308B"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be21636d095df9841bf31454c1ef92fe, type: 3}

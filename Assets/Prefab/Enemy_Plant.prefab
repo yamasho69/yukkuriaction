@@ -258,7 +258,7 @@ MonoBehaviour:
   nonVisibleAct: 0
   checkCollision: {fileID: 2483105899689633842}
   attackObj: {fileID: 2814214301395129944}
-  interval: 1.5
+  interval: 5.5
 --- !u!1 &2814214301395129944
 GameObject:
   m_ObjectHideFlags: 0
