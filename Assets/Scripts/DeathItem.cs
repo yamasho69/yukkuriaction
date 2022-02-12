@@ -29,7 +29,7 @@ public class DeathItem : MonoBehaviour {
             if (!GameManager.instance.isGameOver) {//ゲームオーバー時にはダウンボイスを鳴らさない。
                 GameManager.instance.RandomizeSfx(clip1, clip2, clip3, clip4, clip5);//ランダムでボイスを鳴らす。インスペクターのSfxsourceにはGameManagerをアタッチ。
                 GameManager.instance.playSE(morunmorunSE);
-            }
+            }   
                 Destroy(this.gameObject);
             //}
         }

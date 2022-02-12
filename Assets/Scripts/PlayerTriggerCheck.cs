@@ -12,6 +12,7 @@ public class PlayerTriggerCheck : MonoBehaviour{
 
     private string playerTag = "Player";
 
+
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.tag == playerTag) {
             isOn = true;

@@ -122,6 +122,11 @@ public class Player : MonoBehaviour{
             isGround = ground.IsGround();
             isHead = head.IsGround();
 
+            if(isHead == true && isGround == true) {//自分で追加。頭の衝突判定と接地判定が同時に有効になる場合はジャンプできなくなる。
+                head.isGround = false;//そのため、同時に有効になったら、頭の衝突判定を外す。インスペクター上でチェックを入れても、すぐに外れる。
+            }
+
+
             //各種座標軸の速度を求める
             float ySpeed = GetYSpeed();
             float xSpeed = GetXSpeed();
@@ -298,6 +303,7 @@ public class Player : MonoBehaviour{
                         if (!GameManager.instance.isGameOver) {//ゲームオーバー時にはダウンボイスを鳴らさない。
                             GameManager.instance.RandomizeSfx(enemyDownVoice1, enemyDownVoice2, enemyDownVoice3, enemyDownVoice4,enemyDownVoice5,enemyDownVoice6);//ReceiveDamage内で声を出さないようにしたのでここに入れる。
                             GameManager.instance.playSE(morunmorunSE);
+                            Untagged();
                         }
                         break;//ダウンがあったらループを抜ける。
                     }
@@ -348,6 +354,8 @@ public class Player : MonoBehaviour{
 
     //レッスン50で追加。
     public void ContinuePlayer() {
+        this.tag = "Player";
+        head.tag = "Player";
         isJump = false;
         isOtherJump = false;
         isRight = false;
@@ -386,12 +394,14 @@ public class Player : MonoBehaviour{
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.tag == poisonTag && !isDown) {//ダウン中に唐辛子をとっても反応しない様に!isDownをつける。
             ReceiveDamage(true);
+            //Untagged();
         } else if(collision.tag == hitAreaTag && !isDown) {//!isDownを付けないとトゲの上にいる限り反応する
             ReceiveDamage(true);
             GameManager.instance.playSE(trapSE);
             if(!GameManager.instance.isGameOver) {//ゲームオーバー時にはダウンボイスを鳴らさない。
                 GameManager.instance.RandomizeSfx(trapDownVoice1, trapDownVoice2, trapDownVoice3, trapDownVoice4,trapDownVoice5,trapDownVoice6);
-                GameManager.instance.playSE(morunmorunSE); 
+                GameManager.instance.playSE(morunmorunSE);
+                Untagged();
             }
         } else if(collision.tag == deadAreaTag && !isDown) {//ダウン状態で穴に落ちた状態のときに反応しないように追加。
             ReceiveDamage(false);
@@ -399,5 +409,16 @@ public class Player : MonoBehaviour{
                 GameManager.instance.RandomizeSfx(fallVoice1, fallVoice2, fallVoice3,fallVoice4,fallVoice5);
             }
         }
+    }
+
+
+    //自分で作成。トゲ(トラップ)を触った跡にPlayerタグを外し、アイテムを取らないようにする。
+    //http://negi-lab.blog.jp/archives/12259004.html
+    //コンテニュー時はPlayerタグをつけなおす。毒アイテムは近くに並べて置かないこと。
+    //毒アイテムはDeathItemクラスで別に音を出しているため、タグを外してしまうと、音が鳴らなくなり、毒アイテムもDestroyされなくなる。
+    //今後の課題とする。
+    private void Untagged() {
+        this.tag = "Untagged";
+        head.tag = "Untagged";
     }
 }
