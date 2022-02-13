@@ -221,10 +221,11 @@ MonoBehaviour:
   fallVoice2: {fileID: 8300000, guid: c829bc96a7db66e408fa08ddc40aeb7a, type: 3}
   fallVoice3: {fileID: 8300000, guid: 6ba817ff45047c04baaa517a4ae63a28, type: 3}
   fallVoice4: {fileID: 8300000, guid: 66fe1a73df2ae124b89bdd6ddcf79c09, type: 3}
-  fallVoice5: {fileID: 8300000, guid: 2497e8d8fdf2c1248901fbce5920d45a, type: 3}
+  fallVoice5: {fileID: 8300000, guid: 7629ac172242ed74f91c2cb49fced4b5, type: 3}
   morunmorunSE: {fileID: 8300000, guid: 3ecff22040b3d534c805233348b32707, type: 3}
   enemyDeathSE: {fileID: 8300000, guid: d9299d041d9dacb44b6fe242617dc8f5, type: 3}
   trapSE: {fileID: 8300000, guid: 426a0b20aee1e974fb9f8f523cd58465, type: 3}
+  pauseButton: {fileID: 0}
   isJump: 0
 --- !u!50 &8126471809827173690
 Rigidbody2D:
@@ -334,6 +335,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkPlatformGround: 0
+  groundTag: Ground
+  moveFloorTag: MoveFloor
+  platformTag: GroundPlatform
+  fallFloorTag: FallFloor
+  isGround: 0
+  isGroundEnter: 0
+  isGroundStay: 0
+  isGroundExit: 0
 --- !u!1 &8126471811468313612
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,3 +414,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkPlatformGround: 1
+  groundTag: Ground
+  moveFloorTag: MoveFloor
+  platformTag: GroundPlatform
+  fallFloorTag: FallFloor
+  isGround: 0
+  isGroundEnter: 0
+  isGroundStay: 0
+  isGroundExit: 0

@@ -46,6 +46,7 @@ public class OpeningPlayer : MonoBehaviour{
     [Header("fallSE")] public AudioClip fallSE;
     [Header("LandingVoice")] public AudioClip LandingVoice;
     [Header("LandingSE")] public AudioClip LandingSE;
+    [Header("openingBGM")] public AudioClip openingBGM;
     #endregion
 
     #region
@@ -82,6 +83,12 @@ public class OpeningPlayer : MonoBehaviour{
 
     public void OpeningAnim() {
         anim.Play("StageClear");
+    }
+
+    //BGMを鳴らすときは、AudioSourceを使用し、ループさせたほうがよい。https://yttm-work.jp/unity_beginner/unity_beginner_0011.html
+    public void OpeningBGM() {
+        AudioSource audio = GetComponent<AudioSource>();
+        audio.Play();
     }
 
 
@@ -269,6 +276,7 @@ public class OpeningPlayer : MonoBehaviour{
         GameManager.instance.stageNum = 1;//ステージナンバーを1にする。ステージ２、３からタイトル画面に来た場合のため。
         canvasController.CanvasOn();//キャンバスをオンにする。https://futabazemi.net/notes/script_function/
         Invoke("OpeningAnim", 1.0f);
+        Invoke("OpeningBGM", 4.5f);
 
 
         //踏みつけ判定になる高さ

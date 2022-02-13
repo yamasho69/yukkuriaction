@@ -43,6 +43,7 @@ public class Player : MonoBehaviour{
     [Header("morunmorun")] public AudioClip morunmorunSE;
     [Header("enemyDeath")] public AudioClip enemyDeathSE;
     [Header("trapSE")] public AudioClip trapSE;
+    [Header("pauseButton")] public GameObject pauseButton;
     #endregion
 
     #region
@@ -333,6 +334,7 @@ public class Player : MonoBehaviour{
     public bool IsContinueWaiting() {
         if (GameManager.instance.isGameOver) {
             capcol.enabled = false;//ゲームオーバーの時はプレイヤーのカプセルコライダーをオフにして、画面外に落とす
+            pauseButton.SetActive(false);//ゲームオーバーの時はポーズボタンを非表示にする。
             return false;
         } else {
             return IsDownAnimEnd() || nonDownAnim;

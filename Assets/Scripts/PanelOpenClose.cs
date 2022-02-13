@@ -20,9 +20,9 @@ public class PanelOpenClose : MonoBehaviour{
         }
         if (openpanel != null) {
             openpanel.SetActive(true);
-            if (credit) {
-                GameManager.instance.RandomizeSfx(creditVoice1, creditVoice2);
-            }
+        }
+        if (credit) {
+            GameManager.instance.RandomizeSfx(creditVoice1, creditVoice2);
         }
     }
 }

@@ -36,7 +36,7 @@ public class Title : MonoBehaviour{
     }
 
     private void NextStage() {
-        if(GameManager.instance.stageNum == 99) {
+        if(GameManager.instance.stageNum == 0) {
             SceneManager.LoadScene("titleScene");//ステージナンバーが99だとタイトルに戻る。
         }
         else if (GameManager.instance.stageNum > 1) {
@@ -51,12 +51,12 @@ public class Title : MonoBehaviour{
     public void GotoTitle() {
         Debug.Log("GotoTitle!");
         GameManager.instance.RandomizeSfx(startVoice1, startVoice2, startVoice3, startVoice4, startVoice5);
-        GameManager.instance.stageNum = 99;//ステージナンバーを99にする。
 
 
         if (!firstPush)//プッシュ済みではない場合
         {
             fade.StartFadeOut();
+            GameManager.instance.stageNum = 0;//ステージナンバーを0にする。
             firstPush = true;//一度押すとプッシュ済に
         }
     }

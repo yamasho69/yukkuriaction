@@ -30543,6 +30543,12 @@ Sprite:
   m_PhysicsShape: []
   m_Bones: []
   m_SpriteID: 
+--- !u!1 &818385815 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 818385815, guid: ffaccb1a827de7d4487804e65e7b9fc8,
+    type: 3}
+  m_PrefabInstance: {fileID: 743735078}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &821277376
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -72072,7 +72078,7 @@ PrefabInstance:
     - target: {fileID: 4192109467181493470, guid: 2554e472dd49f3f4e830fdf2b34c80ea,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4192109467181493470, guid: 2554e472dd49f3f4e830fdf2b34c80ea,
         type: 3}
@@ -72642,9 +72648,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8126471809827173688, guid: 853c3df52b0c66947896b1d1ab5d0d05,
         type: 3}
-      propertyPath: fallVoice5
+      propertyPath: pauseButton
       value: 
-      objectReference: {fileID: 8300000, guid: 7629ac172242ed74f91c2cb49fced4b5, type: 3}
+      objectReference: {fileID: 818385815}
     - target: {fileID: 8126471809827173689, guid: 853c3df52b0c66947896b1d1ab5d0d05,
         type: 3}
       propertyPath: m_LocalPosition.x

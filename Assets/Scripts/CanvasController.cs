@@ -17,6 +17,7 @@ public class CanvasController : MonoBehaviour{
     public Image imageShita;
     public GameObject button1;
     public GameObject button2;
+    public GameObject copytext;
 
     // Start is called before the first frame update
     void Start(){
@@ -42,11 +43,12 @@ public class CanvasController : MonoBehaviour{
     public void TitleShitaSlide() {
         imageShita.transform.DOLocalMoveX(0f, 1.5f).SetEase(Ease.OutBounce);
         GameManager.instance.playSE(ShitaVoice);
-        Invoke("ButtonOn", 0.5f);
+        Invoke("ButtonOn", 1.0f);
     }
 
     public void ButtonOn() {
         button1.SetActive(true);
         button2.SetActive(true);
+        copytext.SetActive(true);
     }
 }
