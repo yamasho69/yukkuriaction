@@ -90,6 +90,7 @@ public class FadeImage : MonoBehaviour{
 
     private void FadeInComplete() {
         img.color = new Color(1, 1, 1, 0);
+        Time.timeScale = 1;
         img.fillAmount = 0;
         img.raycastTarget = false;
         timer = 0.0f;
@@ -107,7 +108,7 @@ public class FadeImage : MonoBehaviour{
         else {
             FadeOutComplete();
         }
-        timer += Time.deltaTime;
+            timer += Time.deltaTime;
     }
 
     private void FadeOutComplete() {

@@ -87,4 +87,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bde580724de49ea48872e0cabbb91b33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstFadeInComp: 1
+  firstFadeInComp: 0

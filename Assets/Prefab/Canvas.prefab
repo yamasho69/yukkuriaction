@@ -30,7 +30,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6647170031237805815}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -106,7 +106,7 @@ RectTransform:
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 6647170031237805815}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -218,6 +218,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playButton: {fileID: 21300000, guid: 187d6e0266931374399899735e0c7761, type: 3}
   pauseButton: {fileID: 21300000, guid: c18d664440d289342a5baf6688a055c6, type: 3}
+  goToTitleButton: {fileID: 6647170030026877320}
   pauseEffect: {fileID: 476624943}
   pauseOnSE: {fileID: 8300000, guid: 84c6159c33b197c45ae4c1774e8bc39d, type: 3}
   pauseOffSE: {fileID: 8300000, guid: 789aaa81247058d4e82bf6eed4a258a9, type: 3}
@@ -355,13 +356,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6647170030026877320}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 6647170030966520735}
-  m_Father: {fileID: 6647170031316115186}
-  m_RootOrder: 1
+  m_Father: {fileID: 6647170031237805815}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -423,6 +424,7 @@ MonoBehaviour:
   startVoice4: {fileID: 8300000, guid: d38a87edc71560644ae3ce1cd4db21c3, type: 3}
   startVoice5: {fileID: 8300000, guid: 29f67e4aa51b23f48a5106f6dc29c770, type: 3}
   fade: {fileID: 7145022195190682269}
+  goNextScene: 0
 --- !u!114 &6647170030026877322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -666,6 +668,7 @@ MonoBehaviour:
   startVoice4: {fileID: 8300000, guid: 514337ac8b63e4f42a0c56414fccfb1e, type: 3}
   startVoice5: {fileID: 8300000, guid: 011743af51c633747a1688ad7a139946, type: 3}
   fade: {fileID: 7145022195190682269}
+  goNextScene: 0
 --- !u!114 &6647170030782369616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -954,10 +957,11 @@ RectTransform:
   - {fileID: 6647170030959107189}
   - {fileID: 6647170029777343963}
   - {fileID: 6647170031258100576}
-  - {fileID: 6647170031316115186}
   - {fileID: 6647170031385825464}
   - {fileID: 476624946}
   - {fileID: 818385816}
+  - {fileID: 6647170031316115186}
+  - {fileID: 6647170030026877321}
   - {fileID: 7145022195190682268}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -1239,9 +1243,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6647170030782369631}
-  - {fileID: 6647170030026877321}
   m_Father: {fileID: 6647170031237805815}
-  m_RootOrder: 3
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1317,7 +1320,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6647170031237805815}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1476,7 +1479,7 @@ PrefabInstance:
     - target: {fileID: 4546183953710751604, guid: dd63757e028e7cc47847b2f51096beb8,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4546183953710751604, guid: dd63757e028e7cc47847b2f51096beb8,
         type: 3}

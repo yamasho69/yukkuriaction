@@ -28376,6 +28376,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 297479476}
     m_Modifications:
+    - target: {fileID: 476624943, guid: ffaccb1a827de7d4487804e65e7b9fc8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6647170030026877320, guid: ffaccb1a827de7d4487804e65e7b9fc8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6647170030026877323, guid: ffaccb1a827de7d4487804e65e7b9fc8,
+        type: 3}
+      propertyPath: maricha
+      value: 
+      objectReference: {fileID: 328970949}
     - target: {fileID: 6647170031237805811, guid: ffaccb1a827de7d4487804e65e7b9fc8,
         type: 3}
       propertyPath: m_Name
@@ -28491,6 +28505,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6647170031316115185, guid: ffaccb1a827de7d4487804e65e7b9fc8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffaccb1a827de7d4487804e65e7b9fc8, type: 3}
 --- !u!1 &743735079 stripped
@@ -28520,6 +28539,12 @@ GameObject:
 --- !u!224 &743735082 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6647170031237805815, guid: ffaccb1a827de7d4487804e65e7b9fc8,
+    type: 3}
+  m_PrefabInstance: {fileID: 743735078}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &743735083 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6647170030026877320, guid: ffaccb1a827de7d4487804e65e7b9fc8,
     type: 3}
   m_PrefabInstance: {fileID: 743735078}
   m_PrefabAsset: {fileID: 0}
@@ -49946,6 +49971,7 @@ MonoBehaviour:
   - {fileID: 655377423}
   - {fileID: 739298911}
   gameOverObj: {fileID: 743735081}
+  goToTitleObj: {fileID: 743735083}
   fade: {fileID: 743735080}
   startVoice1: {fileID: 8300000, guid: d5d279a594e0cd147ae08ef08ee2e7d8, type: 3}
   startVoice2: {fileID: 8300000, guid: 059eae8338fb3124f9bbf4ec12ada6f5, type: 3}

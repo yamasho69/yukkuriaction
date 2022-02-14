@@ -12,6 +12,7 @@ public class StageCtrl : MonoBehaviour{
     [Header("プレイヤーゲームオブジェクト")] public GameObject playerObj;
     [Header("コンテニュー位置")] public GameObject[] continuePoint;
     [Header("ゲームオーバー")] public GameObject gameOverObj;//51
+    [Header("タイトルに戻るボタン")] public GameObject goToTitleObj;//ポーズ画面でも使用するため、ゲームオーバーの子オブジェクトから分離
     [Header("フェード")] public FadeImage fade;//51
     [Header("ステージスタートVoice1")] public AudioClip startVoice1;
     [Header("ステージスタートVoice2")] public AudioClip startVoice2;
@@ -46,6 +47,7 @@ public class StageCtrl : MonoBehaviour{
             && gameOverObj != null && fade !=null) 
         {
             gameOverObj.SetActive(false);
+            goToTitleObj.SetActive(false);
             stageClearObj.SetActive(false);//56
             playerObj.transform.position = continuePoint[0].transform.position;
 
@@ -64,6 +66,7 @@ public class StageCtrl : MonoBehaviour{
     void Update(){
         if(GameManager.instance.isGameOver && !doGameOver) {
             gameOverObj.SetActive(true);
+            goToTitleObj.SetActive(true);
             doGameOver = true;
             GameManager.instance.RandomizeSfx(gameOverVoice1, gameOverVoice2, gameOverVoice3,gameOverVoice4,gameOverVoice5);
         }

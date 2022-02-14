@@ -13,6 +13,7 @@ public class PauseScript : MonoBehaviour{
     bool IsOnPause;
     public Sprite playButton;
     public Sprite pauseButton;
+    public GameObject goToTitleButton;
     public GameObject pauseEffect;
     public AudioClip pauseOnSE;
     public AudioClip pauseOffSE;
@@ -32,6 +33,7 @@ public class PauseScript : MonoBehaviour{
             this.gameObject.GetComponent<Image>().sprite = pauseButton;
             GameManager.instance.playSE(pauseOffSE);
             pauseEffect.SetActive(false);
+            goToTitleButton.SetActive(false);
         } else {
             Time.timeScale = 0;
             IsOnPause = true;
@@ -39,6 +41,7 @@ public class PauseScript : MonoBehaviour{
             this.gameObject.GetComponent<Image>().sprite = playButton;
             GameManager.instance.playSE(pauseOnSE);
             pauseEffect.SetActive(true);
+            goToTitleButton.SetActive(true);
         }
     }
 }

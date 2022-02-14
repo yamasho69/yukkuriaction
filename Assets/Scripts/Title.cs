@@ -14,7 +14,8 @@ public class Title : MonoBehaviour{
     [Header("スタートVoice5")] public AudioClip startVoice5;
     [Header("フェード")] public FadeImage fade;
     private bool firstPush = false;//初めてのプッシュかどうか
-    private bool goNextScene = false;
+    public bool goNextScene = false;
+    public GameObject maricha;
 
     public void PressStart()
     {
@@ -49,16 +50,26 @@ public class Title : MonoBehaviour{
 
     //タイトルへ戻るボタンを押すと、こちらを呼び出す。
     public void GotoTitle() {
-        Debug.Log("GotoTitle!");
+        
         GameManager.instance.RandomizeSfx(startVoice1, startVoice2, startVoice3, startVoice4, startVoice5);
-
-
         if (!firstPush)//プッシュ済みではない場合
         {
+            Debug.Log("GotoTitle!");
             fade.StartFadeOut();
             GameManager.instance.stageNum = 0;//ステージナンバーを0にする。
             firstPush = true;//一度押すとプッシュ済に
+            if(Time.timeScale == 0) {//超重要。ポーズ中はFadeimageを動かしているtimerも止まってしまう。
+                //なのでTime.timeScaleを1に戻す必要がある。
+                //しかし、穴やトラップの上で時間を戻すと、Playerが反応してしまう。
+                //なので、Player、さらにリジッドボディとコライダーを破壊し、反応しないようにしてから
+                //Time.timeScaleを元に戻す。非アクティブ化するだけでは、OnCollisionやOnTriggerが反応してしまう。
+                //参考https://qiita.com/OKsaiyowa/items/9579ac348ac860cd522e
+                //参考https://atsushishi.xyz/2017/12/deltatime_realtime/
+                Destroy(maricha.GetComponent<Player>());
+                Time.timeScale = 1;
+                Destroy(maricha.GetComponent<Rigidbody2D>());
+                Destroy(maricha.GetComponent<CapsuleCollider2D>());
+            }
         }
     }
-
 }

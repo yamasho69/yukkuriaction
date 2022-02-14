@@ -64404,6 +64404,12 @@ Sprite:
   m_PhysicsShape: []
   m_Bones: []
   m_SpriteID: 
+--- !u!1 &1336201810 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6647170030026877320, guid: ffaccb1a827de7d4487804e65e7b9fc8,
+    type: 3}
+  m_PrefabInstance: {fileID: 6647170030479183320}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1340378660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68611,6 +68617,7 @@ MonoBehaviour:
   - {fileID: 739298911}
   - {fileID: 254103701}
   gameOverObj: {fileID: 1919783721}
+  goToTitleObj: {fileID: 1336201810}
   fade: {fileID: 1423884667}
   startVoice1: {fileID: 8300000, guid: d5d279a594e0cd147ae08ef08ee2e7d8, type: 3}
   startVoice2: {fileID: 8300000, guid: 059eae8338fb3124f9bbf4ec12ada6f5, type: 3}
@@ -104159,6 +104166,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 297479476}
     m_Modifications:
+    - target: {fileID: 6647170030026877323, guid: ffaccb1a827de7d4487804e65e7b9fc8,
+        type: 3}
+      propertyPath: maricha
+      value: 
+      objectReference: {fileID: 328970949}
     - target: {fileID: 6647170031237805811, guid: ffaccb1a827de7d4487804e65e7b9fc8,
         type: 3}
       propertyPath: m_Name

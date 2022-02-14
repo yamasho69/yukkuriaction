@@ -49,7 +49,7 @@ public class Player : MonoBehaviour{
     #region
     private Animator anim = null;// アニメーターコンポーネントを入れる変数
     private Rigidbody2D rb = null;//リジッドボディ２Ｄを入れる。
-    private CapsuleCollider2D capcol = null;//レッスン45で追加。カプセルコライダー2Dを入れる。
+    public CapsuleCollider2D capcol = null;//レッスン45で追加。カプセルコライダー2Dを入れる。
     private SpriteRenderer sr = null;// スプライトを入れる変数。レッスン50で追加。
     private MoveObject moveObj = null;//54
     private bool isGround = false;//38で追加。
@@ -419,7 +419,7 @@ public class Player : MonoBehaviour{
     //コンテニュー時はPlayerタグをつけなおす。毒アイテムは近くに並べて置かないこと。
     //毒アイテムはDeathItemクラスで別に音を出しているため、タグを外してしまうと、音が鳴らなくなり、毒アイテムもDestroyされなくなる。
     //今後の課題とする。
-    private void Untagged() {
+    public void Untagged() {
         this.tag = "Untagged";
         head.tag = "Untagged";
     }
