@@ -43,6 +43,7 @@ public class Player : MonoBehaviour{
     [Header("morunmorun")] public AudioClip morunmorunSE;
     [Header("enemyDeath")] public AudioClip enemyDeathSE;
     [Header("trapSE")] public AudioClip trapSE;
+    [Header("WatarSE")] public AudioClip watarSE;
     [Header("pauseButton")] public GameObject pauseButton;
     #endregion
 
@@ -75,6 +76,7 @@ public class Player : MonoBehaviour{
     private string moveFloorTag = "MoveFloor";//54
     private string fallFloorTag = "FallFloor"; //55
     private string poisonTag = "Poison"; //唐辛子につけるタグ
+    private string watarTag = "Watar"; //水につけるタグ
     #endregion
 
     // Start is called before the first frame update
@@ -394,9 +396,11 @@ public class Player : MonoBehaviour{
 
     //51で追加。
     private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.tag == poisonTag && !isDown) {//ダウン中に唐辛子をとっても反応しない様に!isDownをつける。
+        if ((collision.tag==watarTag || collision.tag == poisonTag) && !isDown) {//ダウン中に唐辛子をとっても反応しない様に!isDownをつける。
             ReceiveDamage(true);
-            //Untagged();
+            if(collision.tag == watarTag) {
+                GameManager.instance.playSE(watarSE);//水のタグなら鳴らす効果音
+            }
         } else if(collision.tag == hitAreaTag && !isDown) {//!isDownを付けないとトゲの上にいる限り反応する
             ReceiveDamage(true);
             GameManager.instance.playSE(trapSE);
@@ -409,7 +413,7 @@ public class Player : MonoBehaviour{
             ReceiveDamage(false);
             if (!GameManager.instance.isGameOver) {//ゲームオーバー時にはダウンボイスを鳴らさない。
                 GameManager.instance.RandomizeSfx(fallVoice1, fallVoice2, fallVoice3,fallVoice4,fallVoice5);
-            }
+            }            
         }
     }
 

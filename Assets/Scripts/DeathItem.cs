@@ -14,6 +14,8 @@ public class DeathItem : MonoBehaviour {
     [SerializeField] AudioClip clip4;
     [SerializeField] AudioClip clip5;
     [SerializeField] AudioClip morunmorunSE;
+    public bool isWatar;//これをオンにしていると水。破壊されないためにオンにする。
+
 
     //HeadCheckにPlayerタグをつけないと、下からアイテムをとったとき、アイテムが消えずに残ってしまう＝このクラスは実行されない
 
@@ -29,9 +31,13 @@ public class DeathItem : MonoBehaviour {
             if (!GameManager.instance.isGameOver) {//ゲームオーバー時にはダウンボイスを鳴らさない。
                 GameManager.instance.RandomizeSfx(clip1, clip2, clip3, clip4, clip5);//ランダムでボイスを鳴らす。インスペクターのSfxsourceにはGameManagerをアタッチ。
                 GameManager.instance.playSE(morunmorunSE);
-            }   
+                if (isWatar) {
+                    PlayerCheck.isOn = false;//水は壊さないので、こちらからisOnをfalseにしないと、効果音が鳴り続ける。
+                }
+            }
+            if (!isWatar) {
                 Destroy(this.gameObject);
-            //}
+            }             
         }
     }
 }

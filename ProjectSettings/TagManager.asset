@@ -13,6 +13,7 @@ TagManager:
   - FallFloor
   - Poison
   - PlayerFoot
+  - Watar
   layers:
   - Default
   - TransparentFX
@@ -55,6 +56,9 @@ TagManager:
     locked: 0
   - name: TileMap
     uniqueID: 1586262539
+    locked: 0
+  - name: Enamy
+    uniqueID: 3064977929
     locked: 0
   - name: Default
     uniqueID: 0
