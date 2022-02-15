@@ -15,7 +15,8 @@ public class DeathItem : MonoBehaviour {
     [SerializeField] AudioClip clip5;
     [SerializeField] AudioClip morunmorunSE;
     public bool isWatar;//これをオンにしていると水。破壊されないためにオンにする。
-
+    private List<BoxCollider2D> cols;　//複数のボックスコライダーをリストで取得。https://baba-s.hatenablog.com/entry/2014/08/29/092959
+    private bool touched;//水に触った後かどうか。
 
     //HeadCheckにPlayerタグをつけないと、下からアイテムをとったとき、アイテムが消えずに残ってしまう＝このクラスは実行されない
 
@@ -27,17 +28,37 @@ public class DeathItem : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         if (PlayerCheck.isOn) {
-            //if (GameManager.instance != null) {
             if (!GameManager.instance.isGameOver) {//ゲームオーバー時にはダウンボイスを鳴らさない。
                 GameManager.instance.RandomizeSfx(clip1, clip2, clip3, clip4, clip5);//ランダムでボイスを鳴らす。インスペクターのSfxsourceにはGameManagerをアタッチ。
                 GameManager.instance.playSE(morunmorunSE);
-                if (isWatar) {
-                    PlayerCheck.isOn = false;//水は壊さないので、こちらからisOnをfalseにしないと、効果音が鳴り続ける。
+                if (isWatar) {//これが水の場合
+                    PlayerCheck.isOn = false;
+                    WatarTouch();
+                    //col = this.GetComponent<BoxCollider2D>();←これではだめ。一つのコンポーネントしか取得しない。
+                    //col.enabled = false;//プレイヤーが触ったらすぐコライダーをオフに←同上
+                    Invoke("WatarTouch", 1.5f);//1.5秒後にコライダーを復活させる。
+
                 }
             }
             if (!isWatar) {
                 Destroy(this.gameObject);
             }             
+        }
+    }
+
+    void WatarTouch() {
+        var cols = new List<BoxCollider2D>();　//ボックスコライダーをリストを作成
+        GetComponents<BoxCollider2D>(cols);　//ゲットコンポーネントして、リストに入れる。
+        if (!touched) {//水に触っていない状態で水に触る
+            touched = true;//水に触り済になる
+            foreach (var col in cols) {
+                col.enabled = false;//全てのボックスコライダーを非アクティブにする。
+            }
+        } else {//水に触っている状態ならば
+            foreach (var col in cols) {
+                col.enabled = true;//全てのボックスコライダーをアクティブにする。
+            }
+            touched = false;//水に触っていない状態にする。
         }
     }
 }
