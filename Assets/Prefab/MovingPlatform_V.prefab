@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1782727788696381599}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1782727788758340295}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MovingPlatform_V
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1782727790536811771}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,6 +110,11 @@ PrefabInstance:
       propertyPath: movePoint.Array.data[1]
       value: 
       objectReference: {fileID: 1782727790536811768}
+    - target: {fileID: 3675602113919764614, guid: 8f5658d6022d5454b9041403714e2a14,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3675602113919764615, guid: 8f5658d6022d5454b9041403714e2a14,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -165,10 +170,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3675602113919764666, guid: 8f5658d6022d5454b9041403714e2a14,
+        type: 3}
+      propertyPath: m_ColliderMask.m_Bits
+      value: 311
+      objectReference: {fileID: 0}
     - target: {fileID: 3675602113919764667, guid: 8f5658d6022d5454b9041403714e2a14,
         type: 3}
       propertyPath: m_Name
       value: MovingPlatform
+      objectReference: {fileID: 0}
+    - target: {fileID: 3675602113919764667, guid: 8f5658d6022d5454b9041403714e2a14,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f5658d6022d5454b9041403714e2a14, type: 3}

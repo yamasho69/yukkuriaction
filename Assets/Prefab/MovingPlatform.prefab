@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3675602113919764614}
   - component: {fileID: 3675602113919764612}
   - component: {fileID: 4166960824863859248}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MovingPlatform
   m_TagString: MoveFloor
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1586262539
-  m_SortingLayer: -1
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 640ca2a6d900b2b4da4bb2660c0e3138, type: 3}
   m_Color: {r: 0, g: 0.990566, b: 0.20054178, a: 1}
