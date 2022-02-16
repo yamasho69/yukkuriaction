@@ -15,7 +15,8 @@ using System.Linq;
 public class Enemy_Bullet_Boss : MonoBehaviour {
     #region//インスペクターで設定する
     [Header("加算スコア")] public int myScore;
-    [Header("移動速度")] public float speed;
+    [Header("通常移動速度")] public float baseSpeed;
+    [Header("最高移動速度")] public float maxSpeed;
     [Header("重力")] public float gravity;
     [Header("画面外でも行動する")] public bool nonVisibleAct;
     [Header("接触判定")] public EnemyCollisionCheck checkCollision;
@@ -24,19 +25,26 @@ public class Enemy_Bullet_Boss : MonoBehaviour {
     [Header("攻撃間隔")] public float interval;
     public int bossLife;
     private string playerTag = "Player";
+    private SpriteRenderer sp = null;
+    public float mutekitime;
+    
+    
     #endregion
 
+    private float continueTime = 0.0f;//50で追加。
+    private float blinkTime = 0.0f;//50で追加。
 
 
     #region//プライベート変数
+    private float speed = 0.0f;
     private Rigidbody2D rb = null;
     private SpriteRenderer sr = null;
     private Animator anim = null;
     private ObjectCollision oc = null;
     private BoxCollider2D col = null;
-    private bool rightTleftF = false;
+    public bool rightTleftF = false;
     private bool isDead = false;
-
+    public bool isDamage = false;
     private float timer;
     #endregion
 
@@ -47,6 +55,8 @@ public class Enemy_Bullet_Boss : MonoBehaviour {
         anim = GetComponent<Animator>();
         oc = GetComponent<ObjectCollision>();
         col = GetComponent<BoxCollider2D>();
+        sp = GetComponent<SpriteRenderer>();
+        speed = baseSpeed;
 
         if (anim == null || attackObj == null) {
             Debug.Log("設定が足りません");
@@ -68,6 +78,35 @@ public class Enemy_Bullet_Boss : MonoBehaviour {
                 timer += Time.deltaTime;
             }
         }
+
+        if (isDamage) {
+                //明滅　ついている時に戻る
+            if (blinkTime > 0.2f) {
+                sr.enabled = true;
+                blinkTime = 0.0f;
+            }
+                //明滅　消えているとき
+            else if (blinkTime > 0.1f) {
+                sr.enabled = false;
+            }
+                //明滅　ついているとき
+            else {
+                sr.enabled = true;
+            }
+                //無敵時間がたったら明滅終わり
+            if (continueTime > mutekitime) {
+                isDamage = false;    
+                speed = baseSpeed;
+                maxSpeed += 10.0f;
+                blinkTime = 0.0f;
+                continueTime = 0.0f;
+                sr.enabled = true;
+                mutekitime += 0.5f;
+            } else {
+                blinkTime += Time.deltaTime;
+                continueTime += Time.deltaTime;
+            }
+        }
     }
 
     void FixedUpdate() {
@@ -75,6 +114,7 @@ public class Enemy_Bullet_Boss : MonoBehaviour {
             if (sr.isVisible || nonVisibleAct) {
                 if (checkCollision.isOn) {
                     rightTleftF = !rightTleftF;
+                    Attack();
                 }
                 int xVector = -1;
                 if (rightTleftF) {
@@ -88,10 +128,15 @@ public class Enemy_Bullet_Boss : MonoBehaviour {
                 rb.Sleep();
             }
         } else {
-            //anim.Play("hit");
-            //一瞬ボスのコライダーを消した方がよい？
-            //一回踏むと跳ね返ってこなくなる
-            //Invoke("Run", 1.0f);
+            if (!isDamage && bossLife >0) {
+                isDamage = true;
+                oc.playerStepOn = false;
+                //効果音
+                anim.Play("hit");
+                --bossLife;
+                speed = maxSpeed;
+                //Invoke("Damage", 5.0f);
+            }
         }
         if (bossLife > 0) {
             anim.Play("run");
@@ -111,17 +156,5 @@ public class Enemy_Bullet_Boss : MonoBehaviour {
         g.transform.position = attackObj.transform.position;
         g.transform.rotation = attackObj.transform.rotation;
         g.SetActive(true);
-    }
-
-    public void Run() {
-        anim.Play("run");
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision) {
-        if(collision.collider.tag == playerTag){
-            anim.Play("hit");
-            --bossLife;
-            ++speed;
-        }
     }
 }

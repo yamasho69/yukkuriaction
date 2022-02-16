@@ -45,18 +45,6 @@ public class Enemy_Zako1 : MonoBehaviour {
                 //https://zenn.dev/ohbashunsuke/books/20200924-dotween-complete/viewer/dotween-19
 
 
-                //この下は無効にしないと敵の大きさが小さくなる。
-                /*if (checkCollision.isOn) {
-                    rightTleftF = !rightTleftF;
-                }
-                int xVector = -1;
-                if (rightTleftF) {
-                    xVector = 1;
-                    transform.localScale = new Vector3(-10, 10, 1);
-                } else {
-                    transform.localScale = new Vector3(10, 10, 1);
-                
-                rb.velocity = new Vector2(xVector * speed, -gravity);*/
             } else {
                 rb.Sleep();
             }

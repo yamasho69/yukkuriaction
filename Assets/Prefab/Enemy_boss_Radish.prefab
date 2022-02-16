@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2483105899689633840
 Transform:
   m_ObjectHideFlags: 0
@@ -45,7 +45,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -1.4173317, y: 0.9102781}
+  m_Offset: {x: -1.0160024, y: -0.8026614}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -56,7 +56,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.408443, y: 2.7545466}
+  m_Size: {x: 0.16513675, y: 0.24059653}
   m_EdgeRadius: 0
 --- !u!114 &2483105899689633842
 MonoBehaviour:
@@ -85,7 +85,7 @@ GameObject:
   - component: {fileID: 2483105900070936160}
   - component: {fileID: 2483105900070936174}
   - component: {fileID: -3197718229370497708}
-  - component: {fileID: 5246505755346573202}
+  - component: {fileID: 1512841949}
   m_Layer: 9
   m_Name: Enemy_boss_Radish
   m_TagString: Enemy
@@ -102,7 +102,7 @@ Transform:
   m_GameObject: {fileID: 2483105900070936167}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 15, y: 15, z: 0}
+  m_LocalScale: {x: 20, y: 20, z: 0}
   m_Children:
   - {fileID: 2483105899689633840}
   - {fileID: 3673000495914023171}
@@ -172,10 +172,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 6
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 9.8
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -193,7 +193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b73903b083f7bb44a8775c6720b357ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boundHeight: 12
+  boundHeight: 15
   playerStepOn: 0
 --- !u!95 &2483105900070936174
 Animator:
@@ -205,7 +205,7 @@ Animator:
   m_GameObject: {fileID: 2483105900070936167}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d751e59f7b95b454abde67dca50dc9e3, type: 2}
+  m_Controller: {fileID: 9100000, guid: 295532b05552e1343ad7b5f1eeea2065, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -227,7 +227,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.12852958, y: -0.048931643}
+  m_Offset: {x: 0.032443285, y: -0.31290054}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -238,9 +238,9 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.57666063, y: 0.90997744}
+  m_Size: {x: 1.6684408, y: 1.4379151}
   m_EdgeRadius: 0
---- !u!114 &5246505755346573202
+--- !u!114 &1512841949
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -249,16 +249,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 2483105900070936167}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1b157da882fa1640ab7d463bbbf4861, type: 3}
+  m_Script: {fileID: 11500000, guid: 45d4a7b84d4a27947a2991aab7a2f0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myScore: 10
-  speed: 0
-  gravity: 15
-  nonVisibleAct: 0
+  myScore: 0
+  baseSpeed: 30
+  maxSpeed: 75
+  gravity: 5
+  nonVisibleAct: 1
   checkCollision: {fileID: 2483105899689633842}
   attackObj: {fileID: 2814214301395129944}
-  interval: 5.5
+  interval: 5
+  bossLife: 5
+  mutekitime: 2.5
+  rightTleftF: 0
+  isDamage: 0
 --- !u!1 &2814214301395129944
 GameObject:
   m_ObjectHideFlags: 0
@@ -272,13 +277,14 @@ GameObject:
   - component: {fileID: 4835246176885200454}
   - component: {fileID: 7021263358544246818}
   - component: {fileID: 3903367232775031011}
+  - component: {fileID: 4991464835518723787}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: HitArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3673000495914023171
 Transform:
   m_ObjectHideFlags: 0
@@ -288,7 +294,7 @@ Transform:
   m_GameObject: {fileID: 2814214301395129944}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 1}
+  m_LocalScale: {x: 15, y: 15, z: 1}
   m_Children: []
   m_Father: {fileID: 2483105900070936163}
   m_RootOrder: 1
@@ -332,12 +338,13 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d700391178f61c3488cd257e7e7a81bf, type: 3}
+  m_Sprite: {fileID: 1438261671223416474, guid: d66a24f1a595be64bbd51c1a109278b1,
+    type: 3}
   m_Color: {r: 0.97630745, g: 1, b: 0.3820755, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 2, y: 2}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -356,18 +363,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0029516816, y: 0.008439004}
+  m_Offset: {x: 0.0019948632, y: -0.062208615}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 0.16, y: 0.16}
-    newSize: {x: 2, y: 2}
+    newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 1
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.73239064, y: 0.7493551}
+  m_Size: {x: 0.49971518, y: 0.2681415}
   m_EdgeRadius: 0
 --- !u!114 &7021263358544246818
 MonoBehaviour:
@@ -381,8 +388,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef227bea03d3dc24fa3dc42635c6eedb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 25
-  maxDistance: 70
+  speed: 30
+  maxDistance: 60
 --- !u!50 &3903367232775031011
 Rigidbody2D:
   serializedVersion: 4
@@ -398,9 +405,23 @@ Rigidbody2D:
   m_Mass: 0.1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 120
+  m_GravityScale: 130
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &4991464835518723787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2814214301395129944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44627f528b51e014698ce4c0ef3e424d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletSpeed: 70
+  boss: {fileID: 1512841949}
