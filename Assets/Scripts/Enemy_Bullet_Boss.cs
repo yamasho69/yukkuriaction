@@ -23,8 +23,13 @@ public class Enemy_Bullet_Boss : MonoBehaviour {
 
     [Header("攻撃オブジェクト")] public GameObject attackObj;
     [Header("攻撃間隔")] public float interval;
+    [Header("足音")] public AudioClip ashioto;
+    [Header("鳴き声")] public AudioClip nakigoe;
+    
+    [Header("爆発")] public AudioClip bomb;
     public int bossLife;
     private string playerTag = "Player";
+    private string attackTag = "BossAttack";
     private SpriteRenderer sp = null;
     public float mutekitime;
     
@@ -45,6 +50,7 @@ public class Enemy_Bullet_Boss : MonoBehaviour {
     public bool rightTleftF = false;
     private bool isDead = false;
     public bool isDamage = false;
+    
     private float timer;
     #endregion
 
@@ -114,7 +120,7 @@ public class Enemy_Bullet_Boss : MonoBehaviour {
             if (sr.isVisible || nonVisibleAct) {
                 if (checkCollision.isOn) {
                     rightTleftF = !rightTleftF;
-                    Attack();
+                    //Attack();
                 }
                 int xVector = -1;
                 if (rightTleftF) {
@@ -129,6 +135,7 @@ public class Enemy_Bullet_Boss : MonoBehaviour {
             }
         } else {
             if (!isDamage && bossLife >0) {
+                GameManager.instance.playSE(nakigoe);
                 isDamage = true;
                 oc.playerStepOn = false;
                 //効果音
@@ -142,6 +149,7 @@ public class Enemy_Bullet_Boss : MonoBehaviour {
             anim.Play("run");
         } else {
             rb.velocity = new Vector2(0, -gravity);
+            GameManager.instance.playSE(bomb);//このままだと何回もなる
             isDead = true;
             col.enabled = false;//BoxCollider2Dを無効にする。
             Destroy(gameObject, 3f);
@@ -156,5 +164,14 @@ public class Enemy_Bullet_Boss : MonoBehaviour {
         g.transform.position = attackObj.transform.position;
         g.transform.rotation = attackObj.transform.rotation;
         g.SetActive(true);
+    }
+    private void OnTriggerEnter2D(Collider2D collision) {//アタックエリアに入ると弾を射出。弾はbulletControllerクラスで制御
+        if(collision.tag == attackTag) {
+            Attack();
+        }
+    }
+
+    public void Ashioto() {//アニメーションに合わせて足音をならす。
+        GameManager.instance.playSE(ashioto);
     }
 }

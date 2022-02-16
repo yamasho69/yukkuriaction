@@ -14,6 +14,7 @@ TagManager:
   - Poison
   - PlayerFoot
   - Watar
+  - BossAttack
   layers:
   - Default
   - TransparentFX
