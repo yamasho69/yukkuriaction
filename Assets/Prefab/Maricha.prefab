@@ -217,19 +217,21 @@ MonoBehaviour:
   trapDownVoice4: {fileID: 8300000, guid: 2133e550082c5a3449fc95f6ca42a21f, type: 3}
   trapDownVoice5: {fileID: 8300000, guid: 951a422e585eca34baf820f30fd8d8b5, type: 3}
   trapDownVoice6: {fileID: 8300000, guid: 34198cd2b44ce7f4da3d89e93c13c6d8, type: 3}
+  heatDownVoice1: {fileID: 8300000, guid: 96441845ffcb8124f971c2e6f2c5bb28, type: 3}
+  heatDownVoice2: {fileID: 8300000, guid: 94bd6bf3605e94b49a3b35440d7799f7, type: 3}
+  heatDownVoice3: {fileID: 8300000, guid: 6b1a48bf7d5421f4aacad71f949511d7, type: 3}
+  heatDownVoice4: {fileID: 8300000, guid: 680b91886ef061649bff3916841ef1f2, type: 3}
+  heatDownVoice5: {fileID: 8300000, guid: 25d797556584d29438fb0a39e5a74ded, type: 3}
+  heatDownVoice6: {fileID: 8300000, guid: 1017415df740554419a90c6d58c857b5, type: 3}
   fallVoice1: {fileID: 8300000, guid: 5f3d3fbde7a06e64591afff1356aea66, type: 3}
   fallVoice2: {fileID: 8300000, guid: c829bc96a7db66e408fa08ddc40aeb7a, type: 3}
   fallVoice3: {fileID: 8300000, guid: 6ba817ff45047c04baaa517a4ae63a28, type: 3}
   fallVoice4: {fileID: 8300000, guid: 66fe1a73df2ae124b89bdd6ddcf79c09, type: 3}
   fallVoice5: {fileID: 8300000, guid: 7629ac172242ed74f91c2cb49fced4b5, type: 3}
-  watarVoice1: {fileID: 8300000, guid: 1cd294a56a0c1df43861ae9fa8b987d9, type: 3}
-  watarVoice2: {fileID: 8300000, guid: 69af4e222ac0d28479fc51efb00c8c16, type: 3}
-  watarVoice3: {fileID: 8300000, guid: f56e9e5bcd8cb9746bd546e1cdd6bd45, type: 3}
-  watarVoice4: {fileID: 8300000, guid: 48f451c147feb6848a7caae75153e3f6, type: 3}
-  watarVoice5: {fileID: 8300000, guid: eaa1cce9e4722ef42849add5139e2236, type: 3}
   morunmorunSE: {fileID: 8300000, guid: 3ecff22040b3d534c805233348b32707, type: 3}
   enemyDeathSE: {fileID: 8300000, guid: d9299d041d9dacb44b6fe242617dc8f5, type: 3}
   trapSE: {fileID: 8300000, guid: 426a0b20aee1e974fb9f8f523cd58465, type: 3}
+  heatSE: {fileID: 8300000, guid: f4a7fa57c2a06ed4180453142e63d81b, type: 3}
   watarSE: {fileID: 8300000, guid: bc45e43663c227c4cbabcf45eb7ea619, type: 3}
   pauseButton: {fileID: 0}
   capcol: {fileID: 0}

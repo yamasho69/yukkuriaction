@@ -35,6 +35,12 @@ public class Player : MonoBehaviour{
     [Header("trapDownVoice4")] public AudioClip trapDownVoice4;
     [Header("trapDownVoice5")] public AudioClip trapDownVoice5;
     [Header("trapDownVoice6")] public AudioClip trapDownVoice6;
+    [Header("heatDownVoice1")] public AudioClip heatDownVoice1;
+    [Header("heatDownVoice2")] public AudioClip heatDownVoice2;
+    [Header("heatDownVoice3")] public AudioClip heatDownVoice3;
+    [Header("heatDownVoice4")] public AudioClip heatDownVoice4;
+    [Header("heatDownVoice5")] public AudioClip heatDownVoice5;
+    [Header("heatDownVoice6")] public AudioClip heatDownVoice6;
     [Header("FallVoice1")] public AudioClip fallVoice1;
     [Header("FallVoice2")] public AudioClip fallVoice2;
     [Header("FallVoice3")] public AudioClip fallVoice3;
@@ -43,6 +49,7 @@ public class Player : MonoBehaviour{
     [Header("morunmorun")] public AudioClip morunmorunSE;
     [Header("enemyDeath")] public AudioClip enemyDeathSE;
     [Header("trapSE")] public AudioClip trapSE;
+    [Header("heatSE")] public AudioClip heatSE;
     [Header("WatarSE")] public AudioClip watarSE;
     [Header("pauseButton")] public GameObject pauseButton;
     #endregion
@@ -77,6 +84,7 @@ public class Player : MonoBehaviour{
     private string fallFloorTag = "FallFloor"; //55
     private string poisonTag = "Poison"; //唐辛子につけるタグ
     private string watarTag = "Watar"; //水につけるタグ
+    private string heatAreaTag = "HeatArea"; //鉄板につけるタグ
     #endregion
 
     // Start is called before the first frame update
@@ -379,7 +387,7 @@ public class Player : MonoBehaviour{
         {
             if (downAnim) {
                 AnimatorStateInfo currentState = anim.GetCurrentAnimatorStateInfo(0);
-                if (isLeft || currentState.IsName("LeftIdle") || currentState.IsName("LeftLanding")) {
+                if (isLeft || currentState.IsName("LeftIdle") || currentState.IsName("LeftLanding") || currentState.IsName("LeftFall")) {
                     anim.Play("LeftDown");
                     //GameManager.instance.playSE(leftDownVoice); 
                 } else {
@@ -396,26 +404,35 @@ public class Player : MonoBehaviour{
 
     //51で追加。
     private void OnTriggerEnter2D(Collider2D collision) {
-        if ((collision.tag==watarTag || collision.tag == poisonTag) && !isDown) {//ダウン中に唐辛子をとっても反応しない様に!isDownをつける。
+        if ((collision.tag == watarTag || collision.tag == poisonTag) && !isDown) {//ダウン中に唐辛子をとっても反応しない様に!isDownをつける。
             ReceiveDamage(true);
-            if(collision.tag == watarTag) {
+            if (collision.tag == watarTag) {
                 GameManager.instance.playSE(watarSE);//水のタグなら鳴らす効果音
             }
-        } else if(collision.tag == hitAreaTag && !isDown) {//!isDownを付けないとトゲの上にいる限り反応する
+        } else if (collision.tag == hitAreaTag && !isDown) {//!isDownを付けないとトゲの上にいる限り反応する
             ReceiveDamage(true);
             GameManager.instance.playSE(trapSE);
-            if(!GameManager.instance.isGameOver) {//ゲームオーバー時にはダウンボイスを鳴らさない。
-                GameManager.instance.RandomizeSfx(trapDownVoice1, trapDownVoice2, trapDownVoice3, trapDownVoice4,trapDownVoice5,trapDownVoice6);
+            if (!GameManager.instance.isGameOver) {//ゲームオーバー時にはダウンボイスを鳴らさない。
+                GameManager.instance.RandomizeSfx(trapDownVoice1, trapDownVoice2, trapDownVoice3, trapDownVoice4, trapDownVoice5, trapDownVoice6);
                 GameManager.instance.playSE(morunmorunSE);
                 Untagged();
             }
-        } else if(collision.tag == deadAreaTag && !isDown) {//ダウン状態で穴に落ちた状態のときに反応しないように追加。
+        } else if (collision.tag == heatAreaTag && !isDown) {//!isDownを付けないと鉄板の上にいる限り反応する
+            ReceiveDamage(true);
+            GameManager.instance.playSE(heatSE);
+            if (!GameManager.instance.isGameOver) {//ゲームオーバー時にはダウンボイスを鳴らさない。
+                GameManager.instance.RandomizeSfx(heatDownVoice1, heatDownVoice2, heatDownVoice3, heatDownVoice4, heatDownVoice5, heatDownVoice6);
+                GameManager.instance.playSE(morunmorunSE);
+                //Untagged();
+            }
+        } else if (collision.tag == deadAreaTag && !isDown) {//ダウン状態で穴に落ちた状態のときに反応しないように追加。
             ReceiveDamage(false);
             if (!GameManager.instance.isGameOver) {//ゲームオーバー時にはダウンボイスを鳴らさない。
-                GameManager.instance.RandomizeSfx(fallVoice1, fallVoice2, fallVoice3,fallVoice4,fallVoice5);
-            }            
+                GameManager.instance.RandomizeSfx(fallVoice1, fallVoice2, fallVoice3, fallVoice4, fallVoice5);
+            }
         }
     }
+    
 
 
     //自分で作成。トゲ(トラップ)を触った跡にPlayerタグを外し、アイテムを取らないようにする。
