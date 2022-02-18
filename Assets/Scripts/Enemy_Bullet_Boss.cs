@@ -78,7 +78,6 @@ public class Enemy_Bullet_Boss : MonoBehaviour {
         //通常の状態
         if (currentState.IsName("run")) {
             if (timer > interval) {
-                anim.SetTrigger("attack");
                 timer = 0.0f;
             } else {
                 timer += Time.deltaTime;
@@ -160,6 +159,7 @@ public class Enemy_Bullet_Boss : MonoBehaviour {
     //参考ページ　https://dkrevel.com/makegame-beginner/make-2d-action-shot-enemy/
     public void Attack() {
         GameObject g = Instantiate(attackObj);
+        //anim.Play("attack");
         g.transform.SetParent(transform);
         g.transform.position = attackObj.transform.position;
         g.transform.rotation = attackObj.transform.rotation;
