@@ -146,7 +146,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1229989367
-  m_SortingLayer: -1
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_Sprite: {fileID: 4114111432495891202, guid: f85ccb91ff4f71d44808845949b0798b,
     type: 3}
@@ -258,7 +258,7 @@ MonoBehaviour:
   nonVisibleAct: 0
   checkCollision: {fileID: 2483105899689633842}
   attackObj: {fileID: 2814214301395129944}
-  interval: 5.5
+  interval: 7
 --- !u!1 &2814214301395129944
 GameObject:
   m_ObjectHideFlags: 0

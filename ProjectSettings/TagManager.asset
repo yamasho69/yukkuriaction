@@ -62,9 +62,12 @@ TagManager:
   - name: Enamy
     uniqueID: 3064977929
     locked: 0
-  - name: Default
-    uniqueID: 0
+  - name: Player
+    uniqueID: 1017173789
     locked: 0
   - name: Watar
     uniqueID: 3500336817
+    locked: 0
+  - name: Default
+    uniqueID: 0
     locked: 0
