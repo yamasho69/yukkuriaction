@@ -16,6 +16,7 @@ TagManager:
   - Watar
   - BossAttack
   - HeatArea
+  - LastContinuePoint
   layers:
   - Default
   - TransparentFX

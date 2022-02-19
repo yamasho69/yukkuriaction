@@ -25,13 +25,15 @@ public class Enemy_Bullet_Boss : MonoBehaviour {
     [Header("攻撃間隔")] public float interval;
     [Header("足音")] public AudioClip ashioto;
     [Header("鳴き声")] public AudioClip nakigoe;
-    
+    [Header("落下してきた音")] public AudioClip don;
     [Header("爆発")] public AudioClip bomb;
     public int bossLife;
     private string playerTag = "Player";
     private string attackTag = "BossAttack";
     private SpriteRenderer sp = null;
     public float mutekitime;
+
+    public bool battleStart = false;
     
     
     #endregion
@@ -74,85 +76,88 @@ public class Enemy_Bullet_Boss : MonoBehaviour {
 
     void Update() {
         AnimatorStateInfo currentState = anim.GetCurrentAnimatorStateInfo(0);
-
-        //通常の状態
-        if (currentState.IsName("run")) {
-            if (timer > interval) {
-                timer = 0.0f;
-            } else {
-                timer += Time.deltaTime;
+        if (battleStart) {
+            //通常の状態
+            if (currentState.IsName("run")) {
+                if (timer > interval) {
+                    timer = 0.0f;
+                } else {
+                    timer += Time.deltaTime;
+                }
             }
-        }
 
-        if (isDamage) {
+            if (isDamage) {
                 //明滅　ついている時に戻る
-            if (blinkTime > 0.2f) {
-                sr.enabled = true;
-                blinkTime = 0.0f;
-            }
+                if (blinkTime > 0.2f) {
+                    sr.enabled = true;
+                    blinkTime = 0.0f;
+                }
                 //明滅　消えているとき
-            else if (blinkTime > 0.1f) {
-                sr.enabled = false;
-            }
+                else if (blinkTime > 0.1f) {
+                    sr.enabled = false;
+                }
                 //明滅　ついているとき
-            else {
-                sr.enabled = true;
-            }
+                else {
+                    sr.enabled = true;
+                }
                 //無敵時間がたったら明滅終わり
-            if (continueTime > mutekitime) {
-                isDamage = false;    
-                speed = baseSpeed;
-                maxSpeed += 10.0f;
-                blinkTime = 0.0f;
-                continueTime = 0.0f;
-                sr.enabled = true;
-                mutekitime += 0.5f;
-            } else {
-                blinkTime += Time.deltaTime;
-                continueTime += Time.deltaTime;
+                if (continueTime > mutekitime) {
+                    isDamage = false;
+                    speed = baseSpeed;
+                    maxSpeed += 10.0f;
+                    blinkTime = 0.0f;
+                    continueTime = 0.0f;
+                    sr.enabled = true;
+                    mutekitime += 0.5f;
+                } else {
+                    blinkTime += Time.deltaTime;
+                    continueTime += Time.deltaTime;
+                }
             }
         }
     }
 
     void FixedUpdate() {
-        if (!oc.playerStepOn) {
-            if (sr.isVisible || nonVisibleAct) {
-                if (checkCollision.isOn) {
-                    rightTleftF = !rightTleftF;
-                    //Attack();
-                }
-                int xVector = -1;
-                if (rightTleftF) {
-                    xVector = 1;
-                    transform.localScale = new Vector3(-20, 20, 1);//前二つはオブジェクトの大きさ
+        if (battleStart) {
+            if (!oc.playerStepOn) {
+                if (sr.isVisible || nonVisibleAct) {
+                    if (checkCollision.isOn) {
+                        rightTleftF = !rightTleftF;
+                        //Attack();
+                    }
+                    int xVector = -1;
+                    if (rightTleftF) {
+                        xVector = 1;
+                        transform.localScale = new Vector3(-20, 20, 1);//前二つはオブジェクトの大きさ
+                    } else {
+                        transform.localScale = new Vector3(20, 20, 1);
+                    }
+                    rb.velocity = new Vector2(xVector * speed, -gravity);
                 } else {
-                    transform.localScale = new Vector3(20, 20, 1);
+                    rb.Sleep();
                 }
-                rb.velocity = new Vector2(xVector * speed, -gravity);
             } else {
-                rb.Sleep();
+                if (!isDamage && bossLife > 0) {
+                    GameManager.instance.playSE(nakigoe);
+                    isDamage = true;
+                    oc.playerStepOn = false;
+                    //効果音
+                    anim.Play("hit");
+                    --bossLife;
+                    speed = maxSpeed;
+                    //Invoke("Damage", 5.0f);
+                }
             }
-        } else {
-            if (!isDamage && bossLife >0) {
-                GameManager.instance.playSE(nakigoe);
-                isDamage = true;
-                oc.playerStepOn = false;
-                //効果音
-                anim.Play("hit");
-                --bossLife;
-                speed = maxSpeed;
-                //Invoke("Damage", 5.0f);
+            if (bossLife > 0) {
+                anim.Play("run");
+            } else {
+                rb.velocity = new Vector2(0, -gravity);
+                GameManager.instance.playSE(bomb);//このままだと何回もなる
+                isDead = true;
+                col.enabled = false;//BoxCollider2Dを無効にする。
+                Destroy(gameObject, 3f);
+                //transform.Rotate(new Vector3(0, 0, 5)); 
             }
-        }
-        if (bossLife > 0) {
-            anim.Play("run");
-        } else {
-            rb.velocity = new Vector2(0, -gravity);
-            GameManager.instance.playSE(bomb);//このままだと何回もなる
-            isDead = true;
-            col.enabled = false;//BoxCollider2Dを無効にする。
-            Destroy(gameObject, 3f);
-            //transform.Rotate(new Vector3(0, 0, 5)); 
         }
     }
 
@@ -173,5 +178,10 @@ public class Enemy_Bullet_Boss : MonoBehaviour {
 
     public void Ashioto() {//アニメーションに合わせて足音をならす。
         GameManager.instance.playSE(ashioto);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision) {
+        GameManager.instance.playSE(ashioto);
+        Debug.Log("呼ばれた");
     }
 }

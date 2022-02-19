@@ -52,6 +52,8 @@ public class Player : MonoBehaviour{
     [Header("heatSE")] public AudioClip heatSE;
     [Header("WatarSE")] public AudioClip watarSE;
     [Header("pauseButton")] public GameObject pauseButton;
+    public GameObject reimyu;
+    public bool canControl = true;
     #endregion
 
     #region
@@ -85,6 +87,7 @@ public class Player : MonoBehaviour{
     private string poisonTag = "Poison"; //唐辛子につけるタグ
     private string watarTag = "Watar"; //水につけるタグ
     private string heatAreaTag = "HeatArea"; //鉄板につけるタグ
+    private string lastTag = "LastContinuePoint"; //最後のチェックポイントにつけるタグ
     #endregion
 
     // Start is called before the first frame update
@@ -174,50 +177,51 @@ public class Player : MonoBehaviour{
         float verticalKey = Input.GetAxis("Vertical");//上下方向のインプットを取得、レッスン40で追加
         float ySpeed = -grovity; //レッスン40で追加。何もしていないときは重力がそのままかかる
 
+        if (canControl) {//自分で追加。canControlがfalseだと入力を受け付けない。
+            //何かを踏んだ際のジャンプ レッスン45で追加。
+            if (isOtherJump) {
+                //現在の高さが飛べる高さより下か
+                bool canHeight = jumpPos + otherJumpHeight > transform.position.y;
+                //ジャンプ時間が長くなりすぎてないか
+                bool canTime = jumpLimitTime > jumpTime;
 
-        //何かを踏んだ際のジャンプ レッスン45で追加。
-        if (isOtherJump) {
-            //現在の高さが飛べる高さより下か
-            bool canHeight = jumpPos + otherJumpHeight > transform.position.y;
-            //ジャンプ時間が長くなりすぎてないか
-            bool canTime = jumpLimitTime > jumpTime;
-
-            if (canHeight && canTime && !isHead) {
-                ySpeed = jumpSpeed;
-                jumpTime += Time.deltaTime;
-            } else {
-                isOtherJump = false;
-                jumpTime = 0.0f;
-            }
-        }else if (isGround) {
-            if (verticalKey > 0) {
-                ySpeed = jumpSpeed;//設置時に上方向のキー入力があったらジャンプ
-                jumpPos = transform.position.y; //ジャンプした高さを記録
-                isJump = true;
-                jumpTime = 0.0f;//滞空時間をリセット。
-            } else {
-                isJump = false;
-            }
-        }else if (isJump) {
-            //ジャンプした位置+ジャンプできる高さ=飛べる高さ
-            //つまり上方向キーが押されている間かつ自分が飛べる高さにいるとき
-            //if (verticalKey > 0 && jumpPos + jumpHeight > transform.position.y) {
+                if (canHeight && canTime && !isHead) {
+                    ySpeed = jumpSpeed;
+                    jumpTime += Time.deltaTime;
+                } else {
+                    isOtherJump = false;
+                    jumpTime = 0.0f;
+                }
+            } else if (isGround) {
+                if (verticalKey > 0) {
+                    ySpeed = jumpSpeed;//設置時に上方向のキー入力があったらジャンプ
+                    jumpPos = transform.position.y; //ジャンプした高さを記録
+                    isJump = true;
+                    jumpTime = 0.0f;//滞空時間をリセット。
+                } else {
+                    isJump = false;
+                }
+            } else if (isJump) {
+                //ジャンプした位置+ジャンプできる高さ=飛べる高さ
+                //つまり上方向キーが押されている間かつ自分が飛べる高さにいるとき
+                //if (verticalKey > 0 && jumpPos + jumpHeight > transform.position.y) {
 
 
-            //ifの条件式が長くなりすぎるのでレッスン40で変数にして整理した。
-            //上方向のキーを押しているか
-            bool pushUpKey = verticalKey > 0;
-            //現在の高さが飛べる高さより下か
-            bool canHeight = jumpPos + jumpHeight > transform.position.y;
-            //ジャンプ時間が長くなりすぎていないか
-            bool canTime = jumpLimitTime > jumpTime;
+                //ifの条件式が長くなりすぎるのでレッスン40で変数にして整理した。
+                //上方向のキーを押しているか
+                bool pushUpKey = verticalKey > 0;
+                //現在の高さが飛べる高さより下か
+                bool canHeight = jumpPos + jumpHeight > transform.position.y;
+                //ジャンプ時間が長くなりすぎていないか
+                bool canTime = jumpLimitTime > jumpTime;
 
-            if (pushUpKey && canHeight && canTime && !isHead) {
-                ySpeed = jumpSpeed;
-                jumpTime += Time.deltaTime;//上昇している間に進んだゲーム内時間を加算
-            } else {
-                isJump = false;
-                jumpTime = 0.0f;//ジャンプタイムをリセット
+                if (pushUpKey && canHeight && canTime && !isHead) {
+                    ySpeed = jumpSpeed;
+                    jumpTime += Time.deltaTime;//上昇している間に進んだゲーム内時間を加算
+                } else {
+                    isJump = false;
+                    jumpTime = 0.0f;//ジャンプタイムをリセット
+                }
             }
         }
         if (isJump||isOtherJump) {
@@ -228,34 +232,36 @@ public class Player : MonoBehaviour{
     }
 
     private float GetXSpeed() {
+
         float horizontalKey = Input.GetAxis("Horizontal");//左右方向のインプットを取得
         float xSpeed = 0.0f; //Speed変数を入れる変数
+        if (canControl) {//自分で追加。canControlがfalseになると、入力を受け付けない。
+            if (horizontalKey > 0)//右方向の入力があった場合
+            {
+                isRight = true;
+                isLeft = false;
+                dashTime += Time.deltaTime;//41
+                                           //参考動画では画像を反転させて左右への移動を処理
+                                           //transform.localScale = new Vector3(1,1,1);
+                xSpeed = speed;//右なら正の方向のSpeed変数
+            } else if (horizontalKey < 0)//左方向の入力があった場合
+              {
+                isRight = false;
+                isLeft = true;
+                dashTime += Time.deltaTime;//41
+                                           //transform.localScale = new Vector3(-1,1,1);
+                xSpeed = -speed;//右なら負の方向のSpeed変数
+            } else {
+                isLeft = false;
+                isRight = false;
+                dashTime = 0.0f;
+                xSpeed = 0.0f;
+            }
 
-        if (horizontalKey > 0)//右方向の入力があった場合
-        {
-            isRight = true;
-            isLeft = false;
-            dashTime += Time.deltaTime;//41
-            //参考動画では画像を反転させて左右への移動を処理
-            //transform.localScale = new Vector3(1,1,1);
-            xSpeed = speed;//右なら正の方向のSpeed変数
-        } else if (horizontalKey < 0)//左方向の入力があった場合
-          {
-            isRight = false;
-            isLeft = true;
-            dashTime += Time.deltaTime;//41
-            //transform.localScale = new Vector3(-1,1,1);
-            xSpeed = -speed;//右なら負の方向のSpeed変数
-        } else {
-            isLeft = false;
-            isRight = false;
-            dashTime = 0.0f;
-            xSpeed = 0.0f;
-        }
-
-        //レッスン41で追加。前回のキー入力と方向が違うと加速を０にする。
-        if ((horizontalKey > 0 && beforeKey < 0) || (horizontalKey < 0 && beforeKey > 0)) {
-            dashTime = 0.0f;
+            //レッスン41で追加。前回のキー入力と方向が違うと加速を０にする。
+            if ((horizontalKey > 0 && beforeKey < 0) || (horizontalKey < 0 && beforeKey > 0)) {
+                dashTime = 0.0f;
+            }
         }
         beforeKey = horizontalKey;
 
@@ -430,6 +436,12 @@ public class Player : MonoBehaviour{
             if (!GameManager.instance.isGameOver) {//ゲームオーバー時にはダウンボイスを鳴らさない。
                 GameManager.instance.RandomizeSfx(fallVoice1, fallVoice2, fallVoice3, fallVoice4, fallVoice5);
             }
+        }
+
+        if(collision.tag == lastTag && reimyu != null) {
+            canControl = false;//入力をできないようにする。
+            isRight = false;
+            reimyu.SetActive(true);
         }
     }
     
