@@ -138,26 +138,23 @@ public class Enemy_Bullet_Boss : MonoBehaviour {
                 }
             } else {
                 if (!isDamage && bossLife > 0) {
-                    GameManager.instance.playSE(nakigoe);
+                    if (bossLife > 1) {//鳴き声は倒したときには出ないようにする。
+                        GameManager.instance.playSE(nakigoe);
+                        speed = maxSpeed;//スピードがマックスになるのも倒したときには起こさない。
+                    }
                     isDamage = true;
                     oc.playerStepOn = false;
                     //効果音
                     anim.Play("hit");
                     --bossLife;
-                    speed = maxSpeed;
-                    //Invoke("Damage", 5.0f);
                 }
             }
             if (bossLife > 0) {
                 anim.Play("run");
-            } else {
-                rb.velocity = new Vector2(0, -gravity);
-                GameManager.instance.playSE(bomb);//このままだと何回もなる
-                isDead = true;
-                col.enabled = false;//BoxCollider2Dを無効にする。
-                Destroy(gameObject, 3f);
-                //transform.Rotate(new Vector3(0, 0, 5)); 
-            }
+            } else if(bossLife == 0){
+                bossLife -= 100;//ボスのライフをマイナス100にして、1回しか呼ばれなくする。
+                BossDead();
+            } 
         }
     }
 
@@ -182,5 +179,36 @@ public class Enemy_Bullet_Boss : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision) {
         GameManager.instance.playSE(ashioto);
+    }
+
+    private void BossDead() {
+        rb.constraints = RigidbodyConstraints2D.FreezePosition;//オブジェクトが移動しないようにする。参考https://mogi0506.com/unity-constraints/
+        GameManager.instance.playSE(bomb);
+        col.enabled = false;//BoxCollider2Dを無効にする。
+        if (blinkTime > 0.2f) {
+            sr.enabled = true;
+            blinkTime = 0.0f;
+        }
+                //明滅　消えているとき
+                else if (blinkTime > 0.1f) {
+            sr.enabled = false;
+        }
+                //明滅　ついているとき
+                else {
+            sr.enabled = true;
+        }
+        //無敵時間がたったら明滅終わり
+        if (continueTime > mutekitime) {
+            isDamage = false;
+            blinkTime = 0.0f;
+            continueTime = 0.0f;
+            sr.enabled = true;
+            mutekitime += 0.5f;
+            GameManager.instance.playSE(bomb);
+        } else {
+            blinkTime += Time.deltaTime;
+            continueTime += Time.deltaTime;
+        }
+        Destroy(gameObject, 3f);
     }
 }
