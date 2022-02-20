@@ -425,6 +425,7 @@ MonoBehaviour:
   startVoice5: {fileID: 8300000, guid: 29f67e4aa51b23f48a5106f6dc29c770, type: 3}
   fade: {fileID: 7145022195190682269}
   goNextScene: 0
+  maricha: {fileID: 0}
 --- !u!114 &6647170030026877322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -669,6 +670,7 @@ MonoBehaviour:
   startVoice5: {fileID: 8300000, guid: 011743af51c633747a1688ad7a139946, type: 3}
   fade: {fileID: 7145022195190682269}
   goNextScene: 0
+  maricha: {fileID: 0}
 --- !u!114 &6647170030782369616
 MonoBehaviour:
   m_ObjectHideFlags: 0

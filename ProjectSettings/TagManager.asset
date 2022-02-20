@@ -72,3 +72,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Daialog
+    uniqueID: 2675693645
+    locked: 0
+  - name: UI
+    uniqueID: 1674421651
+    locked: 0
