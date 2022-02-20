@@ -27,6 +27,9 @@ public class Enemy_Bullet_Boss : MonoBehaviour {
     [Header("鳴き声")] public AudioClip nakigoe;
     [Header("落下してきた音")] public AudioClip don;
     [Header("爆発")] public AudioClip bomb;
+    [Header("ラストバトルBGM")] public AudioClip lastBattleBGM;
+    public Reimyu reimyu;
+    public AudioSource audioSource;//BGMオブジェクトをインスペクター上で設定。
     public int bossLife;
     private string playerTag = "Player";
     private string attackTag = "BossAttack";
@@ -56,6 +59,17 @@ public class Enemy_Bullet_Boss : MonoBehaviour {
     private float timer;
     #endregion
 
+    //BGMフェードアウト用　参考　https://xr-hub.com/archives/18550
+    public bool IsFade;
+    public double FadeOutSeconds = 2.0;
+    bool IsFadeOut = false;
+    double FadeDeltaTime = 0;
+
+    private bool bgmplaying = false;
+
+
+
+
     // Start is called before the first frame update
     void Start() {
         rb = GetComponent<Rigidbody2D>();
@@ -76,7 +90,13 @@ public class Enemy_Bullet_Boss : MonoBehaviour {
 
     void Update() {
         AnimatorStateInfo currentState = anim.GetCurrentAnimatorStateInfo(0);
-        if (battleStart) {
+        if (battleStart) {//bgmplaying(BGM再生中)がtrueではない場合。
+            if (!bgmplaying) {
+                audioSource.clip = lastBattleBGM;//最後のセリフの場合、BGMを変更するhttps://www.unityprogram.info/entry/Audio-Unity-Change
+                audioSource.Play();
+                bgmplaying = true;
+            }
+
             //通常の状態
             if (currentState.IsName("run")) {
                 if (timer > interval) {
@@ -114,6 +134,16 @@ public class Enemy_Bullet_Boss : MonoBehaviour {
                     continueTime += Time.deltaTime;
                 }
             }
+        }
+
+        if (IsFadeOut) {
+            FadeDeltaTime += Time.deltaTime;
+            if (FadeDeltaTime == FadeOutSeconds)
+            {
+                FadeDeltaTime = FadeOutSeconds;
+                IsFadeOut = false;
+            }
+            audioSource.volume = (float)(0.8 - FadeDeltaTime / FadeOutSeconds);
         }
     }
 
@@ -178,7 +208,10 @@ public class Enemy_Bullet_Boss : MonoBehaviour {
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
-        GameManager.instance.playSE(ashioto);
+        if (!battleStart) {
+            GameManager.instance.playSE(don);
+            audioSource.Stop();//BGMをストップする。
+        }
     }
 
     private void BossDead() {
@@ -209,6 +242,11 @@ public class Enemy_Bullet_Boss : MonoBehaviour {
             blinkTime += Time.deltaTime;
             continueTime += Time.deltaTime;
         }
+        IsFadeOut = true;//音楽フェードアウト
         Destroy(gameObject, 3f);
+    }
+
+    private void OnDestroy() {//壊れた時に呼び出される。参考https://watablog.tech/2020/09/01/post-1876/
+        reimyu.EndingStart();//れいみゅのエンディングメソッドを呼び出す。
     }
 }

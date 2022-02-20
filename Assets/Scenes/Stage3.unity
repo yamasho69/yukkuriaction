@@ -74548,11 +74548,16 @@ MonoBehaviour:
   nakigoe: {fileID: 8300000, guid: 528f5215d6730b84a8f65ab89be45c32, type: 3}
   don: {fileID: 8300000, guid: 6ca1404cad33ab1468dc9bcfc27c7e14, type: 3}
   bomb: {fileID: 8300000, guid: 72a68f4eefc6f584cb8a359930202f9c, type: 3}
+  lastBattleBGM: {fileID: 8300000, guid: 3b4e355e52394c143938eb3bffff26bd, type: 3}
+  reimyu: {fileID: 1608783927}
+  audioSource: {fileID: 1982275761}
   bossLife: 5
   mutekitime: 2.5
   battleStart: 0
   rightTleftF: 0
   isDamage: 0
+  IsFade: 0
+  FadeOutSeconds: 1
 --- !u!61 &1512841950
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -77389,6 +77394,7 @@ MonoBehaviour:
   ouenVoice4: {fileID: 8300000, guid: 9f21fd860b824bc4794999af5cb23fe3, type: 3}
   ouenVoice5: {fileID: 8300000, guid: 6a312fb720590264ba730ebab8df8d24, type: 3}
   escapeSE: {fileID: 8300000, guid: 2cc79ceff8abb2d43bbf62a22be1eefa, type: 3}
+  fade: {fileID: 1423884667}
 --- !u!213 &1609024581
 Sprite:
   m_ObjectHideFlags: 0
@@ -111922,7 +111928,7 @@ Tilemap:
       - {fileID: 21300000, guid: f1f53a31d2786754c93ee256b3d479e2, type: 3}
       - {fileID: 21300000, guid: 834fd03f33d018b43868b6d3360f74a5, type: 3}
       - {fileID: 21300000, guid: 5055826f22b93bd4daae8768dc3c6474, type: 3}
-      m_AnimationSpeed: 5.0000005
+      m_AnimationSpeed: 5
       m_AnimationTimeOffset: 3
       m_IsLooping: 1
   - first: {x: 265, y: -6, z: 0}
@@ -111955,7 +111961,7 @@ Tilemap:
       - {fileID: 21300000, guid: f1f53a31d2786754c93ee256b3d479e2, type: 3}
       - {fileID: 21300000, guid: 834fd03f33d018b43868b6d3360f74a5, type: 3}
       - {fileID: 21300000, guid: 5055826f22b93bd4daae8768dc3c6474, type: 3}
-      m_AnimationSpeed: 5
+      m_AnimationSpeed: 5.0000005
       m_AnimationTimeOffset: 3
       m_IsLooping: 1
   - first: {x: -41, y: -3, z: 0}
