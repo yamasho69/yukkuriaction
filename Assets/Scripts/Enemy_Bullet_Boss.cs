@@ -182,6 +182,5 @@ public class Enemy_Bullet_Boss : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision) {
         GameManager.instance.playSE(ashioto);
-        Debug.Log("呼ばれた");
     }
 }
