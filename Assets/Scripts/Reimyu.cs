@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
+using Cinemachine;
 
 public class Reimyu : MonoBehaviour {
 
@@ -29,8 +30,13 @@ public class Reimyu : MonoBehaviour {
     public GameObject vanishWall;//ラスボスステージ左の壁。ラスボス登場で消える。
     public Animator marichaAnimator;//まりちゃのアニメーション。参考https://teratail.com/questions/62903
     private Animator animator;
+    public GameObject camera1;
+    public GameObject camera2;
+    private AudioSource audioSource;
+    private BoxCollider2D boxCollider2;
 
     public bool afterBoss;//ボスを倒しているか。
+
     [Header("誰が話しているか")] public string[] washa;
     [Header("セリフ内容")] [TextArea(1, 3)] public string[] serifu;
     [Header("ボイス")] public AudioClip[] audios;
@@ -43,19 +49,26 @@ public class Reimyu : MonoBehaviour {
     [Header("応援Voice5")] public AudioClip ouenVoice5;
     [Header("逃げるSE")] public AudioClip escapeSE;
     [Header("フェード")] public FadeImage fade;//51
+    [Header("エンディングでカメラ追従する点")] public Transform follow;
 
     //以下エンディングのセリフの配列
     [Header("誰が話しているか")] public string[] ending_washa;
     [Header("セリフ内容")] [TextArea(1, 3)] public string[] ending_serifu;
     [Header("ボイス")] public AudioClip[] ending_audios;
     [Header("いつから次のメッセージにいけるか。")] public float[] ending_yoin;
-    [Header("セリフ番号")] public int ending_serifuNum = -1;
+    [Header("セリフ番号")] public int ending_serifuNum = 0;
+
+    [Header("ダイコングループ")] public GameObject daicons;
+    [Header("ダイコン１")] public GameObject daicon01;
+    [Header("ダイコン２")] public GameObject daicon02;
 
 
     // Start is called before the first frame update
     void Start() {
         textBox.GetComponent<Image>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+        boxCollider2 = GetComponent<BoxCollider2D>();
         daialogCanvas.SetActive(true);
         transform.DOMoveX(1435, 2.0f); //DoMoveXについてhttps://qiita.com/BEATnonanka/items/b4cca6471e77466cec74
         Invoke("CanNextDaialog", 2.0f);
@@ -93,13 +106,23 @@ public class Reimyu : MonoBehaviour {
         }
 
 
-        if(afterBoss == true) {//ボス後
+        if (afterBoss == true) {//ボス後
             if (sankaku.activeSelf) {//sankakuがアクティブならば
                 if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space)) {//Returnキー=Enterキー
                     sankaku.SetActive(false);
                     daialogBox.SetActive(false);
-                    ending_serifuNum++;
-                    NextMessege();
+                    if (ending_serifuNum == 8) {//8回目のセリフの後にダイコンを降らせる。
+                        //Invoke("DaiconActive(i)", daicontaime);//Invokeに引数は使えない。参考https://kan-kikuchi.hatenablog.com/entry/DelayMethod
+                        daicons.SetActive(true);
+                    }
+                    if (ending_serifuNum == 15) {
+                        animator.Play("RightSmile");
+                        marichaAnimator.Play("RightSmile");
+                    }
+                    if (ending_serifuNum != 8 || (ending_serifuNum == 8 && daicons.activeSelf == true)) {
+                        ending_serifuNum++;
+                        NextMessege();
+                    }
                 }
             }
         }
@@ -132,7 +155,6 @@ public class Reimyu : MonoBehaviour {
 
         if(afterBoss == true) {//ボス後
             daialogeText.text = ending_serifu[ending_serifuNum];//テキスト変更　参考https://freesworder.net/unity-text-change/
-            unknownName.SetActive(false);
             if (ending_washa[ending_serifuNum] == "れいみゅ") {
                 textBox.sprite = reimyuImageBox;  //画像切り替え　参考https://futabazemi.net/unity/photo_change_collider/
                 marichaName.SetActive(false);
@@ -149,24 +171,47 @@ public class Reimyu : MonoBehaviour {
                 reimyuName.SetActive(false);
                 niyunName.SetActive(true);
             }
-            //二ゆんの場合の分岐描く
 
             daialogBox.SetActive(true);
             GameManager.instance.playSE(ending_audios[ending_serifuNum]);
             Invoke("CanNextDaialog", ending_yoin[ending_serifuNum]);
+            if(ending_serifuNum == 1) {//セリフ１の後
+                transform.DOPath(
+                     path       : new Vector3[] {new Vector3(1440, -30.2f, 0), new Vector3(1440, -10.2f, 0), new Vector3(1420, -10.2f, 4) }, //移動するポイント
+                     duration   : 2.5f); //移動時間 //参考https://kan-kikuchi.hatenablog.com/entry/DOTween_Path
+                audioSource.Play();//れいみゅについてるオーディオソースでBGMならす。
+
+            }
+            if(ending_serifuNum == 14) {
+                animator.Play("RightEat");
+                marichaAnimator.Play("RightEat");
+            }
+            if(ending_serifuNum == 15) {
+                daicon01.SetActive(false);
+                daicon02.SetActive(false);
+            }
+            if(ending_serifuNum == 16) {
+                audioSource.Stop();
+                animator.Play("RightPoison");
+                marichaAnimator.Play("RightPoison");
+            }
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        AnimatorStateInfo currentState = animator.GetCurrentAnimatorStateInfo(0);
-        if (currentState.IsName("Idlenaki")) {//泣いてるアニメーションの時しか反応しない。
-            animator.Play("RightSmile");
-            GameManager.instance.RandomizeSfx(ouenVoice1, ouenVoice2, ouenVoice3, ouenVoice4, ouenVoice5);
+        if (afterBoss == false) {
+            AnimatorStateInfo currentState = animator.GetCurrentAnimatorStateInfo(0);
+            if (currentState.IsName("Idlenaki")) {//泣いてるアニメーションの時しか反応しない。
+                animator.Play("RightSmile");
+                GameManager.instance.RandomizeSfx(ouenVoice1, ouenVoice2, ouenVoice3, ouenVoice4, ouenVoice5);
+            }
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision) {
-        Invoke("NakuAnim", 3.5f);//離れてから3.5秒後に泣き出す。
+        if (afterBoss == false) {
+            Invoke("NakuAnim", 5.0f);//離れてから5.0秒後に泣き出す。
+        }
     }
 
     private void OnCollisionStay2D(Collision2D collision) {
@@ -182,45 +227,58 @@ public class Reimyu : MonoBehaviour {
     }
 
     public void EndingStart() {
-        Debug.Log("呼ばれた。");
         player.canControl = false;//プレイヤーを行動不可にする。
         fade.StartFadeOut();
-        movingPlatformRight.SetActive(false);//右側の足場を消す。
-        transform.DOMove(new Vector3(1485f, -10.2f, 0f), 0.1f);//https://qiita.com/broken55/items/df152c061da759ad1471
-        maricha.transform.DOMove(new Vector3(1470f, -10.2f, 0f), 0.1f);
         animator.Play("RightIdle");
         marichaAnimator.Play("RightIdle");
-        Invoke("AfterBoss", 3.0f);
+        Invoke("AfterBoss", 1.5f);
     }
 
     public void AfterBoss() {
-        fade.StartFadeIn();
+        movingPlatformRight.SetActive(false);//左側の足場を消す。
+        maricha.transform.position = new Vector3(1395, -10.2f, 0);
+        camera2.SetActive(true);//カメラ2はfalseからtrueに切り替えないと、ゆっくりカメラ1からカメラ2に切り替わってしまう。
+        camera1.SetActive(false);//カメラを変更。まりちゃ追従のままだとカメラ位置が高すぎるため。//参考https://nekojara.city/unity-cinemachine-change-target
         afterBoss = true;
+        Invoke("AfterBoss2", 2.0f);
+        boxCollider2.isTrigger = false;//れいみゅのボックスコライダー2dのisTriggerを外す。大根が滑ってれいみゅにめり込むため。
+    }
+    
+    public void AfterBoss2() {
+        fade.StartFadeIn();
         textBox.sprite = marichaImageBox; //オブジェクト切り替え　参考https://dodagon.com/unity/array1
         marichaName.SetActive(true);
         reimyuName.SetActive(false);
         daialogBox.SetActive(true);
-        Invoke("CanNextDaialog", 2.0f);
+        daialogeText.text = ending_serifu[ending_serifuNum];
+        GameManager.instance.playSE(ending_audios[ending_serifuNum]);
+        Invoke("CanNextDaialog", ending_yoin[ending_serifuNum]);
+        marichaAnimator.Play("RightSmile");
+        animator.Play("RightSmile");
     }
 }
 
-/*
-やったのじぇ！
-おねーしゃー！
-いもーちょ。
-おねーしゃはすごいんぢゃよ！
-ゆ、まりちゃはさいっきょうなのじぇ！
-わるいわるいおやしゃいしゃんはせいっさいしたのじぇ！
-ありがちょー！おねーしゃはえいっゆんだねっ！
-さ、まりちゃたちのゆっくちぷれいしゅにかえるのじぇ！
-うん、ゆっくちりきゃいしちゃよ！
-ゆゆ？
-→やさい(大根)がいっぱい降ってくる。
-おやしゃいしゃんがいっぱいじゃよ！
-やっぱち、おやしゃいしゃんはかってにはえてくるんぢゃね！
-いもーちょ、いっちょにむーしゃむーしゃするんだじぇ！
-ちょうだね！　じゃあゆっくち、
-いただきまちゅ！(カメラ上にパン)
-むーしゃむーしゃ！ちちち、ちあわ…
-ゆげえええええ、かりゃいいいい、こりぇどくはいっちぇる！
-*/
+//エンディング用の音楽を鳴らす。
+//8(ゆゆっ)のあとに野菜が振ってくる。
+//一時的にセリフキャンバスを非アクティブに
+//ダイコンを8つくらい、空中に置く
+//ループで時間差で上から落とす。startで落下音
+
+//14(むーしゃむーしゃ)でRightEatを再生
+//15(ちちち、ちあわ)の前にダイコンを2つDestroyする。
+//15でRightSmileを再生
+
+//16(ゆげえええええええきゃらいいい)の前に
+//音楽を停止
+//RightPoisonを再生
+
+//18で終了、ダイアログボックスを消す。おわりの文字をうえから降らす。
+//けっかはっぴょう
+//すこあにゆっくり残機×1000
+//500点でどうばっじ、1000点でぎんばっじ、2000てんできんばっじ、3000てんでぷらちなばっじ
+//それにおうじたこうかおんとまりちゃのせりふ
+//点数いれる。
+//ぷらちなばっじのばあいはさいごにえらいっとひょうじ。
+//たいとるへボタンをひょうじ
+
+//かならずafterbossをオフ、れいみゅとダイアログ関係のセットアクティブをオフにすること！

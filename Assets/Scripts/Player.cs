@@ -302,7 +302,7 @@ public class Player : MonoBehaviour{
                 if (p.point.y < judgePos) {
                     //もう一度跳ねる
                     ObjectCollision o = collision.gameObject.GetComponent<ObjectCollision>();//スクリプトObjectCollisionから跳ねる高さを取得
-                    GameManager.instance.playSE(enemyDeathSE);//敵を踏みつけた時の音
+                    GameManager.instance.playSE(enemyDeathSE);//敵を踏みつけた時の音                    
                     GameManager.instance.RandomizeSfx(jumpVoice1, jumpVoice2, jumpVoice3);
                     if (o != null) {
                         if (enemy) {
