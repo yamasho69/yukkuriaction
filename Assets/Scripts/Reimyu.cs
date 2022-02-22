@@ -57,7 +57,7 @@ public class Reimyu : MonoBehaviour {
     [Header("ボイス")] public AudioClip[] ending_audios;
     [Header("いつから次のメッセージにいけるか。")] public float[] ending_yoin;
     [Header("セリフ番号")] public int ending_serifuNum = 0;
-
+    [Header("オチの効果音")] public AudioClip ochiSE;
     [Header("ダイコングループ")] public GameObject daicons;
     [Header("ダイコン１")] public GameObject daicon01;
     [Header("ダイコン２")] public GameObject daicon02;
@@ -111,7 +111,7 @@ public class Reimyu : MonoBehaviour {
                 if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space)) {//Returnキー=Enterキー
                     sankaku.SetActive(false);
                     daialogBox.SetActive(false);
-                    if (ending_serifuNum == 8) {//8回目のセリフの後にダイコンを降らせる。
+                    if (ending_serifuNum == 8) {//8回目のセリフの後にダイコンを降らせる。ダイコンの回転を止める方法https://mogi0506.com/unity-angulardrag/
                         //Invoke("DaiconActive(i)", daicontaime);//Invokeに引数は使えない。参考https://kan-kikuchi.hatenablog.com/entry/DelayMethod
                         daicons.SetActive(true);
                     }
@@ -119,7 +119,11 @@ public class Reimyu : MonoBehaviour {
                         animator.Play("RightSmile");
                         marichaAnimator.Play("RightSmile");
                     }
-                    if (ending_serifuNum != 8 || (ending_serifuNum == 8 && daicons.activeSelf == true)) {
+                    if(ending_serifuNum == 18) { //最後のセリフの後
+                        GameManager.instance.playSE(ochiSE);
+                        //
+
+                    } else if (ending_serifuNum != 8 || (ending_serifuNum == 8 && daicons.activeSelf == true)) {
                         ending_serifuNum++;
                         NextMessege();
                     }
@@ -173,11 +177,11 @@ public class Reimyu : MonoBehaviour {
             }
 
             daialogBox.SetActive(true);
-            GameManager.instance.playSE(ending_audios[ending_serifuNum]);
-            Invoke("CanNextDaialog", ending_yoin[ending_serifuNum]);
+                GameManager.instance.playSE(ending_audios[ending_serifuNum]);
+                Invoke("CanNextDaialog", ending_yoin[ending_serifuNum]);
             if(ending_serifuNum == 1) {//セリフ１の後
                 transform.DOPath(
-                     path       : new Vector3[] {new Vector3(1440, -30.2f, 0), new Vector3(1440, -10.2f, 0), new Vector3(1420, -10.2f, 4) }, //移動するポイント
+                     path       : new Vector3[] {new Vector3(1440, -30.2f, 0), new Vector3(1440, -10.2f, 0), new Vector3(1415, -10.2f, 4) }, //移動するポイント
                      duration   : 2.5f); //移動時間 //参考https://kan-kikuchi.hatenablog.com/entry/DOTween_Path
                 audioSource.Play();//れいみゅについてるオーディオソースでBGMならす。
 
@@ -236,7 +240,7 @@ public class Reimyu : MonoBehaviour {
 
     public void AfterBoss() {
         movingPlatformRight.SetActive(false);//左側の足場を消す。
-        maricha.transform.position = new Vector3(1395, -10.2f, 0);
+        maricha.transform.position = new Vector3(1388, -10.2f, 0);
         camera2.SetActive(true);//カメラ2はfalseからtrueに切り替えないと、ゆっくりカメラ1からカメラ2に切り替わってしまう。
         camera1.SetActive(false);//カメラを変更。まりちゃ追従のままだとカメラ位置が高すぎるため。//参考https://nekojara.city/unity-cinemachine-change-target
         afterBoss = true;
