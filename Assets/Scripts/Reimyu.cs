@@ -27,6 +27,7 @@ public class Reimyu : MonoBehaviour {
     public Enemy_Bullet_Boss enemy_Bullet_Boss;
     public Player player;
     public GameObject maricha;
+    public GameObject irisOut;
     public GameObject vanishWall;//ラスボスステージ左の壁。ラスボス登場で消える。
     public Animator marichaAnimator;//まりちゃのアニメーション。参考https://teratail.com/questions/62903
     private Animator animator;
@@ -49,7 +50,6 @@ public class Reimyu : MonoBehaviour {
     [Header("応援Voice5")] public AudioClip ouenVoice5;
     [Header("逃げるSE")] public AudioClip escapeSE;
     [Header("フェード")] public FadeImage fade;//51
-    [Header("エンディングでカメラ追従する点")] public Transform follow;
 
     //以下エンディングのセリフの配列
     [Header("誰が話しているか")] public string[] ending_washa;
@@ -121,8 +121,7 @@ public class Reimyu : MonoBehaviour {
                     }
                     if(ending_serifuNum == 18) { //最後のセリフの後
                         GameManager.instance.playSE(ochiSE);
-                        //
-
+                        irisOut.SetActive(true);//アイリスアウト(トランジション)を開始。
                     } else if (ending_serifuNum != 8 || (ending_serifuNum == 8 && daicons.activeSelf == true)) {
                         ending_serifuNum++;
                         NextMessege();
