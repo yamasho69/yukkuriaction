@@ -38,7 +38,7 @@ public class Title : MonoBehaviour{
 
     private void NextStage() {
         if(GameManager.instance.stageNum == 0) {
-            SceneManager.LoadScene("titleScene");//ステージナンバーが99だとタイトルに戻る。
+            SceneManager.LoadScene("titleScene");//ステージナンバーが0だとタイトルに戻る。
         }
         else if (GameManager.instance.stageNum > 1) {
             SceneManager.LoadScene("stage" + GameManager.instance.stageNum);
