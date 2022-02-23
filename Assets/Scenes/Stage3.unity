@@ -5662,12 +5662,12 @@ GameObject:
   - component: {fileID: 189242005}
   - component: {fileID: 189242006}
   m_Layer: 0
-  m_Name: StartPos (1)
+  m_Name: StartPos (BossTest)
   m_TagString: Untagged
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &189242005
 Transform:
   m_ObjectHideFlags: 0
@@ -59110,7 +59110,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 939317612}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1470, y: 30, z: 0}
+  m_LocalPosition: {x: 1470.5, y: 30, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2133603847}
@@ -75251,7 +75251,7 @@ GameObject:
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1454875131
 Transform:
   m_ObjectHideFlags: 0
@@ -79252,7 +79252,6 @@ MonoBehaviour:
   ouenVoice5: {fileID: 8300000, guid: 6a312fb720590264ba730ebab8df8d24, type: 3}
   escapeSE: {fileID: 8300000, guid: 2cc79ceff8abb2d43bbf62a22be1eefa, type: 3}
   fade: {fileID: 1423884667}
-  follow: {fileID: 0}
   ending_washa:
   - "\u307E\u308A\u3061\u3083"
   - "\u308C\u3044\u307F\u3085"

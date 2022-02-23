@@ -6335,7 +6335,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1995937467
-  m_SortingLayer: -2
+  m_SortingLayer: -5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: cdea2bffa4eb28246ba22c11616e04b8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -11843,7 +11843,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1586262539
-  m_SortingLayer: -1
+  m_SortingLayer: -4
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -28510,6 +28510,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6647170031385825468, guid: ffaccb1a827de7d4487804e65e7b9fc8,
+        type: 3}
+      propertyPath: ctrl
+      value: 
+      objectReference: {fileID: 1454875132}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffaccb1a827de7d4487804e65e7b9fc8, type: 3}
 --- !u!1 &743735079 stripped
@@ -30331,7 +30336,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 405043395
-  m_SortingLayer: -3
+  m_SortingLayer: -6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 8e160a2a620644cd6afef9119dad1093, type: 3}
   m_Color: {r: 0.7607844, g: 0.7607844, b: 0.7607844, a: 1}
@@ -33819,7 +33824,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1995937467
-  m_SortingLayer: -2
+  m_SortingLayer: -5
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0.024999976, y: 0, z: 0}
@@ -72120,6 +72125,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4192109468328405361, guid: 2554e472dd49f3f4e830fdf2b34c80ea,
+        type: 3}
+      propertyPath: orthographic size
+      value: 23.5
       objectReference: {fileID: 0}
     - target: {fileID: 4192109468516690789, guid: 2554e472dd49f3f4e830fdf2b34c80ea,
         type: 3}

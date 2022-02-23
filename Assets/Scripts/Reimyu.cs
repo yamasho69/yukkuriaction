@@ -192,6 +192,8 @@ public class Reimyu : MonoBehaviour {
             if(ending_serifuNum == 15) {
                 daicon01.SetActive(false);
                 daicon02.SetActive(false);
+                animator.Play("RightSmile");
+                marichaAnimator.Play("RightSmile");
             }
             if(ending_serifuNum == 16) {
                 audioSource.Stop();

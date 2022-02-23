@@ -29,7 +29,7 @@ public class ClearEffect : MonoBehaviour{
                 timer += Time.deltaTime;
             } else {
                 transform.localScale = Vector3.one;
-                ctrl.ChangeScene(GameManager.instance.stageNum + 1);
+                ctrl.ChangeScene(GameManager.instance.stageNum+1);
                 comp = true;
             }
         }
