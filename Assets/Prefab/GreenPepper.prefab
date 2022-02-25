@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8250471398054758680}
   - component: {fileID: -8542434351245145626}
   m_Layer: 0
-  m_Name: Hotpepper 1
+  m_Name: GreenPepper
   m_TagString: Poison
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -136,9 +136,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerCheck: {fileID: 8250471398054758663}
+  deathitemvoices:
+  - {fileID: 8300000, guid: 6a0779ed874fb584f8c68945c4422215, type: 3}
+  - {fileID: 8300000, guid: ae97f93c2392b1f4192619543a3255c9, type: 3}
+  - {fileID: 8300000, guid: f319c465c3c104544ae2b3126a129c2f, type: 3}
+  - {fileID: 8300000, guid: 46ecec918053fa145b041a3ed516969b, type: 3}
+  - {fileID: 8300000, guid: 6204eba028b13984eb24efdfa7d72528, type: 3}
+  - {fileID: 8300000, guid: 2f6bfe0400165824ba20a4fa73a1e6ee, type: 3}
   clip1: {fileID: 8300000, guid: 6a0779ed874fb584f8c68945c4422215, type: 3}
   clip2: {fileID: 8300000, guid: ae97f93c2392b1f4192619543a3255c9, type: 3}
   clip3: {fileID: 8300000, guid: f319c465c3c104544ae2b3126a129c2f, type: 3}
   clip4: {fileID: 8300000, guid: 6204eba028b13984eb24efdfa7d72528, type: 3}
   clip5: {fileID: 8300000, guid: 46ecec918053fa145b041a3ed516969b, type: 3}
   morunmorunSE: {fileID: 8300000, guid: 3ecff22040b3d534c805233348b32707, type: 3}
+  isWatar: 0

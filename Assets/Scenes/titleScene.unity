@@ -2951,15 +2951,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4192109468328405361, guid: 2554e472dd49f3f4e830fdf2b34c80ea,
+        type: 3}
+      propertyPath: orthographic size
+      value: 23.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4192109468328405362, guid: 2554e472dd49f3f4e830fdf2b34c80ea,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 47.000008
+      value: 47
       objectReference: {fileID: 0}
     - target: {fileID: 4192109468328405362, guid: 2554e472dd49f3f4e830fdf2b34c80ea,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.999971
+      value: 5.4999733
       objectReference: {fileID: 0}
     - target: {fileID: 4192109468328405362, guid: 2554e472dd49f3f4e830fdf2b34c80ea,
         type: 3}
@@ -3526,7 +3531,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 405043395
-  m_SortingLayer: -3
+  m_SortingLayer: -6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f78264359f1ff47aeaf7e7f761e4179a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -3997,12 +4002,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bd6efb341768004283389193618bb59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startVoices:
+  - {fileID: 8300000, guid: de9f3b3ea295b944fbec29e3789d9936, type: 3}
+  - {fileID: 8300000, guid: cf695119a30d82d40b78d5a570e63c17, type: 3}
+  - {fileID: 8300000, guid: 059eae8338fb3124f9bbf4ec12ada6f5, type: 3}
+  - {fileID: 8300000, guid: 8bdd1f175e495eb43b2ef50d683eadce, type: 3}
+  - {fileID: 8300000, guid: 18df75db75be035479fa0db6e0d6d07c, type: 3}
+  - {fileID: 8300000, guid: f1e709364f0788841b1bf71993731a76, type: 3}
+  - {fileID: 8300000, guid: 76fc8298730c6744689d81437e35b96c, type: 3}
+  - {fileID: 8300000, guid: 187f95bf120810d4cb8ee444432d423c, type: 3}
   startVoice1: {fileID: 8300000, guid: b8e9d0914671c7d48864fc8affc5f4b2, type: 3}
   startVoice2: {fileID: 8300000, guid: a2addc04b368ba845af0e32467bbaa3c, type: 3}
   startVoice3: {fileID: 8300000, guid: 7c45dcfce4d406b4c9166860c81897a6, type: 3}
   startVoice4: {fileID: 8300000, guid: 76fc8298730c6744689d81437e35b96c, type: 3}
   startVoice5: {fileID: 8300000, guid: 35b45862760cb2e42a138e973e5b7d9c, type: 3}
   fade: {fileID: 1306964061}
+  goNextScene: 0
+  maricha: {fileID: 0}
 --- !u!114 &471725568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4488,7 +4504,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 405043395
-  m_SortingLayer: -3
+  m_SortingLayer: -6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: fb85ac9b37ba441f595e87addbf59d4d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5339,7 +5355,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 405043395
-  m_SortingLayer: -3
+  m_SortingLayer: -6
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 5fd9fcf9b037543179fd139164f4b877, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5567,7 +5583,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 405043395
-  m_SortingLayer: -3
+  m_SortingLayer: -6
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 5fd9fcf9b037543179fd139164f4b877, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -6594,7 +6610,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 405043395
-  m_SortingLayer: -3
+  m_SortingLayer: -6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f78264359f1ff47aeaf7e7f761e4179a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -7325,7 +7341,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 405043395
-  m_SortingLayer: -3
+  m_SortingLayer: -6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: fb85ac9b37ba441f595e87addbf59d4d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -8531,7 +8547,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 405043395
-  m_SortingLayer: -3
+  m_SortingLayer: -6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: fb85ac9b37ba441f595e87addbf59d4d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -8755,7 +8771,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 405043395
-  m_SortingLayer: -3
+  m_SortingLayer: -6
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 5fd9fcf9b037543179fd139164f4b877, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -8990,12 +9006,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bd6efb341768004283389193618bb59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startVoices: []
   startVoice1: {fileID: 8300000, guid: b8e9d0914671c7d48864fc8affc5f4b2, type: 3}
   startVoice2: {fileID: 8300000, guid: a2addc04b368ba845af0e32467bbaa3c, type: 3}
   startVoice3: {fileID: 8300000, guid: 18df75db75be035479fa0db6e0d6d07c, type: 3}
   startVoice4: {fileID: 8300000, guid: 76fc8298730c6744689d81437e35b96c, type: 3}
   startVoice5: {fileID: 8300000, guid: 35b45862760cb2e42a138e973e5b7d9c, type: 3}
   fade: {fileID: 1306964061}
+  goNextScene: 0
+  maricha: {fileID: 0}
 --- !u!114 &1982784370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9330,7 +9349,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 405043395
-  m_SortingLayer: -3
+  m_SortingLayer: -6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f78264359f1ff47aeaf7e7f761e4179a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

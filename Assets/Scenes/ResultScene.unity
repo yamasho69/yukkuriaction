@@ -7969,9 +7969,11 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  jumpVoice1: {fileID: 8300000, guid: f9807422761636b44afe64e1bb7f8b86, type: 3}
-  jumpVoice2: {fileID: 8300000, guid: 0ffa2680c109d154db16068e0dcb319a, type: 3}
-  jumpVoice3: {fileID: 8300000, guid: 2eb882fd3a45c8144a4a44c349d18e0b, type: 3}
+  jumpVoices: []
+  enemyDownVoices: []
+  trapDownVoices: []
+  heatDownVoices: []
+  fallVoices: []
   enemyDownVoice1: {fileID: 8300000, guid: 3d3146ca5ff4aed448890f325ba81571, type: 3}
   enemyDownVoice2: {fileID: 8300000, guid: a0431f3794fe6ce418cd92bf930ea292, type: 3}
   enemyDownVoice3: {fileID: 8300000, guid: c96a401e9dd2b3f4eb4213a433a06bea, type: 3}
@@ -8061,6 +8063,10 @@ MonoBehaviour:
   zanki: {fileID: 6332933224147987877}
   konkainokekka: {fileID: 1069815917}
   konkainokekkaVoice: {fileID: 8300000, guid: 1093aab57b3e4324da04dc90592b2f01, type: 3}
+  puratinaLine: 7000
+  goldLine: 5000
+  silverLine: 3000
+  bronzeLine: 1000
   puratinaBadge: {fileID: 21300000, guid: 74e2bf4e761d19047bc874fc484389c5, type: 3}
   goldBadge: {fileID: 21300000, guid: 6661ec5c3cb8bb14282f33245e2d5998, type: 3}
   silverBadge: {fileID: 21300000, guid: ba99e9d49e593944f8a442b40976649d, type: 3}
@@ -8107,7 +8113,7 @@ MonoBehaviour:
   noBadgeVoice2: {fileID: 8300000, guid: 3849925a7af24be44a68e302538ed044, type: 3}
   badgeKanso: {fileID: 679899357}
   badgeKansoSprite: {fileID: 679899354}
-  puratinaKansoString: "\u3053\u3093\u306A\u30B2\u30FC\u30E0\u3055\u3093\u3057\u3083\u3093\u306B
+  puratinaKansoString: "\u3053\u3093\u306A\u30B2\u30FC\u30E0\u3057\u3083\u3093\u306B
     \u30DE\u30B8\u3063\u306B\u306A\u3063\u3061\u3083\u3063\u3066 \u3069\u3046\u3057\u3085\u308B\u306E"
   goldKansoString: "\u3057\u3087\u3046\u3057\u3093\u3057\u3087\u3046\u3063\u3081\u3044\u3063\u306E
     \u3048\u3044\u3063\u3086\u3093\u3063\u3060\u3058\u3047"
@@ -58976,6 +58982,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bd6efb341768004283389193618bb59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startVoices:
+  - {fileID: 8300000, guid: 3c518745b6b422445958e9ca97daac55, type: 3}
+  - {fileID: 8300000, guid: fe3770ceaf4dfca4e8b25ff60288e76b, type: 3}
+  - {fileID: 8300000, guid: 69f1c5e4b02bea549909c7569ad7262c, type: 3}
+  - {fileID: 8300000, guid: c4bc1e2c4e9400e4bb82e5083e07ab7c, type: 3}
+  - {fileID: 8300000, guid: 1d5f4d2dc09eb1d4381e87ff546dc31c, type: 3}
   startVoice1: {fileID: 8300000, guid: 1f8790579dae17640a6e653a1d2ad0e8, type: 3}
   startVoice2: {fileID: 8300000, guid: a78e2f8653e1e734c8ff01f04a375c1f, type: 3}
   startVoice3: {fileID: 8300000, guid: 69f1c5e4b02bea549909c7569ad7262c, type: 3}

@@ -8,6 +8,7 @@ using System.Linq;
 
 public class DeathItem : MonoBehaviour {
     [Header("プレイヤーの判定")] public PlayerTriggerCheck PlayerCheck;
+    [Header("デスアイテムボイス")] public AudioClip [] deathitemvoices;
     [SerializeField] AudioClip clip1;
     [SerializeField] AudioClip clip2;
     [SerializeField] AudioClip clip3;
@@ -29,7 +30,7 @@ public class DeathItem : MonoBehaviour {
     void Update() {
         if (PlayerCheck.isOn) {
             if (!GameManager.instance.isGameOver) {//ゲームオーバー時にはダウンボイスを鳴らさない。
-                GameManager.instance.RandomizeSfx(clip1, clip2, clip3, clip4, clip5);//ランダムでボイスを鳴らす。インスペクターのSfxsourceにはGameManagerをアタッチ。
+                GameManager.instance.RandomizeSfx(deathitemvoices);//ランダムでボイスを鳴らす。インスペクターのSfxsourceにはGameManagerをアタッチ。
                 GameManager.instance.playSE(morunmorunSE);
                 if (isWatar) {//これが水の場合
                     PlayerCheck.isOn = false;

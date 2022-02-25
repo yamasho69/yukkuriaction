@@ -418,6 +418,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bd6efb341768004283389193618bb59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startVoices:
+  - {fileID: 8300000, guid: 1f8790579dae17640a6e653a1d2ad0e8, type: 3}
+  - {fileID: 8300000, guid: a78e2f8653e1e734c8ff01f04a375c1f, type: 3}
+  - {fileID: 8300000, guid: 455b4447182cc724986fcc837b881f9e, type: 3}
+  - {fileID: 8300000, guid: 29f67e4aa51b23f48a5106f6dc29c770, type: 3}
+  - {fileID: 8300000, guid: 2f3c6f77dc2639e4897c6966dfc386ed, type: 3}
+  - {fileID: 8300000, guid: c4bc1e2c4e9400e4bb82e5083e07ab7c, type: 3}
+  - {fileID: 8300000, guid: a7a79cf74241ad246a66332c1e176399, type: 3}
+  - {fileID: 8300000, guid: 1d5f4d2dc09eb1d4381e87ff546dc31c, type: 3}
+  - {fileID: 8300000, guid: 3615b3adeebdd524a8fa678a6ccf6c9f, type: 3}
+  - {fileID: 8300000, guid: fe3770ceaf4dfca4e8b25ff60288e76b, type: 3}
   startVoice1: {fileID: 8300000, guid: 1f8790579dae17640a6e653a1d2ad0e8, type: 3}
   startVoice2: {fileID: 8300000, guid: a78e2f8653e1e734c8ff01f04a375c1f, type: 3}
   startVoice3: {fileID: 8300000, guid: 69f1c5e4b02bea549909c7569ad7262c, type: 3}
@@ -663,6 +674,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bd6efb341768004283389193618bb59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startVoices:
+  - {fileID: 8300000, guid: 447749b2c97dc89488d833ab0ec15e12, type: 3}
+  - {fileID: 8300000, guid: 16d03ed69fce7714e9eeb87c3acf5579, type: 3}
+  - {fileID: 8300000, guid: d85b5f97c37ce064983b6595c1dccd94, type: 3}
+  - {fileID: 8300000, guid: ef5df59f7c31e7144a0c9b9f1d118362, type: 3}
+  - {fileID: 8300000, guid: e03ee3eea86347846ae815be004eb60a, type: 3}
+  - {fileID: 8300000, guid: 514337ac8b63e4f42a0c56414fccfb1e, type: 3}
+  - {fileID: 8300000, guid: 783da2193e948124ba1e39226a94a221, type: 3}
+  - {fileID: 8300000, guid: ec985dea785deff4392c6d3eb162fbd8, type: 3}
+  - {fileID: 8300000, guid: 881e3414ae63f2c40b4e4fe368802a83, type: 3}
+  - {fileID: 8300000, guid: 3dd0577e78af2544abbed3ec36e47bdb, type: 3}
+  - {fileID: 8300000, guid: 011743af51c633747a1688ad7a139946, type: 3}
+  - {fileID: 8300000, guid: 248ed50ec607b4946b9c702ba4f59e2c, type: 3}
+  - {fileID: 8300000, guid: 31ee541beddfb9e44893a993b8288515, type: 3}
   startVoice1: {fileID: 8300000, guid: 16d03ed69fce7714e9eeb87c3acf5579, type: 3}
   startVoice2: {fileID: 8300000, guid: 881e3414ae63f2c40b4e4fe368802a83, type: 3}
   startVoice3: {fileID: 8300000, guid: ef5df59f7c31e7144a0c9b9f1d118362, type: 3}

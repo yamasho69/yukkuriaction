@@ -3164,6 +3164,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerCheck: {fileID: 2693351076003507761}
+  deathitemvoices:
+  - {fileID: 8300000, guid: 69af4e222ac0d28479fc51efb00c8c16, type: 3}
+  - {fileID: 8300000, guid: 48f451c147feb6848a7caae75153e3f6, type: 3}
+  - {fileID: 8300000, guid: 1cd294a56a0c1df43861ae9fa8b987d9, type: 3}
+  - {fileID: 8300000, guid: f56e9e5bcd8cb9746bd546e1cdd6bd45, type: 3}
+  - {fileID: 8300000, guid: ade566fa0ff07564e9edaf6bf01a2baf, type: 3}
+  - {fileID: 8300000, guid: d0dadef2af3ff3541b79032dccc30d2b, type: 3}
+  - {fileID: 8300000, guid: d4203b9c044ef5541836448e9113330e, type: 3}
+  - {fileID: 8300000, guid: 2133e550082c5a3449fc95f6ca42a21f, type: 3}
+  - {fileID: 8300000, guid: 34198cd2b44ce7f4da3d89e93c13c6d8, type: 3}
+  - {fileID: 8300000, guid: 1017415df740554419a90c6d58c857b5, type: 3}
   clip1: {fileID: 8300000, guid: 69af4e222ac0d28479fc51efb00c8c16, type: 3}
   clip2: {fileID: 8300000, guid: 48f451c147feb6848a7caae75153e3f6, type: 3}
   clip3: {fileID: 8300000, guid: 1cd294a56a0c1df43861ae9fa8b987d9, type: 3}

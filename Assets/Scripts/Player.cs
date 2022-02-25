@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using System;
+//using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,9 +20,12 @@ public class Player : MonoBehaviour{
     [Header("頭をぶつけた時の判定")] public GroundCheck head;//頭をぶつけた時の判定。40で追加
     [Header("ダッシュアニメーションカーブ")] public AnimationCurve dashCurve;//レッスン41で追加。アニメーションカーブ
     [Header("ジャンプアニメーションカーブ")] public AnimationCurve jumpCurve;//同上
-    [Header("JumpVoice1")] public AudioClip jumpVoice1;
-    [Header("JumpVoice2")] public AudioClip jumpVoice2;
-    [Header("JumpVoice3")] public AudioClip jumpVoice3;
+    [Header("JumpVoices")] public AudioClip [] jumpVoices;
+    [Header("enemyDownVoices")] public AudioClip [] enemyDownVoices;
+    [Header("trapDownVoices")] public AudioClip [] trapDownVoices;
+    [Header("heatDownVoices")] public AudioClip [] heatDownVoices;
+    [Header("FallVoices")] public AudioClip [] fallVoices;
+
     [Header("enemyDownVoice1")] public AudioClip enemyDownVoice1;
     [Header("enemyDownVoice2")] public AudioClip enemyDownVoice2;
     [Header("enemyDownVoice3")] public AudioClip enemyDownVoice3;
@@ -297,14 +300,18 @@ public class Player : MonoBehaviour{
                                                                      //踏みつけ判定のワールド座標
             float judgePos = transform.position.y - ((capcolSizeY / 2f) - capcolOffsetY) + stepOnHeight;//動画コメントを参考に変更
 
+            //https://dkrevel.com/makegame-beginner/make-2d-action-enemy-action/
             //レッスン45で追加。敵と衝突した位置を検知。当たったらまずい場所に当たっていたらミス
             foreach (ContactPoint2D p in collision.contacts) {
                 if (p.point.y < judgePos) {
                     //もう一度跳ねる
                     ObjectCollision o = collision.gameObject.GetComponent<ObjectCollision>();//スクリプトObjectCollisionから跳ねる高さを取得
-                    GameManager.instance.playSE(enemyDeathSE);//敵を踏みつけた時の音                    
-                    GameManager.instance.RandomizeSfx(jumpVoice1, jumpVoice2, jumpVoice3);
-                    if (o != null) {
+                    if (!o.playerStepOn) {//その敵を既に踏んでいれば、SEとボイスは鳴らさない。
+                        GameManager.instance.playSE(enemyDeathSE);//敵を踏みつけた時の音
+                        GameManager.instance.RandomizeSfx(jumpVoices);//超重要。配列の中からランダムに音を再生。
+                    }
+
+                if (o != null) {
                         if (enemy) {
                             otherJumpHeight = o.boundHeight;//踏んづけたものから跳ねる高さを取得する。
                             o.playerStepOn = true;
@@ -318,7 +325,7 @@ public class Player : MonoBehaviour{
                     if (enemy) {
                         ReceiveDamage(true);
                         if (!GameManager.instance.isGameOver) {//ゲームオーバー時にはダウンボイスを鳴らさない。
-                            GameManager.instance.RandomizeSfx(enemyDownVoice1, enemyDownVoice2, enemyDownVoice3, enemyDownVoice4,enemyDownVoice5,enemyDownVoice6);//ReceiveDamage内で声を出さないようにしたのでここに入れる。
+                            GameManager.instance.RandomizeSfx(enemyDownVoices);//ReceiveDamage内で声を出さないようにしたのでここに入れる。
                             GameManager.instance.playSE(morunmorunSE);
                             Untagged();
                         }
@@ -419,7 +426,7 @@ public class Player : MonoBehaviour{
             ReceiveDamage(true);
             GameManager.instance.playSE(trapSE);
             if (!GameManager.instance.isGameOver) {//ゲームオーバー時にはダウンボイスを鳴らさない。
-                GameManager.instance.RandomizeSfx(trapDownVoice1, trapDownVoice2, trapDownVoice3, trapDownVoice4, trapDownVoice5, trapDownVoice6);
+                GameManager.instance.RandomizeSfx(trapDownVoices);
                 GameManager.instance.playSE(morunmorunSE);
                 Untagged();
             }
@@ -427,14 +434,14 @@ public class Player : MonoBehaviour{
             ReceiveDamage(true);
             GameManager.instance.playSE(heatSE);
             if (!GameManager.instance.isGameOver) {//ゲームオーバー時にはダウンボイスを鳴らさない。
-                GameManager.instance.RandomizeSfx(heatDownVoice1, heatDownVoice2, heatDownVoice3, heatDownVoice4, heatDownVoice5, heatDownVoice6);
+                GameManager.instance.RandomizeSfx(heatDownVoices);
                 GameManager.instance.playSE(morunmorunSE);
                 //Untagged();
             }
         } else if (collision.tag == deadAreaTag && !isDown) {//ダウン状態で穴に落ちた状態のときに反応しないように追加。
             ReceiveDamage(false);
             if (!GameManager.instance.isGameOver) {//ゲームオーバー時にはダウンボイスを鳴らさない。
-                GameManager.instance.RandomizeSfx(fallVoice1, fallVoice2, fallVoice3, fallVoice4, fallVoice5);
+                GameManager.instance.RandomizeSfx(fallVoices);
             }
         }
 

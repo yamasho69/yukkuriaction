@@ -16,7 +16,12 @@ public class ResultMaricha : MonoBehaviour{
     public GameObject zanki;
     public GameObject konkainokekka;
     public AudioClip konkainokekkaVoice;
-    
+
+    public int puratinaLine;
+    public int goldLine;
+    public int silverLine;
+    public int bronzeLine;
+
     //引数1
     public Sprite puratinaBadge;
     public Sprite goldBadge;
@@ -119,28 +124,28 @@ public class ResultMaricha : MonoBehaviour{
         yield return new WaitForSeconds(2);
         //今回の評価声
         //セットアクティブ今回の評価
-        if (GameManager.instance.score >= 4000) {
+        if (GameManager.instance.score >= puratinaLine) {
             Badge(puratinaBadge,puratinaBadgeVoice,puratinaString,puratinaStringColor);
             
-        }else if (GameManager.instance.score >= 3000) {
+        }else if (GameManager.instance.score >= goldLine) {
             Badge(goldBadge,goldBadgeVoice,goldString,goldStringColor);
-        } else if (GameManager.instance.score >= 2000) {
+        } else if (GameManager.instance.score >= silverLine) {
             Badge(silverBadge,silverBadgeVoice,silverString,silverStringColor);
-        }else if (GameManager.instance.score >= 1000) {
+        }else if (GameManager.instance.score >= bronzeLine) {
             Badge(bronzeBadge,bronzeBadgeVoice,bronzeString,bronzeStringColor);
         } else {
             Badge(poop,noBadgeVoice,noString,noStringColor);
         }
         yield return new WaitForSeconds(2);
 
-        if (GameManager.instance.score >= 4000) {
+        if (GameManager.instance.score >= puratinaLine) {
             BadgeSE(puratinaBadgeSE,puratinaAnim);
 
-        } else if (GameManager.instance.score >= 3000) {
+        } else if (GameManager.instance.score >= goldLine) {
             BadgeSE(goldBadgeSE,goldAnim);
-        } else if (GameManager.instance.score >= 2000) {
+        } else if (GameManager.instance.score >= silverLine) {
             BadgeSE(silverBadgeSE,silverAnim);
-        } else if (GameManager.instance.score >= 1000) {
+        } else if (GameManager.instance.score >= bronzeLine) {
             BadgeSE(bronzeBadgeSE,bronzeAnim);
         } else {
             BadgeSE(noBadgeSE,noAnim);
@@ -148,20 +153,20 @@ public class ResultMaricha : MonoBehaviour{
 
         yield return new WaitForSeconds(2);
 
-        if (GameManager.instance.score >= 4000) {
+        if (GameManager.instance.score >= puratinaLine) {
             BadgeKanso(puratinaKansoString, puratinaBadgeVoice2);
             yield return new WaitForSeconds(1.5f);
-        } else if (GameManager.instance.score >= 3000) {
+        } else if (GameManager.instance.score >= goldLine) {
             BadgeKanso(goldKansoString, goldBadgeVoice2);
-        } else if (GameManager.instance.score >= 2000) {
+        } else if (GameManager.instance.score >= silverLine) {
             BadgeKanso(silverKansoString, silverBadgeVoice2);
-        } else if (GameManager.instance.score >= 1000) {
+        } else if (GameManager.instance.score >= bronzeLine) {
             BadgeKanso(bronzeKansoString, bronzeBadgeVoice2);
         } else {
             BadgeKanso(noKansoString, noBadgeVoice2);
         }
         yield return new WaitForSeconds(3);
-        if (GameManager.instance.score >= 4000) {
+        if (GameManager.instance.score >= puratinaLine) {
             Erai.SetActive(true);
             GameManager.instance.playSE(EraiVoice);
             yield return new WaitForSeconds(1);

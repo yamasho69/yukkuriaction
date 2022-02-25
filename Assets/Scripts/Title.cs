@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 public class Title : MonoBehaviour{
+    [Header("スタートVoices")] public AudioClip [] startVoices;
     [Header("スタートVoice1")] public AudioClip startVoice1;
     [Header("スタートVoice2")] public AudioClip startVoice2;
     [Header("スタートVoice3")] public AudioClip startVoice3;
@@ -20,7 +21,7 @@ public class Title : MonoBehaviour{
     public void PressStart()
     {
         Debug.Log("Press Start!");
-        GameManager.instance.RandomizeSfx(startVoice1, startVoice2, startVoice3, startVoice4, startVoice5);
+        GameManager.instance.RandomizeSfx(startVoices);
         
 
         if (!firstPush)//プッシュ済みではない場合
@@ -51,7 +52,7 @@ public class Title : MonoBehaviour{
     //タイトルへ戻るボタンを押すと、こちらを呼び出す。
     public void GotoTitle() {
         
-        GameManager.instance.RandomizeSfx(startVoice1, startVoice2, startVoice3, startVoice4, startVoice5);
+        GameManager.instance.RandomizeSfx(startVoices);
         if (!firstPush)//プッシュ済みではない場合
         {
             Debug.Log("GotoTitle!");

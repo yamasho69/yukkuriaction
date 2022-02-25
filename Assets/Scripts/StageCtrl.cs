@@ -14,6 +14,9 @@ public class StageCtrl : MonoBehaviour{
     [Header("ゲームオーバー")] public GameObject gameOverObj;//51
     [Header("タイトルに戻るボタン")] public GameObject goToTitleObj;//ポーズ画面でも使用するため、ゲームオーバーの子オブジェクトから分離
     [Header("フェード")] public FadeImage fade;//51
+    [Header("ステージスタートVoices")] public AudioClip [] startVoices;
+    [Header("ゲームオーバーVoices")] public AudioClip [] gameOverVoices;
+    [Header("ステージクリアVoices")] public AudioClip [] stageClearVoices;
     [Header("ステージスタートVoice1")] public AudioClip startVoice1;
     [Header("ステージスタートVoice2")] public AudioClip startVoice2;
     [Header("ステージスタートVoice3")] public AudioClip startVoice3;
@@ -42,7 +45,7 @@ public class StageCtrl : MonoBehaviour{
     
     // Start is called before the first frame update
     void Start(){
-        GameManager.instance.RandomizeSfx(startVoice1, startVoice2, startVoice3,startVoice4,startVoice5);
+        GameManager.instance.RandomizeSfx(startVoices);
         if (playerObj != null && continuePoint != null && continuePoint.Length > 0 
             && gameOverObj != null && fade !=null) 
         {
@@ -68,7 +71,7 @@ public class StageCtrl : MonoBehaviour{
             gameOverObj.SetActive(true);
             goToTitleObj.SetActive(true);
             doGameOver = true;
-            GameManager.instance.RandomizeSfx(gameOverVoice1, gameOverVoice2, gameOverVoice3,gameOverVoice4,gameOverVoice5);
+            GameManager.instance.RandomizeSfx(gameOverVoices);
         }
         else if(p!= null && p.IsContinueWaiting() && !doGameOver) {
             if(continuePoint.Length > GameManager.instance.continueNum) {
@@ -94,6 +97,7 @@ public class StageCtrl : MonoBehaviour{
                     GameManager.instance.stageNum = nextStageNum;
                 }
                 GameManager.instance.isStageClear = false;//56で追加。クリアフラグ。
+                //コンティニューナンバーをリセットする必要があるか？
                 SceneManager.LoadScene("stage" + nextStageNum);
                 doSceneChange = true;
             }
@@ -118,6 +122,7 @@ public class StageCtrl : MonoBehaviour{
         GameManager.instance.isStageClear = true;
         stageClearObj.SetActive(true);
         GameManager.instance.playSE(stageClearSE);
-        GameManager.instance.RandomizeSfx(stageClearVoice1, stageClearVoice2, stageClearVoice3);
+        GameManager.instance.continueNum = 0;//コンティニューポイントを0番に戻す。
+        GameManager.instance.RandomizeSfx(stageClearVoices);
     }
 }

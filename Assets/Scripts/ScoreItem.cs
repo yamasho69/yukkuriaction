@@ -10,6 +10,7 @@ public class ScoreItem : MonoBehaviour{
 
     [Header("加算するスコア")] public int myScore;
     [Header("プレイヤーの判定")] public PlayerTriggerCheck PlayerCheck;
+    [Header("あまあまVoices")] public AudioClip []  amaamaVoices;
     [SerializeField] AudioClip clip1;
     [SerializeField] AudioClip clip2;
     [SerializeField] AudioClip clip3;
@@ -29,7 +30,7 @@ public class ScoreItem : MonoBehaviour{
                         GameManager.instance.zankiUpScore += 100;
                         GameManager.instance.AddHeartNum();
                     }
-                    GameManager.instance.RandomizeSfx(clip1, clip2, clip3);//ランダムでボイスを鳴らす。インスペクターのSfxsourceにはGameManagerをアタッチ。
+                    GameManager.instance.RandomizeSfx(amaamaVoices);//ランダムでボイスを鳴らす。インスペクターのSfxsourceにはGameManagerをアタッチ。
                     Destroy(this.gameObject);
                 }
             }

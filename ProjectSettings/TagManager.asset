@@ -60,6 +60,9 @@ TagManager:
   - name: TileMap
     uniqueID: 1586262539
     locked: 0
+  - name: Heat
+    uniqueID: 3068017133
+    locked: 0
   - name: Enamy
     uniqueID: 3064977929
     locked: 0

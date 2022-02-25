@@ -98,6 +98,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myScore: 30
   PlayerCheck: {fileID: 8250471398054758663}
+  amaamaVoices:
+  - {fileID: 8300000, guid: 54dd9e8d1cce41d439bcd01e96db8637, type: 3}
+  - {fileID: 8300000, guid: 0de572fb040ba0c42a0a534c41206a00, type: 3}
+  - {fileID: 8300000, guid: 3b1b8d19914769c428be94a489b5463f, type: 3}
+  - {fileID: 8300000, guid: 496c1d36d54c9ee4aa29394b8d4fa654, type: 3}
+  - {fileID: 8300000, guid: 68b96fdcca4ea8b43884e0af6f82da61, type: 3}
+  - {fileID: 8300000, guid: b76d7be4d04559b4198ca2c148bf1c6f, type: 3}
+  - {fileID: 8300000, guid: f33841bb9cb3a9c4187b51cba22e04fd, type: 3}
+  - {fileID: 8300000, guid: 983acd1af933a49429723db1aba8fe3e, type: 3}
+  - {fileID: 8300000, guid: 2ac8706c24e4f744d98a57c9bb8cc4e9, type: 3}
+  - {fileID: 8300000, guid: 19bcd705f72de9d478114ca2d8ef2f2d, type: 3}
   clip1: {fileID: 8300000, guid: 54dd9e8d1cce41d439bcd01e96db8637, type: 3}
   clip2: {fileID: 8300000, guid: cc16c3d9c9d6cc4499305ca2ae1340dd, type: 3}
   clip3: {fileID: 8300000, guid: 2ac8706c24e4f744d98a57c9bb8cc4e9, type: 3}
