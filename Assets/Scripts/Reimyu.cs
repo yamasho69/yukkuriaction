@@ -17,6 +17,7 @@ public class Reimyu : MonoBehaviour {
     public GameObject reimyuName;
     public GameObject marichaName;
     public GameObject niyunName;
+    public GameObject purseButton;
     public Sprite reimyuImageBox;
     public Sprite marichaImageBox;
     public Sprite niyunImageBox;
@@ -81,6 +82,9 @@ public class Reimyu : MonoBehaviour {
                 if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space)) {//Returnキー=Enterキー
                     sankaku.SetActive(false);
                     daialogBox.SetActive(false);
+                    if(serifuNum == -1) {
+                        marichaAnimator.Play("RightSmile");//まりちゃが飛び跳ねながら、コンティニューポイントに触ったときアニメーションが飛んでいる状態で会話が始まってしまうため。
+                    }
                     if (serifuNum == 4) {//最後のセリフの番号
                         Hanten();
                         transform.DOMoveX(1490, 1.0f);//画面外へ
@@ -233,6 +237,7 @@ public class Reimyu : MonoBehaviour {
 
     public void EndingStart() {
         player.canControl = false;//プレイヤーを行動不可にする。
+        purseButton.SetActive(false);//エンディング中ポーズされると動かなくなったため。
         fade.StartFadeOut();
         animator.Play("RightIdle");
         marichaAnimator.Play("RightIdle");
