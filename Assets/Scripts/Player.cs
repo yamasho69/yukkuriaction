@@ -57,6 +57,9 @@ public class Player : MonoBehaviour{
     [Header("pauseButton")] public GameObject pauseButton;
     public GameObject reimyu;
     public bool canControl = true;
+
+    public FixedJoystick joystick;//ジョイスティック導入　https://note.com/npaka/n/neafdd3059b0c
+
     #endregion
 
     #region
@@ -176,7 +179,7 @@ public class Player : MonoBehaviour{
     }
 
 
-    private float GetYSpeed() {
+    public float GetYSpeed() {
         float verticalKey = Input.GetAxis("Vertical");//上下方向のインプットを取得、レッスン40で追加
         float ySpeed = -grovity; //レッスン40で追加。何もしていないときは重力がそのままかかる
 
@@ -196,8 +199,8 @@ public class Player : MonoBehaviour{
                     jumpTime = 0.0f;
                 }
             } else if (isGround) {
-                if (verticalKey > 0) {
-                    ySpeed = jumpSpeed;//設置時に上方向のキー入力があったらジャンプ
+                if (verticalKey > 0 || joystick.Vertical > 0) {　//ジョイスティックの判定も追加
+                    ySpeed = jumpSpeed;//接地時に上方向のキー入力があったらジャンプ
                     jumpPos = transform.position.y; //ジャンプした高さを記録
                     isJump = true;
                     jumpTime = 0.0f;//滞空時間をリセット。
@@ -213,12 +216,13 @@ public class Player : MonoBehaviour{
                 //ifの条件式が長くなりすぎるのでレッスン40で変数にして整理した。
                 //上方向のキーを押しているか
                 bool pushUpKey = verticalKey > 0;
+                bool joyUp = joystick.Vertical > 0;//ジョイスティックの判定も追加。これがないとジャンプできない。
                 //現在の高さが飛べる高さより下か
                 bool canHeight = jumpPos + jumpHeight > transform.position.y;
                 //ジャンプ時間が長くなりすぎていないか
                 bool canTime = jumpLimitTime > jumpTime;
 
-                if (pushUpKey && canHeight && canTime && !isHead) {
+                if ((pushUpKey || joyUp) && canHeight && canTime && !isHead) {//ジョイスティックの判定も追加
                     ySpeed = jumpSpeed;
                     jumpTime += Time.deltaTime;//上昇している間に進んだゲーム内時間を加算
                 } else {
@@ -234,12 +238,12 @@ public class Player : MonoBehaviour{
 
     }
 
-    private float GetXSpeed() {
+    public float GetXSpeed() {
 
         float horizontalKey = Input.GetAxis("Horizontal");//左右方向のインプットを取得
         float xSpeed = 0.0f; //Speed変数を入れる変数
         if (canControl) {//自分で追加。canControlがfalseになると、入力を受け付けない。
-            if (horizontalKey > 0)//右方向の入力があった場合
+            if (horizontalKey > 0 || joystick.Horizontal>0)//右方向の入力があった場合　//ジョイスティックの判定も追加
             {
                 isRight = true;
                 isLeft = false;
@@ -247,7 +251,7 @@ public class Player : MonoBehaviour{
                                            //参考動画では画像を反転させて左右への移動を処理
                                            //transform.localScale = new Vector3(1,1,1);
                 xSpeed = speed;//右なら正の方向のSpeed変数
-            } else if (horizontalKey < 0)//左方向の入力があった場合
+            } else if (horizontalKey < 0||joystick.Horizontal<0)//左方向の入力があった場合　//ジョイスティックの判定も追加
               {
                 isRight = false;
                 isLeft = true;

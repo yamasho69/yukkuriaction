@@ -17,6 +17,7 @@ public class PauseScript : MonoBehaviour{
     public GameObject pauseEffect;
     public AudioClip pauseOnSE;
     public AudioClip pauseOffSE;
+    public GameObject joyStick;
 
     public void Update() {
         if (Input.GetKeyDown(KeyCode.P) && GameManager.instance.isGameOver == false) {//GetKeyDown関数にしないと何回も押せてしまう。Pキーでもポーズがかかるように改良
@@ -33,6 +34,7 @@ public class PauseScript : MonoBehaviour{
             this.gameObject.GetComponent<Image>().sprite = pauseButton;
             GameManager.instance.playSE(pauseOffSE);
             pauseEffect.SetActive(false);
+            joyStick.SetActive(true);
             goToTitleButton.SetActive(false);
         } else {
             Time.timeScale = 0;
@@ -42,6 +44,7 @@ public class PauseScript : MonoBehaviour{
             GameManager.instance.playSE(pauseOnSE);
             pauseEffect.SetActive(true);
             goToTitleButton.SetActive(true);
+            joyStick.SetActive(false);
         }
     }
 }

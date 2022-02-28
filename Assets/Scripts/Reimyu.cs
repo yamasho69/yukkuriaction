@@ -63,6 +63,9 @@ public class Reimyu : MonoBehaviour {
     [Header("ダイコン１")] public GameObject daicon01;
     [Header("ダイコン２")] public GameObject daicon02;
 
+    [Header("次へボタン")] public GameObject nextButton;
+    public bool nextButtonOn;
+    [Header("ジョイスティック")] public GameObject joyStick;
 
     // Start is called before the first frame update
     void Start() {
@@ -70,6 +73,8 @@ public class Reimyu : MonoBehaviour {
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         boxCollider2 = GetComponent<BoxCollider2D>();
+        joyStick.SetActive(false);
+        purseButton.SetActive(false);
         daialogCanvas.SetActive(true);
         transform.DOMoveX(1435, 2.0f); //DoMoveXについてhttps://qiita.com/BEATnonanka/items/b4cca6471e77466cec74
         Invoke("CanNextDaialog", 2.0f);
@@ -79,8 +84,10 @@ public class Reimyu : MonoBehaviour {
     void Update() {
         if (afterBoss == false) {//ボスの前ならば
             if (sankaku.activeSelf) {//sankakuがアクティブならば
-                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space)) {//Returnキー=Enterキー
+                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space)||nextButtonOn) {//Returnキー=Enterキー
                     sankaku.SetActive(false);
+                    nextButton.SetActive(false);
+                    nextButtonOn = false;
                     daialogBox.SetActive(false);
                     if(serifuNum == -1) {
                         marichaAnimator.Play("RightSmile");//まりちゃが飛び跳ねながら、コンティニューポイントに触ったときアニメーションが飛んでいる状態で会話が始まってしまうため。
@@ -94,6 +101,7 @@ public class Reimyu : MonoBehaviour {
                         enemy_Bullet_Boss.battleStart = true;//ボス動き出す
                         maricha.GetComponent<Player>();
                         player.canControl = true;//プレイヤー操作可能に
+                        joyStick.SetActive(true);
                         vanishWall.SetActive(false);//左の壁を消す。
                         Invoke("Hanten", 1.5f);//1.5秒後画面外でれいみゅを反転させる。
                         return;
@@ -112,8 +120,10 @@ public class Reimyu : MonoBehaviour {
 
         if (afterBoss == true) {//ボス後
             if (sankaku.activeSelf) {//sankakuがアクティブならば
-                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space)) {//Returnキー=Enterキー
+                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space) || nextButtonOn) {//Returnキー=Enterキー
                     sankaku.SetActive(false);
+                    nextButton.SetActive(false);
+                    nextButtonOn = false;
                     daialogBox.SetActive(false);
                     if (ending_serifuNum == 8) {//8回目のセリフの後にダイコンを降らせる。ダイコンの回転を止める方法https://mogi0506.com/unity-angulardrag/
                         //Invoke("DaiconActive(i)", daicontaime);//Invokeに引数は使えない。参考https://kan-kikuchi.hatenablog.com/entry/DelayMethod
@@ -135,9 +145,13 @@ public class Reimyu : MonoBehaviour {
         }
     }
 
+    public void OnClickNextButton() {
+        nextButtonOn = true;
+    }
 
     void CanNextDaialog() {
         sankaku.SetActive(true);
+        nextButton.SetActive(true);
     }
     void NextMessege() {
         if (afterBoss == false) {//ボス前
@@ -237,6 +251,7 @@ public class Reimyu : MonoBehaviour {
 
     public void EndingStart() {
         player.canControl = false;//プレイヤーを行動不可にする。
+        joyStick.SetActive(false);
         purseButton.SetActive(false);//エンディング中ポーズされると動かなくなったため。
         fade.StartFadeOut();
         animator.Play("RightIdle");
