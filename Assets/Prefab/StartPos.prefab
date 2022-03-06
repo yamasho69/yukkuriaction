@@ -133,3 +133,7 @@ MonoBehaviour:
   stageClearVoice3: {fileID: 8300000, guid: 46e71c0ea777ba44ab9b2df39daa155e, type: 3}
   stageClearObj: {fileID: 0}
   stageClearTrigger: {fileID: 0}
+  jumpButton: {fileID: 4813312837496025723, guid: 2be5ccb7bfd18054ba8c0a13ebcbd7e9,
+    type: 3}
+  joyStick: {fileID: 2929252283123773939, guid: aaa2c939c0359ac4dbce3f49e8b90252,
+    type: 3}

@@ -66,6 +66,9 @@ public class Reimyu : MonoBehaviour {
     [Header("次へボタン")] public GameObject nextButton;
     public bool nextButtonOn;
     [Header("ジョイスティック")] public GameObject joyStick;
+    [Header("ジョイスティックハンドル")] public GameObject joyStickHandle;
+    [Header("ジャンプボタン")] public GameObject jumpButton;
+    [Header("まりちゃのリジッドボディ")] public Rigidbody2D maricharigidbody2D;
 
     // Start is called before the first frame update
     void Start() {
@@ -74,6 +77,7 @@ public class Reimyu : MonoBehaviour {
         audioSource = GetComponent<AudioSource>();
         boxCollider2 = GetComponent<BoxCollider2D>();
         joyStick.SetActive(false);
+        jumpButton.SetActive(false);
         purseButton.SetActive(false);
         daialogCanvas.SetActive(true);
         transform.DOMoveX(1435, 2.0f); //DoMoveXについてhttps://qiita.com/BEATnonanka/items/b4cca6471e77466cec74
@@ -101,8 +105,14 @@ public class Reimyu : MonoBehaviour {
                         enemy_Bullet_Boss.battleStart = true;//ボス動き出す
                         maricha.GetComponent<Player>();
                         player.canControl = true;//プレイヤー操作可能に
+                        purseButton.SetActive(true);
                         joyStick.SetActive(true);
+                        RectTransform rectTransform = joyStickHandle.GetComponent<RectTransform>();
+                        Vector2 pos = rectTransform.GetComponent<RectTransform>().anchoredPosition;
+                        pos.x = 0.0f;
+                        jumpButton.SetActive(true);
                         vanishWall.SetActive(false);//左の壁を消す。
+                        maricharigidbody2D.velocity = new Vector2(0, 0);//ボスの直前で
                         Invoke("Hanten", 1.5f);//1.5秒後画面外でれいみゅを反転させる。
                         return;
                     }//最後のセリフならこの下はいかない
@@ -252,6 +262,7 @@ public class Reimyu : MonoBehaviour {
     public void EndingStart() {
         player.canControl = false;//プレイヤーを行動不可にする。
         joyStick.SetActive(false);
+        jumpButton.SetActive(false);
         purseButton.SetActive(false);//エンディング中ポーズされると動かなくなったため。
         fade.StartFadeOut();
         animator.Play("RightIdle");

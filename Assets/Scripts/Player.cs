@@ -83,7 +83,7 @@ public class Player : MonoBehaviour{
     private float jumpPos = 0.0f;//40で追加。ジャンプした高さを記録。
     private float otherJumpHeight = 0.0f; //45で追加。
     private float jumpTime = 0.0f;//40で追加。滞空時間をはかる。
-    private float dashTime = 0.0f;//41
+    [HideInInspector]public float dashTime = 0.0f;
     private float beforeKey = 0.0f;//41
     private string enemyTag = "Enemy"; //44で追加。敵判別。
     private string deadAreaTag = "DeadArea";//51
@@ -94,6 +94,7 @@ public class Player : MonoBehaviour{
     private string watarTag = "Watar"; //水につけるタグ
     private string heatAreaTag = "HeatArea"; //鉄板につけるタグ
     private string lastTag = "LastContinuePoint"; //最後のチェックポイントにつけるタグ
+    public bool jumpbuton;
     #endregion
 
     // Start is called before the first frame update
@@ -141,6 +142,7 @@ public class Player : MonoBehaviour{
             //設置判定を得る
             isGround = ground.IsGround();
             isHead = head.IsGround();
+            
 
             if(isHead == true && isGround == true) {//自分で追加。頭の衝突判定と接地判定が同時に有効になる場合はジャンプできなくなる。
                 head.isGround = false;//そのため、同時に有効になったら、頭の衝突判定を外す。インスペクター上でチェックを入れても、すぐに外れる。
@@ -199,7 +201,7 @@ public class Player : MonoBehaviour{
                     jumpTime = 0.0f;
                 }
             } else if (isGround) {
-                if (verticalKey > 0 || joystick.Vertical > 0) {　//ジョイスティックの判定も追加
+                if (verticalKey > 0 || joystick.Vertical > 0||jumpbuton) {　//ジョイスティックの判定も追加
                     ySpeed = jumpSpeed;//接地時に上方向のキー入力があったらジャンプ
                     jumpPos = transform.position.y; //ジャンプした高さを記録
                     isJump = true;
@@ -222,7 +224,7 @@ public class Player : MonoBehaviour{
                 //ジャンプ時間が長くなりすぎていないか
                 bool canTime = jumpLimitTime > jumpTime;
 
-                if ((pushUpKey || joyUp) && canHeight && canTime && !isHead) {//ジョイスティックの判定も追加
+                if ((pushUpKey || joyUp||jumpbuton) && canHeight && canTime && !isHead) {//ジョイスティックの判定も追加
                     ySpeed = jumpSpeed;
                     jumpTime += Time.deltaTime;//上昇している間に進んだゲーム内時間を加算
                 } else {
@@ -237,6 +239,16 @@ public class Player : MonoBehaviour{
         return ySpeed;
 
     }
+
+    public void OnCilckDownJumpButton() {
+        jumpbuton = true;
+    }
+
+    public void OnCilckUpJumpButton() {
+        jumpbuton = false;
+    }
+
+
 
     public float GetXSpeed() {
 

@@ -33,6 +33,8 @@ public class StageCtrl : MonoBehaviour{
     [Header("ステージクリアVO3")]public AudioClip stageClearVoice3;
     [Header("ステージクリア")]public GameObject stageClearObj;
     [Header("ステージクリア判定")]public PlayerTriggerCheck stageClearTrigger;
+    [Header("ジャンプボタン")] public GameObject jumpButton;
+    [Header("ジョイスティック")] public GameObject joyStick;
 
     private Player p;
     //以下の変数は51で追加
@@ -52,6 +54,8 @@ public class StageCtrl : MonoBehaviour{
             gameOverObj.SetActive(false);
             goToTitleObj.SetActive(false);
             stageClearObj.SetActive(false);//56
+            jumpButton.SetActive(true);
+            joyStick.SetActive(true);
             playerObj.transform.position = continuePoint[0].transform.position;
 
             p = playerObj.GetComponent<Player>();
@@ -70,6 +74,8 @@ public class StageCtrl : MonoBehaviour{
         if(GameManager.instance.isGameOver && !doGameOver) {
             gameOverObj.SetActive(true);
             goToTitleObj.SetActive(true);
+            jumpButton.SetActive(false);
+            joyStick.SetActive(false);
             doGameOver = true;
             GameManager.instance.RandomizeSfx(gameOverVoices);
         }
