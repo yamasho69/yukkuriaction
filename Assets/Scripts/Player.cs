@@ -85,6 +85,8 @@ public class Player : MonoBehaviour{
     private float jumpTime = 0.0f;//40で追加。滞空時間をはかる。
     [HideInInspector]public float dashTime = 0.0f;
     private float beforeKey = 0.0f;//41
+    private float beforeJoy = 0.0f;//41
+    public bool stop;
     private string enemyTag = "Enemy"; //44で追加。敵判別。
     private string deadAreaTag = "DeadArea";//51
     private string hitAreaTag = "HitArea";//51
@@ -277,15 +279,28 @@ public class Player : MonoBehaviour{
                 xSpeed = 0.0f;
             }
 
-            //レッスン41で追加。前回のキー入力と方向が違うと加速を０にする。
-            if ((horizontalKey > 0 && beforeKey < 0) || (horizontalKey < 0 && beforeKey > 0)) {
+            if (stop) {
+                xSpeed = 0.0f;
                 dashTime = 0.0f;
             }
+
+            //レッスン41で追加。前回のキー入力と方向が違うと加速を０にする。
+            if ((horizontalKey > 0 && beforeKey < 0) || (horizontalKey < 0 && beforeKey > 0||(horizontalKey > 0 && beforeJoy < 0) || (horizontalKey < 0 && beforeJoy > 0)
+                || (joystick.Horizontal > 0 && beforeJoy < 0) || (joystick.Horizontal < 0 && beforeJoy > 0))) {
+                dashTime = 0.0f;
+            }
+
+            beforeKey = horizontalKey;
+            beforeJoy = joystick.Horizontal;
         }
-        beforeKey = horizontalKey;
 
         //アニメーションカーブを速度に適用
         xSpeed *= dashCurve.Evaluate(dashTime);
+
+        if (stop) {
+            xSpeed = 0.0f;
+            dashTime = 0.0f;
+        }
 
         return xSpeed;
     }
@@ -463,7 +478,11 @@ public class Player : MonoBehaviour{
 
         if(collision.tag == lastTag && reimyu != null) {
             canControl = false;//入力をできないようにする。
+            var ab =joystick.GetComponent<FixedJoystick>();
+            //ab.Horizontal = 0.0f;/////////////// 直接入力できない。
+            ab.OnPointerUp(null);
             isRight = false;
+            //stop = true;
             reimyu.SetActive(true);
         }
     }

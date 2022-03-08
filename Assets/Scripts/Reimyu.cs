@@ -69,6 +69,7 @@ public class Reimyu : MonoBehaviour {
     [Header("ジョイスティックハンドル")] public GameObject joyStickHandle;
     [Header("ジャンプボタン")] public GameObject jumpButton;
     [Header("まりちゃのリジッドボディ")] public Rigidbody2D maricharigidbody2D;
+    
 
     // Start is called before the first frame update
     void Start() {
@@ -76,6 +77,10 @@ public class Reimyu : MonoBehaviour {
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         boxCollider2 = GetComponent<BoxCollider2D>();
+        maricharigidbody2D.velocity = new Vector2(0,0);
+        RectTransform rectTransform = joyStickHandle.GetComponent<RectTransform>();
+        var newVec = new Vector3(0, 0, 0);
+        rectTransform.localPosition = newVec; //https://nigiri.hatenablog.com/entry/2019/09/17/231702
         joyStick.SetActive(false);
         jumpButton.SetActive(false);
         purseButton.SetActive(false);
@@ -86,6 +91,8 @@ public class Reimyu : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        var ab = joyStick.GetComponent<FixedJoystick>();
+        Debug.Log(ab.Horizontal);
         if (afterBoss == false) {//ボスの前ならば
             if (sankaku.activeSelf) {//sankakuがアクティブならば
                 if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space)||nextButtonOn) {//Returnキー=Enterキー
@@ -107,12 +114,13 @@ public class Reimyu : MonoBehaviour {
                         player.canControl = true;//プレイヤー操作可能に
                         purseButton.SetActive(true);
                         joyStick.SetActive(true);
-                        RectTransform rectTransform = joyStickHandle.GetComponent<RectTransform>();
-                        Vector2 pos = rectTransform.GetComponent<RectTransform>().anchoredPosition;
-                        pos.x = 0.0f;
                         jumpButton.SetActive(true);
                         vanishWall.SetActive(false);//左の壁を消す。
-                        maricharigidbody2D.velocity = new Vector2(0, 0);//ボスの直前で
+                        /*var joy = joyStick.GetComponent<FixedJoystick>();
+                        if (joy.Horizontal == 0) {//JoyStickがニュートラルの場合は
+                            player.stop = false;//プレイヤーが移動可能。JoyStickがニュートラルでない場合は、
+                            //JoyStickにタッチされてReStart関数が働くことで移動可能になる。
+                        }*/
                         Invoke("Hanten", 1.5f);//1.5秒後画面外でれいみゅを反転させる。
                         return;
                     }//最後のセリフならこの下はいかない
@@ -145,7 +153,9 @@ public class Reimyu : MonoBehaviour {
                     }
                     if(ending_serifuNum == 18) { //最後のセリフの後
                         GameManager.instance.playSE(ochiSE);
+                        //アスペクト比によって、アイリスアウトを変える。4パターンくらい。
                         irisOut.SetActive(true);//アイリスアウト(トランジション)を開始。
+                        
                     } else if (ending_serifuNum != 8 || (ending_serifuNum == 8 && daicons.activeSelf == true)) {
                         ending_serifuNum++;
                         NextMessege();
@@ -153,6 +163,10 @@ public class Reimyu : MonoBehaviour {
                 }
             }
         }
+    }
+
+    public void ReStart() {
+        player.stop = false;//ジョイスティックをタッチされたらプレイ可能になるhttps://pengoya.net/unity/object-touch/
     }
 
     public void OnClickNextButton() {
@@ -293,6 +307,7 @@ public class Reimyu : MonoBehaviour {
         animator.Play("RightSmile");
     }
 }
+
 
 //エンディング用の音楽を鳴らす。
 //8(ゆゆっ)のあとに野菜が振ってくる。
